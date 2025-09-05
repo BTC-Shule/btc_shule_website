@@ -78,8 +78,6 @@ btc-shule-website/
 ├── src/
 │   ├── app/       # Next.js app directory
 │   ├── components/ # Reusable UI components
-│   ├── pages/     # Legacy Next.js pages (if needed)
-│   ├── styles/    # Global styles
 │   └── utils/     # Helpers & utilities
 └── README.md
 ```
