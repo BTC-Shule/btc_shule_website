@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="pt-[136px]">
+      <main className="pt-[72px] md:pt-[136px]">
         <Hero />
       </main>
     </>
