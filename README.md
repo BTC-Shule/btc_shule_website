@@ -22,7 +22,6 @@ The project includes:
 - [Next.js](https://nextjs.org/) – React framework for server-side rendering and static site generation.
 - [TypeScript](https://www.typescriptlang.org/) – Type-safe JavaScript.
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework.
-- [shadcn/ui](https://ui.shadcn.com/) – Accessible and reusable UI components.
 - [Framer Motion](https://www.framer.com/motion/) – Animations.
 
 ---
