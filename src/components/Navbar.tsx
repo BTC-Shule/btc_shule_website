@@ -136,7 +136,7 @@ export default function Navbar() {
                       href="/#home"
                       className="flex-shrink-0 flex items-center gap-2 md:gap-3"
                     >
-                      <span className="font-extrabold text-4xl text-primary">
+                      <span className="font-extrabold text-3xl md:text-4xl text-primary">
                         BTC SHULE
                       </span>
                     </Link>
@@ -199,7 +199,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/donate"
-              className="block bg-primary text-center rounded-2xl text-background hover:bg-primary/80 py-2 transition-colors"
+              className="block w-32 bg-primary text-center rounded-3xl text-background hover:bg-primary-dark py-2 transition-colors"
             >
               Donate Now
             </Link>
