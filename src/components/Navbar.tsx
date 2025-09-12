@@ -72,10 +72,9 @@ export default function Navbar() {
           <motion.div
             key={`navbar-${triggerBounce}`}
             initial={{ y: -80, opacity: 0 }}
-            animate={{ y: [-80, 0, 6, 0], opacity: 1 }} // 👈 bounce upward only
-            exit={{ y: -80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{
-              duration: 0.3,
+              duration: 0.5,
               ease: "easeOut",
             }}
             className="bg-background backdrop-blur-md border-b border-black/10"
@@ -91,7 +90,7 @@ export default function Navbar() {
                         weight="fill"
                         className="text-primary"
                       />
-                      <span>Nairobi, Kenya</span>
+                      <span>Map</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone size={20} weight="fill" className="text-primary" />
