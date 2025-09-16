@@ -13,7 +13,7 @@ import {
 
 export default function About() {
   return (
-    <section id="about" className="relative bg-background py-24">
+    <section id="about" className="relative bg-foreground py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
