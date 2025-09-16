@@ -90,7 +90,7 @@ function StatCard({
         <Icon size={32} weight="duotone" className="text-gray-600" />
       </motion.div>
 
-      <h3 className="text-5xl font-extrabold text-foreground mb-3">
+      <h3 className="text-3xl md:text-5xl font-extrabold text-foreground mb-3">
         <Counter target={value} inView={inView} />
       </h3>
       <p className="text-foreground font-semibold tracking-wide">{label}</p>
@@ -130,11 +130,9 @@ export default function Statistics() {
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center"
-        >
-          <div className="mt-4 mx-auto w-20 h-1 bg-secondary-light rounded-full"></div>
-        </motion.div>
+        ></motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-10 text-center">
           {stats.map((stat, index) => (
             <StatCard key={index} {...stat} index={index} />
           ))}

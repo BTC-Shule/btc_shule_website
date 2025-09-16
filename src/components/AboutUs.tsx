@@ -127,7 +127,7 @@ export default function About() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="flex justify-center items-center"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl w-full h-auto">
+            <div className="hidden md:flex relative rounded-2xl overflow-hidden shadow-2xl w-full h-auto">
               <Image
                 src="/emoney.jpg"
                 alt="BTC Shule - Elevate with Bitcoin"
@@ -136,7 +136,7 @@ export default function About() {
                 height={500}
               />
               <div className="absolute bottom-4 left-4 bg-primary/90 text-background font-bold px-6 py-3 rounded-lg shadow-lg">
-                BTC Shule – Elevate with Bitcoin!
+                BTC Shule
               </div>
             </div>
           </motion.div>

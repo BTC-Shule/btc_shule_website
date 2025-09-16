@@ -63,7 +63,7 @@ export default function Services() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="flex justify-center items-center"
+            className="hidden md:flex justify-center items-center"
           >
             <div className="relative rounded-2xl overflow-hidden shadow-xl w-full h-auto">
               <Image

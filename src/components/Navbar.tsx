@@ -137,7 +137,7 @@ export default function Navbar() {
                         height={60}
                         className="rounded-full"
                       />
-                      <span className="font-extrabold text-3xl md:text-4xl text-primary">
+                      <span className="font-extrabold text-2xl md:text-4xl text-primary">
                         BTC SHULE
                       </span>
                     </Link>

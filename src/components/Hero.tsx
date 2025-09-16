@@ -8,8 +8,8 @@ export default function Hero() {
       className="relative flex items-center bg-[url('/btchero.jpg')] bg-contain bg-center bg-no-repeat"
     >
       <div className="absolute inset-0 bg-black/70"></div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-36 w-full">
+    
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-36 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ x: -150, opacity: 0 }}
