@@ -26,41 +26,41 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    let lastScroll = 0;
-    let timeout: NodeJS.Timeout | null = null;
+  let lastScroll = 0;
+  let timeout: NodeJS.Timeout | null = null;
 
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      const nowAtTop = currentScroll === 0;
-      setAtTop(nowAtTop);
+  const handleScroll = () => {
+    const currentScroll = window.scrollY;
+    const nowAtTop = currentScroll === 0;
+    setAtTop(nowAtTop);
 
-      if (nowAtTop) {
-        setHasBounced(false);
-      }
+    if (nowAtTop) {
+      setHasBounced(false);
+    }
 
-      if (currentScroll > lastScroll && currentScroll > 0) {
-        if (!hasBounced) {
-          setShowNavbar(false);
+    if (currentScroll > lastScroll && currentScroll > 0 && !hasBounced) {
+      setShowNavbar(false);
 
-          if (timeout) clearTimeout(timeout);
-          timeout = setTimeout(() => {
-            setShowNavbar(true);
-            setTriggerBounce((n) => n + 1);
-          }, 100);
-        }
-      } else {
-        if (!showNavbar) setShowNavbar(true);
-      }
-
-      lastScroll = currentScroll;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
       if (timeout) clearTimeout(timeout);
-    };
-  }, [showNavbar, hasBounced]);
+      timeout = setTimeout(() => {
+        setShowNavbar(true);
+        setTriggerBounce((n) => n + 1);
+        setHasBounced(true);
+      }, 100);
+    } else {
+      if (!showNavbar) setShowNavbar(true);
+    }
+
+    lastScroll = currentScroll;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    if (timeout) clearTimeout(timeout);
+  };
+}, [showNavbar, hasBounced]);
+
 
   return (
     <nav className="fixed w-full z-50">
