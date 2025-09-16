@@ -50,21 +50,53 @@ function StatCard({
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.8, delay: index * 0.2 }}
-      className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-8 hover:shadow-2xl transition"
+      className="bg-transparent/80 p-8 transition"
     >
-      <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full 
-                      bg-gradient-to-tr from-secondary/90 to-secondary-light/90 text-white shadow-md">
-        <Icon size={32} weight="duotone" />
-      </div>
+      <motion.div
+        className="flex items-center justify-center w-20 h-20 mx-auto mb-6 text-white shadow-md bg-primary"
+        animate={{
+          borderTopLeftRadius: [
+            "48.8066% 59.4236%",
+            "30% 70%",
+            "60% 40%",
+            "48.8066% 59.4236%",
+          ],
+          borderBottomLeftRadius: [
+            "51.1934% 44.2302%",
+            "60% 30%",
+            "40% 60%",
+            "51.1934% 44.2302%",
+          ],
+          borderTopRightRadius: [
+            "74.8208% 40.5764%",
+            "50% 50%",
+            "65% 35%",
+            "74.8208% 40.5764%",
+          ],
+          borderBottomRightRadius: [
+            "25.1792% 55.7698%",
+            "40% 60%",
+            "20% 80%",
+            "25.1792% 55.7698%",
+          ],
+        }}
+        transition={{
+          duration: 6,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "mirror",
+        }}
+      >
+        <Icon size={32} weight="duotone" className="text-gray-600" />
+      </motion.div>
 
-      <h3 className="text-5xl font-extrabold text-primary mb-3">
+      <h3 className="text-5xl font-extrabold text-foreground mb-3">
         <Counter target={value} inView={inView} />
       </h3>
-      <p className="text-gray-800 font-semibold tracking-wide">{label}</p>
+      <p className="text-foreground font-semibold tracking-wide">{label}</p>
     </motion.div>
   );
 }
-
 
 export default function Statistics() {
   const stats = [
@@ -79,14 +111,14 @@ export default function Statistics() {
   ];
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <Image
           src="/about.jpg"
           alt="Background"
           fill
           priority
-          className="object-cover object-center opacity-40"
+          className="object-cover object-center opacity-80"
         />
         <div className="absolute inset-0 bg-secondary/80"></div>
       </div>
@@ -97,11 +129,8 @@ export default function Statistics() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-primary">
-            Our Impact in Numbers
-          </h2>
           <div className="mt-4 mx-auto w-20 h-1 bg-secondary-light rounded-full"></div>
         </motion.div>
 
