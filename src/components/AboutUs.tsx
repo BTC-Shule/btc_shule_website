@@ -10,8 +10,27 @@ import {
   ShieldCheck,
   Users,
 } from "phosphor-react";
+import { useEffect, useState } from "react";
 
 export default function About() {
+  const [twitterFailed, setTwitterFailed] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const w = window as any;
+    if (w.twttr) {
+      w.twttr.widgets.load();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://platform.twitter.com/widgets.js";
+      script.async = true;
+
+      script.onerror = () => {
+        setTwitterFailed(true);
+      };
+      document.body.appendChild(script);
+    }
+  }, []);
+
   return (
     <section id="about-us" className="relative bg-foreground py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
@@ -127,18 +146,26 @@ export default function About() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="flex justify-center items-center"
           >
-            <div className="hidden md:flex relative rounded-2xl overflow-hidden shadow-2xl w-full h-auto">
-              <Image
-                src="/emoney.jpg"
-                alt="BTC Shule - Elevate with Bitcoin"
-                className="w-full h-full object-cover"
-                width={600}
-                height={500}
-              />
-              <div className="absolute bottom-4 left-4 bg-primary/90 text-background font-bold px-6 py-3 rounded-lg shadow-lg">
-                BTC Shule
+            {twitterFailed ? (
+              <div className="hidden md:flex relative rounded-2xl overflow-hidden shadow-2xl w-full h-auto">
+                <Image
+                  src="/emoney.jpg"
+                  alt="BTC Shule - Elevate with Bitcoin"
+                  className="w-full h-full object-cover"
+                  width={600}
+                  height={500}
+                />
+                <div className="absolute bottom-4 left-4 bg-primary/90 text-background font-bold px-6 py-3 rounded-lg shadow-lg">
+                  BTC Shule - Circular Bitcoin Economy
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex rounded-2xl overflow-hidden shadow-2xl w-full h-auto">
+                <blockquote className="twitter-tweet" data-theme="dark">
+                  <a href="https://twitter.com/BitcoinNewsCom/status/1933178940392087819"></a>
+                </blockquote>
+              </div>
+            )}
           </motion.div>
           <motion.div
             initial={{ y: 40, opacity: 0 }}
