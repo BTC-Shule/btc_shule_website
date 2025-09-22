@@ -32,7 +32,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about-us" className="relative bg-foreground py-24">
+    <section id="about-us" className="relative bg-background py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -167,7 +167,7 @@ export default function About() {
               </div>
             )}
           </motion.div>
-          <motion.div
+          {/* <motion.div
             initial={{ y: 40, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -179,7 +179,7 @@ export default function About() {
             >
               Learn More
             </a>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </section>
