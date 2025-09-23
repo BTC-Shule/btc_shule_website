@@ -100,14 +100,14 @@ function StatCard({
 
 export default function Statistics() {
   const stats = [
-    { value: "1000+", label: "Total Participants", icon: UsersThree },
-    { value: "3+", label: "Local Merchants Onboarded", icon: Storefront },
     {
-      value: "225+",
-      label: "Certification Courses Completed",
-      icon: GraduationCap,
+      value: "300",
+      label: "Unbanked Community Members Reached",
+      icon: UsersThree,
     },
-    { value: "5+", label: "Active Community", icon: ChatsCircle },
+    { value: "15", label: "Merchants Onboarded", icon: Storefront },
+    { value: "350", label: "Trezor Academy Graduates", icon: GraduationCap },
+    { value: "20", label: "Successful Meetups", icon: ChatsCircle },
   ];
 
   return (

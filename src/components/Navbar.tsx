@@ -143,7 +143,7 @@ export default function Navbar() {
                     </Link>
                   </div>
                   <div className="hidden md:flex md:items-center md:space-x-8 text-lg">
-                    {["Home", "About Us", "Services", "Contact"].map(
+                    {["Home", "About Us", "Programs", "Contact"].map(
                       (item, i) => (
                         <Link
                           key={i}
@@ -183,7 +183,7 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-black/10">
-            {["Home", "About Us", "Services", "Contact"].map((item, i) => (
+            {["Home", "About Us", "Programs", "Contact"].map((item, i) => (
               <Link
                 key={i}
                 href={`/#${item.toLowerCase().replace(" ", "-")}`}

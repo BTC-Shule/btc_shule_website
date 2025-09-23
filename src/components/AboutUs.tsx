@@ -41,7 +41,11 @@ export default function About() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-extrabold text-primary">About Us</h2>
+          <h2 className="text-4xl font-extrabold text-primary">About BTC Shule</h2>
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            We are pioneering Bitcoin adoption in Burundi by building a circular economy, 
+            training future leaders, and fostering open-source innovation.
+          </p>
           <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
         </motion.div>
 
@@ -60,9 +64,8 @@ export default function About() {
             />
             <h3 className="text-xl font-bold mb-2">Our Vision</h3>
             <p className="text-gray-500 leading-relaxed">
-              We envision a robust Bitcoin economy in Burundi, where individuals
-              and businesses thrive through adoption and use of Bitcoin as a
-              practical alternative to traditional currency.
+              A resilient Bitcoin-driven economy in Burundi where individuals
+              and businesses thrive through freedom money.
             </p>
           </motion.div>
 
@@ -76,9 +79,8 @@ export default function About() {
             <Target size={40} weight="duotone" className="text-primary mb-4" />
             <h3 className="text-xl font-bold mb-2">Our Mission</h3>
             <p className="text-gray-500 leading-relaxed">
-              To empower Burundians with the knowledge and tools to embrace
-              Bitcoin, fostering a self-sustaining circular economy that
-              promotes financial autonomy and resilience.
+              To empower communities through education, practical adoption, and
+              open-source tools that make Bitcoin accessible to all.
             </p>
           </motion.div>
         </div>
@@ -95,7 +97,7 @@ export default function About() {
               <div className="absolute left-0 top-0 bottom-0 w-2 bg-secondary-light/90 rounded-full"></div>
               <h3 className="text-2xl font-bold text-primary mb-4">Our Goal</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
-                Our goal is to equip individuals with the necessary tools and
+                To equip individuals with the necessary tools and
                 resources to confidently navigate the Bitcoin ecosystem,
                 ultimately establishing a circular Bitcoin economy that promotes
                 financial autonomy and resilience for all.

@@ -5,11 +5,11 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex items-center bg-[url('/btchero.jpg')] bg-contain bg-center bg-no-repeat"
+      className="relative flex items-center bg-[url('/btchero.jpg')] bg-cover bg-center bg-no-repeat"
     >
       <div className="absolute inset-0 bg-black/70"></div>
-    
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-36 w-full">
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-36 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ x: -150, opacity: 0 }}
@@ -18,12 +18,15 @@ export default function Hero() {
             className="bg-secondary-light/80 rounded-xl shadow-2xl p-8 md:p-12 text-white"
           >
             <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
-              Empowering Burundi through Bitcoin
+              Bringing Bitcoin to Burundi
             </h1>
             <p className="text-lg md:text-xl text-gray-200 leading-relaxed">
-              Join us in establishing a circular Bitcoin economy that provides{" "}
-              <span className="text-primary font-semibold">financial autonomy{" "}</span> 
-              through education and real-world adoption.
+              BTC Shule is building{" "}
+              <span className="text-primary font-semibold">
+                a thriving Bitcoin Circular Economy
+              </span>{" "}
+              starting in Winteko village and expanding across Burundi through
+              education, meetups, and real-world adoption.
             </p>
           </motion.div>
 
@@ -34,22 +37,22 @@ export default function Hero() {
             className="text-white lg:pl-12"
           >
             <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              Circular Bitcoin Economy in Burundi
+              From Villages to Universities
             </h2>
             <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-6">
-              Get safe, save money, and build a future powered by open,
-              decentralized finance.
+              We empower communities, merchants, and students with the tools and
+              knowledge to embrace Bitcoin as money.
             </p>
             <p className="text-lg text-gray-300">
-              We create sustainable impact through Bitcoin adoption, community
-              education, and practical innovation.
+              Join us in building a future where financial autonomy is a reality
+              for every Burundian.
             </p>
             <div className="mt-8">
               <a
-                href="#services"
+                href="#programs"
                 className="inline-block bg-primary hover:bg-primary-dark text-background font-semibold px-6 py-3 rounded-lg shadow-lg transition-colors"
               >
-                Learn More
+                Explore Programs
               </a>
             </div>
           </motion.div>
