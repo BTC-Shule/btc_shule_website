@@ -7,7 +7,7 @@ export default function VolunteerPage() {
     <>
       <Navbar />
       <main className="pt-[72px] md:pt-[136px]">
-        <section className="bg-background py-24">
+        <section className="bg-background py-16 md:py-24">
           <div className="max-w-4xl mx-auto px-6">
             <motion.h1
               initial={{ opacity: 0, y: -20 }}

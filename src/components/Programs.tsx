@@ -14,30 +14,35 @@ const programs = [
     description:
       "Our flagship project in Winteko village is building a local Bitcoin circular economy where community members and merchants transact seamlessly in Bitcoin.",
     icon: Storefront,
-  },
-  {
-    title: "Meetups & Calendar",
-    description:
-      "We host regular Bitcoin meetups across Burundi, creating spaces for dialogue, learning, and grassroots adoption. Stay updated with our public events calendar.",
-    icon: Calendar,
+    link: "https://geyser.fund/project/btcshule",
   },
   {
     title: "Trezor Academy",
     description:
       "In partnership with Trezor, we train students and professionals on Bitcoin security, self-custody, and open-source innovation, with over 350 graduates so far.",
     icon: GraduationCap,
+    link: "/register",
   },
   {
     title: "BitDevs Gitega",
     description:
       "Our local BitDevs chapter fosters technical discussions on Bitcoin development, Lightning, and open-source contributions within Burundi.",
     icon: Code,
+    link: "https://bitdevsgtga.org",
+  },
+  {
+    title: "Meetups & Calendar",
+    description:
+      "We host regular Bitcoin meetups across Burundi, creating spaces for dialogue, learning, and grassroots adoption. Stay updated with our public events calendar.",
+    icon: Calendar,
+    link: "/calendar",
   },
   {
     title: "Translation Initiatives",
     description:
       "We localize Bitcoin content into Kirundi and French, breaking down language barriers and making Bitcoin education accessible to all Burundians.",
     icon: Translate,
+    link: "",
   },
 ];
 
@@ -60,11 +65,11 @@ export default function Programs() {
             Bitcoin to life in Burundi. From villages to universities, we are
             building lasting impact.
           </p>
-          <div className="mt-4 mx-auto w-24 h-1 bg-primary rounded-full"></div>
+          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
         </motion.div>
 
         {/* Program Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto justify-items-center max-w-5xl">
           {programs.map((program, index) => (
             <motion.div
               key={program.title}
@@ -79,7 +84,7 @@ export default function Programs() {
               </h3>
               <p className="text-gray-600 mb-4">{program.description}</p>
               <a
-                href="#get-involved"
+                href={program.link}
                 className="text-primary font-semibold hover:underline"
               >
                 Learn More →

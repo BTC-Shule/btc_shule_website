@@ -60,7 +60,7 @@ export default function GetInvolved() {
             place for you in building Bitcoin adoption in Burundi. Here’s how
             you can contribute.
           </p>
-          <div className="mt-4 mx-auto w-24 h-1 bg-primary rounded-full"></div>
+          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
         </motion.div>
 
         {/* Opportunities Grid */}
