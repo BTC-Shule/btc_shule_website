@@ -46,7 +46,7 @@ const opportunities = [
 export default function GetInvolved() {
   return (
     <section id="get-involved" className="relative bg-background py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
