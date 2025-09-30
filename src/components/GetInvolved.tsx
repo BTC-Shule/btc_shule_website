@@ -11,7 +11,7 @@ const opportunities = [
   {
     title: "Register for Cohorts",
     description:
-      "Join our training programs such as the Trezor Academy to gain hands-on Bitcoin skills and become a leader in your community.",
+      "Join our Trezor Academy training program to gain hands-on Bitcoin skills and become a leader in your community.",
     icon: Users,
     link: "/register",
     cta: "Register Now",
@@ -21,7 +21,7 @@ const opportunities = [
     description:
       "Be part of our vibrant Bitcoin community by attending local meetups across Burundi. Share ideas, learn, and connect with peers.",
     icon: CalendarCheck,
-    link: "/calendar",
+    link: "/#events",
     cta: "See Events",
   },
   {

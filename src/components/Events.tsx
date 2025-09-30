@@ -123,7 +123,7 @@ export default function Events() {
                 </div>
 
                 {/* Column 2: Details */}
-                <div className="md:w-3/6 flex flex-col justify-between px-4">
+                <div className="md:w-4/6 flex flex-col justify-between px-4">
                   <div>
                     <h3 className="text-lg font-bold text-primary">
                       {event.title}
@@ -155,7 +155,7 @@ export default function Events() {
                 </div>
 
                 {/* Column 3: Action */}
-                <div className="md:w-2/6 flex items-center justify-end mt-4 md:mt-0">
+                <div className="md:w-1/6 flex items-center justify-end mt-4 md:mt-0">
                   {event.type === "upcoming" ? (
                     <a
                       href="#rsvp"
