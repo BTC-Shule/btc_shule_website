@@ -14,22 +14,6 @@ type Event = {
 
 const events: Event[] = [
   {
-    title: "BTC Shule Meetup – Bujumbura",
-    date: "March 20, 2025",
-    location: "Bujumbura, Burundi",
-    description:
-      "Over 80 attendees joined to learn about Bitcoin use-cases and local adoption.",
-    type: "past",
-  },
-  {
-    title: "Bitcoin for Change Hackathon",
-    date: "April 10, 2025",
-    location: "Online",
-    description:
-      "A hackathon focused on building open-source Bitcoin tools for African communities.",
-    type: "past",
-  },
-  {
     title: "Bitcoin for Change Hackathon",
     date: "May 10, 2025",
     location: "Online",
@@ -49,15 +33,6 @@ const events: Event[] = [
   {
     title: "Merchants & Bitcoin Training – Ngozi",
     date: "December 5, 2025",
-    time: "1:00 PM – 5:00 PM",
-    location: "Ngozi, Burundi",
-    description:
-      "Helping local merchants understand how to accept Bitcoin and integrate it in their businesses.",
-    type: "upcoming",
-  },
-  {
-    title: "Merchants & Bitcoin Training – Ngozi",
-    date: "December 15, 2025",
     time: "1:00 PM – 5:00 PM",
     location: "Ngozi, Burundi",
     description:
