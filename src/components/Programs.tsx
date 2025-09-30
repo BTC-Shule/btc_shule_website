@@ -2,10 +2,8 @@
 import { motion } from "framer-motion";
 import {
   Storefront,
-  Calendar,
   GraduationCap,
   Code,
-  Translate,
 } from "phosphor-react";
 
 const programs = [
@@ -29,20 +27,6 @@ const programs = [
       "Our local BitDevs chapter fosters technical discussions on Bitcoin development, Lightning, and open-source contributions within Burundi.",
     icon: Code,
     link: "https://bitdevsgtga.org",
-  },
-  {
-    title: "Meetups & Calendar",
-    description:
-      "We host regular Bitcoin meetups across Burundi, creating spaces for dialogue, learning, and grassroots adoption. Stay updated with our public events calendar.",
-    icon: Calendar,
-    link: "/calendar",
-  },
-  {
-    title: "Translation Initiatives",
-    description:
-      "We localize Bitcoin content into Kirundi and French, breaking down language barriers and making Bitcoin education accessible to all Burundians.",
-    icon: Translate,
-    link: "",
   },
 ];
 

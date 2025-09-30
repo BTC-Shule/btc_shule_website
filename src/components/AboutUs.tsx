@@ -55,15 +55,15 @@ export default function About() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-secondary-light/10 rounded-xl shadow-lg px-6 py-12 text-gray-600 border border-gray-300"
+            className="bg-secondary-light/10 rounded-xl shadow-lg px-8 py-12 border border-gray-300"
           >
             <Lightbulb
               size={40}
               weight="duotone"
               className="text-primary mb-4"
             />
-            <h3 className="text-xl font-bold mb-2">Our Vision</h3>
-            <p className="text-gray-500 leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-gray-800">Our Vision</h3>
+            <p className="text-gray-600 mb-4">
               A resilient Bitcoin-driven economy in Burundi where individuals
               and businesses thrive through freedom money.
             </p>
@@ -77,8 +77,8 @@ export default function About() {
             className="bg-secondary-light/10 rounded-xl shadow-lg px-6 py-12 text-gray-600 border border-gray-300"
           >
             <Target size={40} weight="duotone" className="text-primary mb-4" />
-            <h3 className="text-xl font-bold mb-2">Our Mission</h3>
-            <p className="text-gray-500 leading-relaxed">
+            <h3 className="text-xl font-bold mb-3 text-gray-800">Our Mission</h3>
+            <p className="text-gray-600 mb-4">
               To empower communities through education, practical adoption, and
               open-source tools that make Bitcoin accessible to all.
             </p>
