@@ -1,11 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import {
-  Users,
-  CalendarCheck,
-  Handshake,
-  CurrencyBtc,
-} from "phosphor-react";
+import { Users, CalendarCheck, Handshake, CurrencyBtc } from "phosphor-react";
 
 const opportunities = [
   {
@@ -38,10 +33,9 @@ const opportunities = [
       "Contribute to our mission by supporting with Bitcoin. Every satoshi helps us onboard communities and scale impact sustainably.",
     icon: CurrencyBtc,
     link: "/donate",
-    cta: "Support in Bitcoin",
+    cta: "Support",
   },
 ];
-
 
 export default function GetInvolved() {
   return (
@@ -71,19 +65,26 @@ export default function GetInvolved() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:shadow-xl transition-all"
+              className="bg-white rounded-2xl shadow-lg p-8 flex flex-col text-center hover:shadow-xl transition-all"
             >
-              <item.icon size={48} className="text-primary mb-6" />
-              <h3 className="text-xl font-bold mb-3 text-gray-800">
-                {item.title}
-              </h3>
-              <p className="text-gray-600 mb-6">{item.description}</p>
-              <a
-                href={item.link}
-                className="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
-              >
-                {item.cta}
-              </a>
+              {/* Top section */}
+              <div className="flex flex-col items-center flex-grow">
+                <item.icon size={48} className="text-primary mb-6" />
+                <h3 className="text-xl font-bold mb-3 text-gray-800">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600">{item.description}</p>
+              </div>
+
+              {/* Bottom section */}
+              <div className="mt-6">
+                <a
+                  href={item.link}
+                  className="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+                >
+                  {item.cta}
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>

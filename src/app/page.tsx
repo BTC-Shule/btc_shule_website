@@ -7,6 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import GetInvolved from "@/components/GetInvolved";
 import Events from "@/components/Events";
 import Blog from "@/components/Blog";
+import Partners from "@/components/Partners";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <Testimonials />
         <Events />
         <Blog />
+        <Partners />
       </main>
     </>
   );

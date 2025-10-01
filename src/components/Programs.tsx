@@ -1,10 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import {
-  Storefront,
-  GraduationCap,
-  Code,
-} from "phosphor-react";
+import { Storefront, GraduationCap, Code } from "phosphor-react";
 
 const programs = [
   {
@@ -60,31 +56,28 @@ export default function Programs() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all"
+              className="bg-white rounded-2xl shadow-lg p-8 flex flex-col hover:shadow-xl transition-all"
             >
-              <program.icon size={48} className="text-primary mb-6" />
-              <h3 className="text-xl font-bold mb-3 text-gray-800">
-                {program.title}
-              </h3>
-              <p className="text-gray-600 mb-4">{program.description}</p>
-              <a
-                href={program.link}
-                className="text-primary font-semibold hover:underline"
-              >
-                Learn More →
-              </a>
+              {/* Top section */}
+              <div className="flex flex-col flex-grow">
+                <program.icon size={48} className="text-primary mb-6" />
+                <h3 className="text-xl font-bold mb-3 text-gray-800">
+                  {program.title}
+                </h3>
+                <p className="text-gray-600">{program.description}</p>
+              </div>
+
+              {/* Bottom section */}
+              <div className="mt-6">
+                <a
+                  href={program.link}
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Learn More →
+                </a>
+              </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <a
-            href="#get-involved"
-            className="inline-block bg-primary text-white px-8 py-4 rounded-xl shadow-lg hover:bg-primary-dark transition-colors font-semibold"
-          >
-            Join Our Mission
-          </a>
         </div>
       </div>
     </section>

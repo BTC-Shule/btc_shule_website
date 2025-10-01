@@ -22,8 +22,7 @@ const blogs: Blog[] = [
       "Learn the basics of Bitcoin, how it works, and why it’s a financial revolution.",
     date: "September 5, 2025",
     author: "Chris Mwaniki",
-    image:
-      "https://images.unsplash.com/photo-1621504450181-61a2d57f075e?auto=format&fit=crop&w=1200&q=80",
+    image: "/emoney.jpg",
   },
   {
     id: "africa-adoption",
@@ -32,8 +31,7 @@ const blogs: Blog[] = [
       "Explore how Bitcoin is empowering individuals and merchants across Africa.",
     date: "September 15, 2025",
     author: "Jane Doe",
-    image:
-      "https://images.unsplash.com/photo-1621504450883-8b1c3790fb70?auto=format&fit=crop&w=1200&q=80",
+    image: "/emoney.jpg",
   },
   {
     id: "btc-security",
@@ -42,8 +40,7 @@ const blogs: Blog[] = [
       "Best practices for safeguarding your Bitcoin and staying safe online.",
     date: "September 20, 2025",
     author: "David K.",
-    image:
-      "https://images.unsplash.com/photo-1612178992563-3a58e32e41d2?auto=format&fit=crop&w=1200&q=80",
+    image: "/emoney.jpg",
   },
 ];
 
@@ -77,11 +74,11 @@ export default function Blog() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: i * 0.2 }}
               className="h-full"
             >
               <Link href={`/blog/${blog.id}`} className="group block h-full">
-                <div className="bg-secondary-light/10 border border-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-2 flex flex-col h-full">
+                <div className="bg-secondary-light/10 border border-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
                   {/* Image */}
                   <div className="h-48 overflow-hidden">
                     <Image

@@ -58,22 +58,29 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut", delay: i * 0.2 }}
-              className="bg-secondary-light/90 border border-gray-700 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="bg-secondary-light border border-gray-700 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              {t.avatar && (
-                <Image
-                  src={t.avatar}
-                  alt={t.name}
-                  width={64}
-                  height={64}
-                  className="w-16 h-16 rounded-full border-2 border-primary mb-4 object-cover"
-                />
-              )}
-              <p className="text-white italic leading-relaxed mb-6">
-                “{t.quote}”
-              </p>
-              <h4 className="text-lg font-semibold text-primary">{t.name}</h4>
-              <span className="text-sm text-gray-500">{t.role}</span>
+              {/* Top section */}
+              <div className="flex flex-col items-center flex-grow">
+                {t.avatar && (
+                  <Image
+                    src={t.avatar}
+                    alt={t.name}
+                    width={64}
+                    height={64}
+                    className="w-16 h-16 rounded-full border-2 border-primary mb-4 object-cover"
+                  />
+                )}
+                <p className="text-white italic leading-relaxed">
+                  “{t.quote}”
+                </p>
+              </div>
+
+              {/* Bottom section */}
+              <div className="mt-6">
+                <h4 className="text-lg font-semibold text-primary">{t.name}</h4>
+                <span className="text-sm text-gray-500">{t.role}</span>
+              </div>
             </motion.div>
           ))}
         </div>
