@@ -105,7 +105,7 @@ export default function Events() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
-                className="flex flex-col md:flex-row items-stretch bg-secondary-light/10 border border-gray-700 rounded-2xl shadow-lg hover:shadow-xl transition p-4 md:py-8"
+                className="flex flex-col md:flex-row items-stretch bg-secondary-light/10 border border-gray-300 rounded-2xl shadow-lg hover:shadow-xl transition p-4 md:py-8"
               >
                 {/* Column 1: Date */}
                 <div className="md:w-1/6 flex items-center md:justify-center px-4 mb-4 md:mb-0">

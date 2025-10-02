@@ -16,31 +16,13 @@ type Blog = {
 
 const blogs: Blog[] = [
   {
-    id: "bitcoin-101",
-    title: "Bitcoin 101: A Beginner’s Guide",
+    id: "circular-economy",
+    title: "Exploring Kenya’s Bitcoin Circular Economies",
     excerpt:
-      "Learn the basics of Bitcoin, how it works, and why it’s a financial revolution.",
-    date: "September 5, 2025",
-    author: "Chris Mwaniki",
-    image: "/emoney.jpg",
-  },
-  {
-    id: "africa-adoption",
-    title: "Bitcoin Adoption in Africa",
-    excerpt:
-      "Explore how Bitcoin is empowering individuals and merchants across Africa.",
-    date: "September 15, 2025",
-    author: "Jane Doe",
-    image: "/emoney.jpg",
-  },
-  {
-    id: "btc-security",
-    title: "Securing Your Bitcoin Wallet",
-    excerpt:
-      "Best practices for safeguarding your Bitcoin and staying safe online.",
-    date: "September 20, 2025",
-    author: "David K.",
-    image: "/emoney.jpg",
+      "From Nairobi to Kiambu, discover how Bitcoin is transforming communities.",
+    date: "August 2025",
+    author: "Belyi Nobel Kubwayo",
+    image: "/blogheader.jpg",
   },
 ];
 
@@ -78,7 +60,7 @@ export default function Blog() {
               className="h-full"
             >
               <Link href={`/blog/${blog.id}`} className="group block h-full">
-                <div className="bg-secondary-light/10 border border-gray-700 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                <div className="bg-secondary-light/10 border border-gray-300 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
                   {/* Image */}
                   <div className="h-48 overflow-hidden">
                     <Image

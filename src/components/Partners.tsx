@@ -3,11 +3,52 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const partners = [
-  { name: "Trezor", logo: "/partners/trezor.png", url: "https://trezor.io" },
-  { name: "Geyser Fund", logo: "/partners/geyser.png", url: "https://geyser.fund" },
-  { name: "BitDevs Gitega", logo: "/partners/bitdevs.png", url: "https://bitdevsgtga.org" },
-  { name: "Local Merchants", logo: "/partners/merchants.png", url: "#" },
-  // Add more partners here
+  {
+    name: "Bitcoin Beach Brazil",
+    logo: "/BiTCOIN bEACH bRAZIL.jpg",
+    url: "https://bitcoinbeachbr.org/en/",
+  },
+  {
+    name: "Bitcoin Beach",
+    logo: "/Bitcoin beach.png",
+    url: "https://www.bitcoinbeach.com/en/our-work",
+  },
+  {
+    name: "Bitcoin Ekasi",
+    logo: "/Bitcoin Ekasi.png",
+    url: "https://bitcoinekasi.com/",
+  },
+  {
+    name: "Blink",
+    logo: "/blinkk.png",
+    url: "https://blink.sv",
+  },
+  {
+    name: "Btrust Builders",
+    logo: "/btrust_builders_logo.jpeg",
+    url: "https://btrust.tech",
+  },
+  {
+    name: "Federation of Bitcoin",
+    logo: "/federation-of-bitcoin.png",
+    url: "https://fbce.io",
+  },
+  {
+    name: "Human Rights Foundation",
+    logo: "/Human_Rights_Foundation_logo.svg.png",
+    url: "https://hrf.org/",
+  },
+  {
+    name: "Machankura",
+    logo: "/Machankura.webp",
+    url: "https://8333.mobi",
+  },
+  {
+    name: "Mi Primer Bitcoin",
+    logo: "/Mi-Primer-Bitcoin-Logo.png",
+    url: "https://myfirstbitcoin.io/",
+  },
+  { name: "Trezor", logo: "/trezor academy.jpg", url: "https://trezor.io/" },
 ];
 
 export default function Partners() {
@@ -23,8 +64,9 @@ export default function Partners() {
         >
           <h2 className="text-4xl font-extrabold text-primary">Our Partners</h2>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            We collaborate with forward-thinking organizations to build Bitcoin adoption
-            across Burundi and beyond. Together, we create lasting impact.
+            We collaborate with forward-thinking organizations to build Bitcoin
+            adoption across Burundi and beyond. Together, we create lasting
+            impact.
           </p>
           <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
         </motion.div>
@@ -47,7 +89,7 @@ export default function Partners() {
                 alt={partner.name}
                 width={160}
                 height={80}
-                className="max-h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                className="max-h-16 object-contain"
               />
             </motion.a>
           ))}
