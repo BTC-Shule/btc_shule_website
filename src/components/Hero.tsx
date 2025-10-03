@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex items-center bg-[url('/btchero.jpg')] bg-cover bg-center bg-no-repeat"
+      className="md:h-dvh relative flex items-center bg-[url('/btchero.jpg')] bg-cover bg-center bg-no-repeat"
     >
       <div className="absolute inset-0 bg-black/70"></div>
 
