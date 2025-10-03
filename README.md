@@ -37,7 +37,7 @@ The project includes:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-org-or-username>/btc-shule-website.git
+git clone https://github.com/BTC-Shule/btc_shule_website.git
 cd btc-shule-website
 ```
 
