@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const partners = [
   {
@@ -60,6 +61,7 @@ export default function Partners() {
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          viewport={{ once: true }}
           className="text-center"
         >
           <h2 className="text-4xl font-extrabold text-primary">Our Partners</h2>
@@ -82,6 +84,7 @@ export default function Partners() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
+              viewport={{ once: true }}
               className="w-full h-32 flex items-center justify-center rounded-2xl bg-white/70 shadow-md backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <Image
@@ -97,12 +100,12 @@ export default function Partners() {
 
         {/* CTA */}
         <div className="text-center mt-16">
-          <a
-            href="/contact"
+          <Link
+            href="/#contact"
             className="inline-block bg-secondary-light text-white px-10 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-90 transition-all font-semibold"
           >
             Become a Partner
-          </a>
+          </Link>
         </div>
       </div>
     </section>

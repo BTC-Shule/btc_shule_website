@@ -31,9 +31,9 @@ const blogs: Blog[] = [
     image: "/blogheader.jpg",
     content: (
       <>
-        <p className="leading-8 mb-6 italic text-xl md:text-2xl">
+        <p className="leading-8 mb-6 italic text-gray-500 text-xl">
           What if you could ride a motorbike, buy medicine, and feed your family
-          all using Bitcoin? In Kenya, this isn’t a dream — it’s a growing
+          all using Bitcoin? In Kenya, this isn’t a dream, it’s a growing
           reality powered by grassroots innovation and unstoppable community
           energy. From Nairobi’s bustling streets to remote villages in Kiambu,
           I witnessed firsthand how Bitcoin is transforming lives, one satoshi
@@ -44,7 +44,7 @@ const blogs: Blog[] = [
           From August 2nd to 4th, 2025, I had the incredible opportunity to
           visit three of the most impactful Bitcoin circular economy projects in
           Kenya. These initiatives, based in Nairobi and Kiambu, are not just
-          about Bitcoin — they are about community empowerment, financial
+          about Bitcoin, they are about community empowerment, financial
           inclusion, and redefining what economic freedom can look like in
           Africa. As someone leading a similar journey with my team in Winteko,
           Burundi, this experience was both inspiring and motivating.
@@ -68,10 +68,10 @@ const blogs: Blog[] = [
           of Nairobi horns, vendors, and the vibrant chaos of daily life. But
           what caught my eye even more were the stickers on local shops proudly
           displaying “Bitcoin Accepted Here.” Here, Bitcoin isn’t a future
-          concept — it’s already integrated into everyday transactions.
+          concept, it’s already integrated into everyday transactions.
         </p>
 
-        <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden my-8 shadow-lg">
+        <div className="relative w-full h-72 md:h-96 overflow-hidden my-8 shadow-lg">
           <Image
             src="/bitcoingithurai.jpg"
             alt="Bitcoin Accepted in Githurai shops"
@@ -108,7 +108,7 @@ const blogs: Blog[] = [
           everyone, regardless of background, can participate.
         </p>
 
-        <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden my-8 shadow-lg">
+        <div className="relative w-full h-72 md:h-96 overflow-hidden my-8 shadow-lg">
           <Image
             src="/Afribit.jpg"
             alt="Afribit Kibera Bitcoin community"
@@ -134,7 +134,7 @@ const blogs: Blog[] = [
         </h2>
 
         <p className="leading-8 mb-6">
-          On my final day, I traveled to Matangi in Kiambu County to visit the
+          On my final day, I traveled to Matangi in Kiambu County to visit the{" "}
           <span className="text-primary">Bitcoin Babies</span> project. This
           initiative, warmly introduced to me by Eve, the program manager,
           touched me deeply. It focuses on empowering mothers with newborns
@@ -152,7 +152,7 @@ const blogs: Blog[] = [
           ecosystem of healthcare and financial empowerment.
         </p>
 
-        <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden mt-8 mb-4 shadow-lg">
+        <div className="relative w-full h-72 md:h-96 overflow-hidden mt-8 mb-4 shadow-lg">
           <Image
             src="/bitcoinbabies.jpg"
             alt="Bitcoin Babies project Matangi"
@@ -168,7 +168,7 @@ const blogs: Blog[] = [
           a hairdresser who accepts Bitcoin payments and is a passionate
           advocate. She told me that many women prefer to buy Bitcoin via{" "}
           <span className="text-primary">Bitika</span> instead of holding Kenyan
-          shillings — trusting its speed, efficiency, and lower transaction
+          shillings, trusting its speed, efficiency, and lower transaction
           costs.
         </p>
 
@@ -180,12 +180,11 @@ const blogs: Blog[] = [
           One of the things I loved most about Kenya is how innovative and
           proactive people are in embracing Bitcoin. From tools like{" "}
           <span className="text-primary">Tando</span>, which integrates with
-          Mpesa, to the ease of buying Bitcoin through
-          <span className="text-primary">Bitika</span>, the infrastructure is
+          Mpesa, to the ease of buying Bitcoin through {" "}<span className="text-primary">Bitika</span>, the infrastructure is
           already strong.
         </p>
 
-        <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden my-8 shadow-lg">
+        <div className="relative w-full h-72 md:h-96 overflow-hidden my-8 shadow-lg">
           <Image
             src="/bitcoininnovation.jpg"
             alt="Kenya Bitcoin innovation"
@@ -252,7 +251,7 @@ export default function BlogPage() {
             </motion.div>
 
             {/* Cover Image */}
-            <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden mb-12">
+            <div className="relative w-full h-72 md:h-96 overflow-hidden mb-12">
               <Image
                 src={blog.image}
                 alt={blog.title}
@@ -267,7 +266,7 @@ export default function BlogPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="prose prose-invert prose-lg text-secondary text-lg md:text-xl max-w-none"
+              className="prose prose-invert prose-lg text-gray-600 text-lg max-w-none"
             >
               {blog.content}
             </motion.div>

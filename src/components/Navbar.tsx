@@ -26,41 +26,40 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-  let lastScroll = 0;
-  let timeout: NodeJS.Timeout | null = null;
+    let lastScroll = 0;
+    let timeout: NodeJS.Timeout | null = null;
 
-  const handleScroll = () => {
-    const currentScroll = window.scrollY;
-    const nowAtTop = currentScroll === 0;
-    setAtTop(nowAtTop);
+    const handleScroll = () => {
+      const currentScroll = window.scrollY;
+      const nowAtTop = currentScroll === 0;
+      setAtTop(nowAtTop);
 
-    if (nowAtTop) {
-      setHasBounced(false);
-    }
+      if (nowAtTop) {
+        setHasBounced(false);
+      }
 
-    if (currentScroll > lastScroll && currentScroll > 0 && !hasBounced) {
-      setShowNavbar(false);
+      if (currentScroll > lastScroll && currentScroll > 0 && !hasBounced) {
+        setShowNavbar(false);
 
+        if (timeout) clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          setShowNavbar(true);
+          setTriggerBounce((n) => n + 1);
+          setHasBounced(true);
+        }, 50);
+      } else {
+        if (!showNavbar) setShowNavbar(true);
+      }
+
+      lastScroll = currentScroll;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
       if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        setShowNavbar(true);
-        setTriggerBounce((n) => n + 1);
-        setHasBounced(true);
-      }, 100);
-    } else {
-      if (!showNavbar) setShowNavbar(true);
-    }
-
-    lastScroll = currentScroll;
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-    if (timeout) clearTimeout(timeout);
-  };
-}, [showNavbar, hasBounced]);
-
+    };
+  }, [showNavbar, hasBounced]);
 
   return (
     <nav className="fixed w-full z-50">
@@ -80,25 +79,47 @@ export default function Navbar() {
               <div className="w-full bg-secondary-light text-sm text-gray-600 border-b border-black/10">
                 <div className="max-w-8xl mx-auto hidden md:flex justify-between items-center px-4 sm:px-6 lg:px-24 py-2">
                   <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-2">
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Winteko,+Burundi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
                       <MapPin
                         size={20}
                         weight="fill"
                         className="text-primary"
                       />
                       <span>Map</span>
+                    </a>
+
+                    <div>
+                      <a
+                        href="https://wa.me/25762919316"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <Phone
+                          size={20}
+                          weight="fill"
+                          className="text-primary"
+                        />
+                        <span>+257 62919316</span>
+                      </a>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Phone size={20} weight="fill" className="text-primary" />
-                      <span>+257 62919316</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <EnvelopeSimple
-                        size={20}
-                        weight="fill"
-                        className="text-primary"
-                      />
-                      <span>btcshule@gmail.com</span>
+                    <div>
+                      <a
+                        href="mailto:btcshule@gmail.com"
+                        className="flex items-center gap-2"
+                      >
+                        <EnvelopeSimple
+                          size={20}
+                          weight="fill"
+                          className="text-primary"
+                        />
+                        <span>btcshule@gmail.com</span>
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -128,6 +149,7 @@ export default function Navbar() {
                   <div className="flex items-center">
                     <Link
                       href="/#home"
+                      onClick={() => setShowNavbar(true)}
                       className="flex-shrink-0 flex items-center gap-2 md:gap-3"
                     >
                       <Image
@@ -143,26 +165,35 @@ export default function Navbar() {
                     </Link>
                   </div>
                   <div className="hidden md:flex md:items-center md:space-x-8 text-lg">
-                    {["Home", "About Us", "Programs", "Events", "Blog", "Contact"].map(
-                      (item, i) => (
-                        <Link
-                          key={i}
-                          href={`/#${item.toLowerCase().replace(" ", "-")}`}
-                          className="text-gray-600 hover:text-primary transition-colors"
-                        >
-                          {item}
-                        </Link>
-                      )
-                    )}
+                    {[
+                      "Home",
+                      "About Us",
+                      "Programs",
+                      "Get Involved",
+                      "Events",
+                      "Blog",
+                      "Contact",
+                    ].map((item, i) => (
+                      <Link
+                        key={i}
+                        href={`/#${item.toLowerCase().replace(" ", "-")}`}
+                        onClick={() => setShowNavbar(true)}
+                        className="text-gray-600 hover:text-primary transition-colors"
+                      >
+                        {item}
+                      </Link>
+                    ))}
                   </div>
 
                   <div className="hidden md:flex md:items-center md:space-x-8">
-                    <Link
-                      href="/donate"
+                    <a
+                      href="https://btcpay.satcrowd.com/apps/u1M6aoKXbDHqdvByaSRTHNV682M/crowdfund"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-background bg-primary hover:bg-primary-dark py-2 px-6 rounded-3xl transition-colors"
                     >
                       Donate Now
-                    </Link>
+                    </a>
                   </div>
 
                   <div className="md:hidden flex items-center gap-2">
@@ -183,22 +214,34 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-black/10">
-            {["Home", "About Us", "Programs", "events", "Contact"].map((item, i) => (
+            {[
+              "Home",
+              "About Us",
+              "Programs",
+              "Get Involved",
+              "Events",
+              "Contact",
+            ].map((item, i) => (
               <Link
                 key={i}
                 href={`/#${item.toLowerCase().replace(" ", "-")}`}
                 className="block px-3 py-2 rounded-md text-gray-600 hover:bg-primary/10 transition-colors"
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  setShowNavbar(true);
+                }}
               >
                 {item}
               </Link>
             ))}
-            <Link
-              href="/donate"
+            <a
+              href="https://btcpay.satcrowd.com/apps/u1M6aoKXbDHqdvByaSRTHNV682M/crowdfund"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block w-32 bg-primary text-center rounded-3xl text-background hover:bg-primary-dark py-2 transition-colors"
             >
               Donate Now
-            </Link>
+            </a>
           </div>
         </div>
       )}

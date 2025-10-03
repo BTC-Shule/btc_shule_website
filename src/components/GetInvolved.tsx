@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Users, CalendarCheck, Handshake, CurrencyBtc } from "phosphor-react";
+import Link from "next/link";
 
 const opportunities = [
   {
@@ -32,7 +33,7 @@ const opportunities = [
     description:
       "Contribute to our mission by supporting with Bitcoin. Every satoshi helps us onboard communities and scale impact sustainably.",
     icon: CurrencyBtc,
-    link: "/donate",
+    link: "https://btcpay.satcrowd.com/apps/u1M6aoKXbDHqdvByaSRTHNV682M/crowdfund",
     cta: "Support",
   },
 ];
@@ -46,6 +47,7 @@ export default function GetInvolved() {
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
+          viewport={{ once: true }}
           className="text-center"
         >
           <h2 className="text-4xl font-extrabold text-primary">Get Involved</h2>
@@ -59,34 +61,50 @@ export default function GetInvolved() {
 
         {/* Opportunities Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {opportunities.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white rounded-2xl shadow-lg p-8 flex flex-col text-center hover:shadow-xl transition-all"
-            >
-              {/* Top section */}
-              <div className="flex flex-col items-center flex-grow">
-                <item.icon size={48} className="text-primary mb-6" />
-                <h3 className="text-xl font-bold mb-3 text-gray-800">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600">{item.description}</p>
-              </div>
+          {opportunities.map((item, index) => {
+            const isExternal = item.link.startsWith("http");
 
-              {/* Bottom section */}
-              <div className="mt-6">
-                <a
-                  href={item.link}
-                  className="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
-                >
-                  {item.cta}
-                </a>
-              </div>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl shadow-lg p-8 flex flex-col text-center hover:shadow-xl transition-all"
+              >
+                {/* Top section */}
+                <div className="flex flex-col items-center flex-grow">
+                  <item.icon size={48} className="text-primary mb-6" />
+                  <h3 className="text-xl font-bold mb-3 text-gray-800">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+
+                {/* Bottom section */}
+                <div className="mt-6">
+                  {isExternal ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+                    >
+                      {item.cta}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.link}
+                      className="inline-block bg-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+                    >
+                      {item.cta}
+                    </Link>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

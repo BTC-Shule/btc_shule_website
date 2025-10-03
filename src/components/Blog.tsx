@@ -111,7 +111,7 @@ export default function Blog() {
         <div className="text-center mt-10">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-secondary-light text-background font-semibold shadow-lg hover:scale-105 transition"
+            className="inline-block bg-secondary-light text-white px-10 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-90 transition-all font-semibold"
           >
             View All Blogs
           </Link>

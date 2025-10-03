@@ -9,6 +9,7 @@ import Events from "@/components/Events";
 import Blog from "@/components/Blog";
 import Partners from "@/components/Partners";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         <Blog />
         <Partners />
         <Contact />
+        <Footer />
       </main>
     </>
   );
