@@ -1,7 +1,7 @@
 "use client";
 
 import { Tweet } from "react-tweet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Testimonials() {
@@ -70,6 +70,7 @@ export default function Testimonials() {
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [direction, setDirection] = useState<number>(1);
+  const [isMobile, setIsMobile] = useState(false);
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection);
@@ -78,9 +79,20 @@ export default function Testimonials() {
     );
   };
 
+    useEffect(() => {
+    // Set initial value
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize(); // run once on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // ✅ Only 1 tweet on mobile, 3 on md+
   const getVisibleTweets = () => {
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
     const count = isMobile ? 1 : 3;
     return Array.from({ length: count }, (_, i) => {
       return tweets[(activeIndex + i) % tweets.length];
@@ -108,7 +120,7 @@ export default function Testimonials() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
                 transition={{ duration: 0.6 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-auto md:h-[30rem]"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-[30rem]"
               >
                 {getVisibleTweets().map((tweet) => (
                   <motion.div

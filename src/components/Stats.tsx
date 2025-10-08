@@ -10,6 +10,7 @@ import {
   Sparkle,
 } from "phosphor-react";
 import { useInView } from "react-intersection-observer";
+import Link from "next/link";
 
 function Counter({ target, inView }: { target: string; inView: boolean }) {
   const [currentValue, setCurrentValue] = useState(0);
@@ -122,15 +123,17 @@ export default function Statistics() {
       </div>
 
       <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="text-center md-8 md:mb-16"
-        >
-          <h2 className="text-4xl font-extrabold text-primary">Our Key Impact Metrics</h2>
-          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
-        </motion.div>
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="text-center md-8 md:mb-16"
+      >
+        <h2 className="text-4xl font-extrabold text-primary p-4">
+          Our Key Impact Metrics
+        </h2>
+        <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Stats Grid */}
@@ -141,25 +144,31 @@ export default function Statistics() {
         </div>
 
         {/* Featured Innovation Box */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-          className="mt-12 max-w-2xl mx-auto bg-white/90 rounded-2xl shadow-lg p-6 text-center"
+        <Link
+          href="https://github.com/Advaxe/MySatoshis"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <div className="flex justify-center mb-4">
-            <Sparkle size={36} className="text-primary" />
-          </div>
-          <h4 className="text-xl font-bold text-gray-800 mb-2">
-            Featured Innovation
-          </h4>
-          <p className="text-gray-600">
-            <span className="font-semibold">My Satoshi Tool</span> – a local
-            innovation that helps Burundians calculate and understand Bitcoin
-            sats-to-fiat conversions, empowering practical adoption.
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+            className="mt-12 max-w-2xl mx-auto bg-white/90 rounded-2xl shadow-lg p-6 text-center"
+          >
+            <div className="flex justify-center mb-4">
+              <Sparkle size={36} className="text-primary" />
+            </div>
+            <h4 className="text-xl font-bold text-gray-800 mb-2">
+              Featured Innovation
+            </h4>
+            <p className="text-gray-600">
+              <span className="font-semibold">My Satoshi Tool</span> – a local
+              innovation that helps Burundians calculate and understand Bitcoin
+              sats-to-fiat conversions, empowering practical adoption.
+            </p>
+          </motion.div>
+        </Link>
       </div>
     </section>
   );
