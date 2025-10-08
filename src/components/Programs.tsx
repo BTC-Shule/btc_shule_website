@@ -30,7 +30,7 @@ const programs = [
     description:
       "BTC Shule translates essential Bitcoin content into Kirundi, making Bitcoin knowledge accessible to millions of Burundians in their native language.",
     icon: BookOpen,
-    link: "/donate",
+    link: "/volunteer",
   },
 ];
 

@@ -24,34 +24,18 @@ async function sendConfirmationEmail({ firstName, email }) {
   const mailOptions = {
     from: `"BTC Shule" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: "Welcome to the Bitcoin Diploma Course",
+    subject: "Welcome to the Trezor Academy Program",
     html: `
       <p>Dear ${firstName},</p>
 
-      <p>Thank you for registering for the <strong>Bitcoin Diploma Course</strong> – we're happy to have you onboard!</p>
+      <p>Thank you for signing up for our Trezor Academy program.</p>
 
-      <p>📅 <strong>Classes begin on 21st October 2025</strong><br/>
-      📍 Online | Hosted by <strong>The Core – Bitcoin Education</strong></p>
+      <p>You are currently on our waiting list, and we will share the details of the next cohort with you soon, it will take place in the coming days.</p>
 
-      <p>🎯 <strong>What You’ll Gain:</strong></p>
-      <ul>
-        <li>A solid understanding of Bitcoin fundamentals and the concept of money</li>
-        <li>Practical skills on how to set up a wallet and send/receive Bitcoin securely</li>
-        <li>A Certificate of Completion + Bitcoin rewards sent directly to your wallet</li>
-      </ul>
+      <p>In the meantime, please stay updated by following our 
+      👉 <a href="https://academy.trezor.io/countries/burundi">Trezor Academy Burundi</a> page for the latest information.</p>
 
-      <p>🔔 <strong>Stay Connected!</strong><br/>
-      👉 <a href="https://chat.whatsapp.com/FgFflU9UbNxKuuyQDUZBNi">Join WhatsApp Group</a><br/>
-      👉 <a href="https://t.me/thecor21m/3359">Join Telegram Group</a></p>
-
-      <p>📌 Please read the group description after joining for important details about the course.</p>
-
-      <p>If you have any questions before the course begins, feel free to reply to this email.</p>
-
-      <p>We’re excited to meet you in class and start this journey together!</p>
-
-      <p>Best regards,<br/>
-      <strong>The Core – Bitcoin Education Team</strong></p>
+      <p>Welcome once again!</p>
     `,
   };
 

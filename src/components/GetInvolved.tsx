@@ -33,7 +33,7 @@ const opportunities = [
     description:
       "Contribute to our mission by supporting with Bitcoin. Every satoshi helps us onboard communities and scale impact sustainably.",
     icon: CurrencyBtc,
-    link: "https://btcpay.satcrowd.com/apps/u1M6aoKXbDHqdvByaSRTHNV682M/crowdfund",
+    link: "/donate",
     cta: "Support",
   },
 ];

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,33 +24,70 @@ export default function RegisterPage() {
       <Navbar />
       <main className="pt-[72px] md:pt-[136px]">
         {/* Hero Section */}
-        <section className="bg-background pt-20 pb-10 md:pt-28 md:pb-16 px-4 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-4xl md:text-5xl font-extrabold text-primary mb-6"
-          >
-            Register for Trezor Academy Cohorts
-          </motion.h1>
-          <p className="text-gray-700 mb-12 max-w-2xl mx-auto text-lg">
-            The{" "}
-            <span className="font-semibold">BTC Shule Trezor Academy</span> is
-            a program on{" "}
-            <span className="font-medium">
-              Bitcoin security, self-custody, open-source innovation, and
-              financial sovereignty
-            </span>
-            . Over <strong>350+ students</strong> have joined — you could be
-            next!
-          </p>
+        <section className="bg-background pt-20 pb-10 md:pt-28 md:pb-16 px-4">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            {/* Left: Video */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              className="w-full"
+            >
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg">
+                <video
+                  src="/videos/trezor-academy.mp4" // replace with your actual video path
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+                {/* Optional overlay for better text contrast */}
+                <div className="absolute inset-0 bg-black/20"></div>
+              </div>
+            </motion.div>
 
-          <button
-            onClick={() => setIsOpen(true)}
-            className="bg-secondary-light text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:bg-secondary-light/90 transition"
-          >
-            Fill Registration Form
-          </button>
+            {/* Right: Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              className="text-center md:text-left"
+            >
+              <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-6">
+                Register for Trezor Academy Cohorts
+              </h1>
+
+              <p className="text-gray-700 mb-6 text-lg">
+                The{" "}
+                <span className="font-semibold">BTC Shule Trezor Academy</span>{" "}
+                is a hands-on training program on{" "}
+                <span className="font-medium">
+                  Bitcoin security, self-custody, open-source innovation, and
+                  financial sovereignty
+                </span>
+                .
+              </p>
+
+              <p className="text-gray-700 text-lg">
+                Since its launch, we’ve{" "}
+                <strong>trained and certified over 350 participants</strong>.
+                Each cohort averages 25 students — with{" "}
+                <strong>4 cohorts in 2024</strong> and{" "}
+                <strong>10 cohorts in 2025</strong>. You could be next!
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Button below both columns */}
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="bg-secondary-light text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:bg-secondary-light/90 transition"
+            >
+              Fill Registration Form
+            </button>
+          </div>
         </section>
 
         {/* Program Highlights */}
@@ -90,8 +128,50 @@ export default function RegisterPage() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* Gallery Section */}
         <section className="bg-secondary-light/5 py-16 md:py-24">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold text-primary mb-10">
+              Moments from Past Classes
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {[
+                "/1K4A7368.jpg",
+                "/1K4A7369.jpg",
+                "/1K4A7436.jpg",
+                "/GuMR6HXXsAAipLH.jpg",
+                "/GuMR6N2WkAAzRk4.jpg",
+                "/GysbpR0XgAcSD2k.jpg",
+                "/GuMR7ZgWsAAYLDR.jpg",
+                "/1K4A7490.jpg",
+                "/DSC_0092.JPG.jpg",
+                "/DSC_0096.JPG.jpg",
+                "/IMG_20250413_162621_274.jpg",
+                "/IMG_20250413_163110_917.jpg",
+              ].map((src, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.15 }}
+                  className="overflow-hidden rounded-2xl shadow-lg"
+                >
+                  <Image
+                    src={src}
+                    alt={`Class session ${i + 1}`}
+                    width={500}
+                    height={300}
+                    className="object-cover w-full h-64 hover:scale-105 transition-transform duration-300"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="bg-secondary-light/10 py-16 md:py-24">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl font-bold text-primary text-center mb-10">
               Frequently Asked Questions
@@ -168,19 +248,18 @@ export default function RegisterPage() {
                   </label>
                   <div className="flex gap-2">
                     <input
-                    type="text"
-                    required
-                    className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="First name"
-                  />
-                  <input
-                    type="text"
-                    required
-                    className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Last name"
-                  />
+                      type="text"
+                      required
+                      className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="First name"
+                    />
+                    <input
+                      type="text"
+                      required
+                      className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="Last name"
+                    />
                   </div>
-                  
                 </div>
 
                 <div>
@@ -200,11 +279,11 @@ export default function RegisterPage() {
                     Country
                   </label>
                   <input
-                  type="country"
+                    type="text"
                     required
                     className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Enter your country"
-                  ></input>
+                  />
                 </div>
 
                 <button
@@ -218,9 +297,7 @@ export default function RegisterPage() {
               {status && (
                 <p
                   className={`mt-4 text-sm ${
-                    status.startsWith("✅")
-                      ? "text-green-600"
-                      : "text-gray-600"
+                    status.startsWith("✅") ? "text-green-600" : "text-gray-600"
                   }`}
                 >
                   {status}
@@ -230,6 +307,7 @@ export default function RegisterPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
       <Footer />
     </>
   );

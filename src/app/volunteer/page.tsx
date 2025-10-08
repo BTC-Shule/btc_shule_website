@@ -24,9 +24,9 @@ export default function VolunteerPage() {
             transition={{ delay: 0.3 }}
             className="max-w-2xl mx-auto text-lg text-gray-700 px-4"
           >
-            Join a global community empowering people with Bitcoin education. 
-            Whether you contribute time, skills, or ideas, you’ll help shape 
-            a brighter financial future.
+            Join a global community empowering people with Bitcoin education.
+            Whether you contribute time, skills, or ideas, you’ll help shape a
+            brighter financial future.
           </motion.p>
         </section>
 
@@ -44,7 +44,7 @@ export default function VolunteerPage() {
                 },
                 {
                   title: "Skill Growth",
-                  desc: "Gain experience in community building, content creation, and event organizing.",
+                  desc: "Gain experience in community building, content creation, translation, and event organizing.",
                 },
                 {
                   title: "Meaningful Connections",
@@ -69,8 +69,47 @@ export default function VolunteerPage() {
           </div>
         </section>
 
-        {/* Ways to Contribute */}
+        {/* Featured Initiatives */}
         <section className="py-16 md:py-24 bg-foreground">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold text-primary mb-6">
+              Featured Volunteer Initiatives
+            </h2>
+            <p className="text-gray-700 max-w-3xl mx-auto mb-10">
+              Our volunteers are driving projects that make Bitcoin education
+              more accessible across Africa and beyond.
+            </p>
+            <div className="grid md:grid-cols-2 gap-8">
+              {[
+                {
+                  title: "Kirundi Translations",
+                  desc: "We are translating Bitcoin educational resources into Kirundi, including materials from Exonumia and Plan B Network.",
+                },
+                {
+                  title: "Local Bitcoin Meetups",
+                  desc: "Support our grassroots Bitcoin meetups and help create learning hubs for your local community.",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.2 }}
+                  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition text-left"
+                >
+                  <h3 className="text-xl font-semibold text-secondary-light mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Ways to Contribute */}
+        <section className="py-16 md:py-24 bg-background">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-3xl font-bold text-primary text-center mb-10">
               Ways You Can Contribute
@@ -83,11 +122,11 @@ export default function VolunteerPage() {
                 },
                 {
                   title: "Content & Translation",
-                  desc: "Translate Bitcoin resources into Kirundi and other languages.",
+                  desc: "Translate resources, write articles, or create visual content in local languages.",
                 },
                 {
                   title: "Digital Advocacy",
-                  desc: "Spread awareness online and engage with our global audience.",
+                  desc: "Spread awareness online, create campaigns, and engage with our global audience.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -109,13 +148,13 @@ export default function VolunteerPage() {
         </section>
 
         {/* Volunteer Form */}
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-16 md:py-24 bg-foreground">
           <div className="max-w-lg mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold text-primary mb-6">
               Ready to Join Us?
             </h2>
             <p className="text-gray-600 mb-8">
-              Fill out the form below and we’ll get back to you soon.
+              Fill out the form below and let us know how you’d like to help.
             </p>
             <form className="space-y-6 text-secondary-light text-left max-w-lg m-auto">
               <input
@@ -130,8 +169,17 @@ export default function VolunteerPage() {
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
                 required
               />
+              <select
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                required
+              >
+                <option value="">Select Area of Interest</option>
+                <option value="events">Community Events</option>
+                <option value="translation">Content & Translation</option>
+                <option value="advocacy">Digital Advocacy</option>
+              </select>
               <textarea
-                placeholder="How would you like to help?"
+                placeholder="Tell us more about your skills or ideas..."
                 rows={4}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
                 required

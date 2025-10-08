@@ -6,7 +6,7 @@ import Link from "next/link";
 const partners = [
   {
     name: "Adopting Bitcoin CapeTown",
-    logo: "/adoptingbitcoin.jpg",
+    logo: "/Adopting Bitcoin Capetown Logo.png",
     url: " https://x.com/btcshule/status/1884833741303861551",
   },
   {
@@ -35,6 +35,11 @@ const partners = [
     url: "https://x.com/btrust_builders/status/1935659915697074587",
   },
   {
+    name: "Exonumia",
+    logo: "/exonumia-logo.png",
+    url: "https://x.com/btcshule/status/1956592878882287623",
+  },
+  {
     name: "Federation of Bitcoin",
     logo: "/federation-of-bitcoin.png",
     url: "https://x.com/btcshule/status/1948106928824992213",
@@ -54,7 +59,11 @@ const partners = [
     logo: "/Mi-Primer-Bitcoin-Logo.png",
     url: "https://x.com/BitcoinEkasi/status/1899852853662888410",
   },
-  { name: "Trezor", logo: "/trezor academy.jpg", url: "https://academy.trezor.io/countries/burundi" },
+  {
+    name: "Trezor",
+    logo: "/trezor academy.jpg",
+    url: "https://academy.trezor.io/countries/burundi",
+  },
 ];
 
 export default function Partners() {
@@ -79,7 +88,7 @@ export default function Partners() {
         </motion.div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 lg:gap-12 items-center justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 lg:gap-12 items-start justify-items-center">
           {partners.map((partner, i) => (
             <motion.a
               key={partner.name}
@@ -90,7 +99,7 @@ export default function Partners() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               viewport={{ once: true }}
-              className="w-full h-32 flex items-center justify-center rounded-2xl bg-white/70 shadow-md backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="w-full flex flex-col items-center justify-between rounded-2xl bg-white/70 shadow-md backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-4"
             >
               <Image
                 src={partner.logo}
@@ -99,6 +108,9 @@ export default function Partners() {
                 height={80}
                 className="max-h-16 object-contain"
               />
+              <p className="mt-3 text-center text-md font-medium text-gray-600">
+                {partner.name}
+              </p>
             </motion.a>
           ))}
         </div>
