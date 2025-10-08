@@ -7,6 +7,7 @@ import {
   Storefront,
   GraduationCap,
   ChatsCircle,
+  Sparkle,
 } from "phosphor-react";
 import { useInView } from "react-intersection-observer";
 
@@ -50,7 +51,7 @@ function StatCard({
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.8, delay: index * 0.2 }}
-      className="bg-transparent/80 p-8 transition"
+      className="bg-transparent/80 p-4 transition"
     >
       <motion.div
         className="flex items-center justify-center w-20 h-20 mx-auto mb-6 text-white shadow-md bg-primary"
@@ -90,7 +91,7 @@ function StatCard({
         <Icon size={32} weight="duotone" className="text-gray-600" />
       </motion.div>
 
-      <h3 className="text-3xl md:text-5xl font-extrabold text-foreground mb-3">
+      <h3 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">
         <Counter target={value} inView={inView} />
       </h3>
       <p className="text-foreground font-semibold tracking-wide">{label}</p>
@@ -100,14 +101,11 @@ function StatCard({
 
 export default function Statistics() {
   const stats = [
-    {
-      value: "300",
-      label: "Unbanked Community Members Reached",
-      icon: UsersThree,
-    },
-    { value: "15", label: "Merchants Onboarded", icon: Storefront },
+    { value: "300", label: "Unbanked Onboarded", icon: UsersThree },
+    { value: "15", label: "14 Shops + 1 Hotel", icon: Storefront },
     { value: "350", label: "Trezor Academy Graduates", icon: GraduationCap },
-    { value: "20", label: "Successful Meetups", icon: ChatsCircle },
+    { value: "84", label: "Mi Primer Bitcoin Graduates", icon: GraduationCap },
+    { value: "20", label: "Meetups", icon: ChatsCircle },
   ];
 
   return (
@@ -123,20 +121,45 @@ export default function Statistics() {
         <div className="absolute inset-0 bg-secondary/80"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+      <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center"
-        ></motion.div>
+          className="text-center md-8 md:mb-16"
+        >
+          <h2 className="text-4xl font-extrabold text-primary">Our Key Impact Metrics</h2>
+          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-10 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 md:gap-10 text-center">
           {stats.map((stat, index) => (
             <StatCard key={index} {...stat} index={index} />
           ))}
         </div>
+
+        {/* Featured Innovation Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+          className="mt-12 max-w-2xl mx-auto bg-white/90 rounded-2xl shadow-lg p-6 text-center"
+        >
+          <div className="flex justify-center mb-4">
+            <Sparkle size={36} className="text-primary" />
+          </div>
+          <h4 className="text-xl font-bold text-gray-800 mb-2">
+            Featured Innovation
+          </h4>
+          <p className="text-gray-600">
+            <span className="font-semibold">My Satoshi Tool</span> – a local
+            innovation that helps Burundians calculate and understand Bitcoin
+            sats-to-fiat conversions, empowering practical adoption.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

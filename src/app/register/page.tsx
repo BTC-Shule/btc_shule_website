@@ -166,12 +166,21 @@ export default function RegisterPage() {
                   <label className="block text-left font-medium text-gray-700 mb-1">
                     Full Name
                   </label>
+                  <div className="flex gap-2">
+                    <input
+                    type="text"
+                    required
+                    className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="First name"
+                  />
                   <input
                     type="text"
                     required
                     className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Enter your name"
+                    placeholder="Last name"
                   />
+                  </div>
+                  
                 </div>
 
                 <div>

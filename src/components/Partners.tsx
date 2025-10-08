@@ -5,6 +5,11 @@ import Link from "next/link";
 
 const partners = [
   {
+    name: "Adopting Bitcoin CapeTown",
+    logo: "/adoptingbitcoin.jpg",
+    url: " https://x.com/btcshule/status/1884833741303861551",
+  },
+  {
     name: "Bitcoin Beach Brazil",
     logo: "/BiTCOIN bEACH bRAZIL.jpg",
     url: "https://bitcoinbeachbr.org/en/",
@@ -12,32 +17,32 @@ const partners = [
   {
     name: "Bitcoin Beach",
     logo: "/Bitcoin beach.png",
-    url: "https://www.bitcoinbeach.com/en/our-work",
+    url: "https://x.com/BitcoinEkasi/status/1899852853662888410",
   },
   {
     name: "Bitcoin Ekasi",
     logo: "/Bitcoin Ekasi.png",
-    url: "https://bitcoinekasi.com/",
+    url: "https://x.com/btcshule/status/1905580947845554351",
   },
   {
     name: "Blink",
     logo: "/blinkk.png",
-    url: "https://blink.sv",
+    url: "https://x.com/blinkbtc/status/1928521121021735255",
   },
   {
     name: "Btrust Builders",
     logo: "/btrust_builders_logo.jpeg",
-    url: "https://btrust.tech",
+    url: "https://x.com/btrust_builders/status/1935659915697074587",
   },
   {
     name: "Federation of Bitcoin",
     logo: "/federation-of-bitcoin.png",
-    url: "https://fbce.io",
+    url: "https://x.com/btcshule/status/1948106928824992213",
   },
   {
     name: "Human Rights Foundation",
     logo: "/Human_Rights_Foundation_logo.svg.png",
-    url: "https://hrf.org/",
+    url: "https://x.com/femilonge/status/1836049505050869880",
   },
   {
     name: "Machankura",
@@ -47,9 +52,9 @@ const partners = [
   {
     name: "Mi Primer Bitcoin",
     logo: "/Mi-Primer-Bitcoin-Logo.png",
-    url: "https://myfirstbitcoin.io/",
+    url: "https://x.com/BitcoinEkasi/status/1899852853662888410",
   },
-  { name: "Trezor", logo: "/trezor academy.jpg", url: "https://trezor.io/" },
+  { name: "Trezor", logo: "/trezor academy.jpg", url: "https://academy.trezor.io/countries/burundi" },
 ];
 
 export default function Partners() {

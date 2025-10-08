@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Storefront, GraduationCap, Code } from "phosphor-react";
+import { Storefront, GraduationCap, Code, BookOpen } from "phosphor-react";
 import Link from "next/link";
 
 const programs = [
@@ -24,6 +24,13 @@ const programs = [
       "Our local BitDevs chapter fosters technical discussions on Bitcoin development, Lightning, and open-source contributions within Burundi.",
     icon: Code,
     link: "https://bitdevsgtga.org",
+  },
+  {
+    title: "Translation Work – Kirundi Resources",
+    description:
+      "BTC Shule translates essential Bitcoin content into Kirundi, making Bitcoin knowledge accessible to millions of Burundians in their native language.",
+    icon: BookOpen,
+    link: "/donate",
   },
 ];
 
@@ -51,7 +58,7 @@ export default function Programs() {
         </motion.div>
 
         {/* Program Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto justify-items-center max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mx-auto justify-items-center max-w-6xl">
           {programs.map((program, index) => {
             const isExternal = program.link.startsWith("http");
             return (

@@ -187,8 +187,7 @@ export default function Navbar() {
 
                   <div className="hidden md:flex md:items-center md:space-x-8">
                     <a
-                      href="https://btcpay.satcrowd.com/apps/u1M6aoKXbDHqdvByaSRTHNV682M/crowdfund"
-                      target="_blank"
+                      href="/donate"
                       rel="noopener noreferrer"
                       className="text-background bg-primary hover:bg-primary-dark py-2 px-6 rounded-3xl transition-colors"
                     >
@@ -235,8 +234,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="https://btcpay.satcrowd.com/apps/u1M6aoKXbDHqdvByaSRTHNV682M/crowdfund"
-              target="_blank"
+              href="/donate"
               rel="noopener noreferrer"
               className="block w-32 bg-primary text-center rounded-3xl text-background hover:bg-primary-dark py-2 transition-colors"
             >
