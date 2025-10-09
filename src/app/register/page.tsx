@@ -33,14 +33,13 @@ export default function RegisterPage() {
               transition={{ duration: 1 }}
               className="w-full"
             >
-              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg">
-                <video
-                  src="/videos/trezor-academy.mp4" // replace with your actual video path
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
+              <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/hero.jpg"
+                  fill
+                  alt="Trezor Students in class"
+                  className="object-cover"
+                  priority
                 />
                 {/* Optional overlay for better text contrast */}
                 <div className="absolute inset-0 bg-black/20"></div>
