@@ -33,7 +33,7 @@ export default function RegisterPage() {
               transition={{ duration: 1 }}
               className="w-full"
             >
-              <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+              <div className="relative w-full h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src="/hero.jpg"
                   fill
