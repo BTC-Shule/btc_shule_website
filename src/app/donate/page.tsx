@@ -30,7 +30,7 @@ export default function DonatePage() {
       <Navbar />
       <main className="pt-[72px] md:pt-[136px]">
         {/* Hero */}
-        <section className="bg-secondary-light py-16 md:py-24 text-center text-white">
+        <section className="bg-background py-16 md:py-24 text-center text-gray-700">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -195,11 +195,11 @@ export default function DonatePage() {
         </section>
 
         {/* Final Call to Action */}
-        <section className="py-16 md:py-24 bg-primary text-white text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
+        <section className="py-16 md:py-24 bg-foreground text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-gray-800">
             Be Part of the Movement
           </h2>
-          <p className="max-w-2xl mx-auto mb-8 text-lg">
+          <p className="max-w-2xl mx-auto mb-8 text-lg text-gray-600">
             Your sats are not just donations — they’re an investment in the
             future of freedom, education, and financial sovereignty.
           </p>

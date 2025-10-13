@@ -12,7 +12,7 @@ function getServiceAccountKey() {
 
 async function sendConfirmationEmail({ firstName, email }) {
   const transporter = nodemailer.createTransport({
-    host: "smtp.zoho.com",
+    host: "gmail",
     port: 465,
     secure: true,
     auth: {

@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState("");
 
   const handleChange = (
@@ -37,7 +37,7 @@ export default function Contact() {
       const data = await res.json();
       if (res.ok) {
         setStatus("✅ Message sent successfully!");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", subject: "", message: "" });
       } else {
         // show API error to user
         setStatus(`❌ ${data.error || "Something went wrong"}`);
@@ -159,7 +159,7 @@ export default function Contact() {
                 <WhatsappLogo size={28} weight="duotone" />
               </a>
               <a
-                href="#"
+                href="https://x.com/btcshule"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
               >
                 <TwitterLogo size={28} weight="duotone" />
@@ -227,7 +227,7 @@ export default function Contact() {
                 <input
                   type="text"
                   name="subject"
-                  value={form.message}
+                  value={form.subject}
                   onChange={handleChange}
                   required
                   placeholder="Message Subject"
