@@ -17,12 +17,43 @@ import { useState } from "react";
 
 export default function DonatePage() {
   const [copied, setCopied] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [currency, setCurrency] = useState("USD");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const btcAddress = "bc1qexampleaddress1234567890xyz";
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(btcAddress);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleBTCPayDonate = async () => {
+    if (!amount) return;
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/create-invoice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount, currency }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.checkoutLink) {
+        window.location.href = data.checkoutLink;
+      } else {
+        throw new Error(data.error || "Invoice creation failed");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Unable to connect to BTCPay. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,7 +89,7 @@ export default function DonatePage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="bg-white shadow-2xl rounded-2xl p-8 inline-block"
+              className="bg-white shadow-2xl rounded-2xl p-8 inline-block w-full max-w-lg"
             >
               <Image
                 src="/btc-qr.png"
@@ -86,10 +117,59 @@ export default function DonatePage() {
                     </>
                   )}
                 </button>
-                <button className="flex items-center justify-center gap-2 border border-primary text-primary px-5 py-2 rounded-lg shadow-sm hover:bg-primary/5 transition">
-                  <Lightning size={20} /> Donate via Lightning
-                </button>
               </div>
+
+              <hr className="my-8 border-gray-200" />
+
+              <h3 className="text-xl font-semibold mb-4 text-gray-700">
+                Donate via BTCPay (Bitcoin or Lightning ⚡)
+              </h3>
+
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 ">
+                <input
+                  type="number"
+                  placeholder="Enter amount"
+                  min="1"
+                  step="any"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-4 py-2 text-lg  w-48 text-center focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="USD">USD</option>
+                  <option value="BTC">BTC</option>
+                </select>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                disabled={loading || !amount}
+                onClick={handleBTCPayDonate}
+                className={`${
+                  loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-primary hover:bg-primary/90"
+                } text-gray-600 px-8 py-3 rounded-xl font-semibold shadow-lg transition flex items-center justify-center gap-2 mx-auto`}
+              >
+                {loading ? (
+                  <>
+                    <Lightning size={20} className="animate-pulse" />
+                    Generating Invoice...
+                  </>
+                ) : (
+                  <>
+                    <Lightning size={20} />
+                    Donate with BTCPay
+                  </>
+                )}
+              </motion.button>
+
+              {error && <p className="text-red-500 mt-4">{error}</p>}
             </motion.div>
           </div>
         </section>

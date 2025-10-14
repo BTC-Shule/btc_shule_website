@@ -9,14 +9,36 @@ export default function RegisterPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
     setStatus("⏳ Submitting...");
 
-    // Fake API simulation
-    setTimeout(() => {
-      setStatus("✅ Registration successful! We’ll email you details soon.");
-    }, 2000);
+    const form = e.currentTarget;
+  const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setStatus("✅ Registration successful! We’ll email you details soon.");
+        form.reset();
+      } else if (result.status === "duplicate") {
+        setStatus("⚠️ Email already registered.");
+      } else {
+        setStatus("❌ Something went wrong. Try again later.");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("❌ Network error.");
+    }
   };
 
   return (
@@ -248,12 +270,14 @@ export default function RegisterPage() {
                   <div className="flex gap-2">
                     <input
                       type="text"
+                      name="firstName"
                       required
                       className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="First name"
                     />
                     <input
                       type="text"
+                      name="lastName"
                       required
                       className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="Last name"
@@ -267,6 +291,7 @@ export default function RegisterPage() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
                     className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Enter your email"
@@ -279,6 +304,7 @@ export default function RegisterPage() {
                   </label>
                   <input
                     type="text"
+                    name="country"
                     required
                     className="w-full border rounded-lg px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Enter your country"

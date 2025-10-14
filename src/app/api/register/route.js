@@ -12,9 +12,7 @@ function getServiceAccountKey() {
 
 async function sendConfirmationEmail({ firstName, email }) {
   const transporter = nodemailer.createTransport({
-    host: "gmail",
-    port: 465,
-    secure: true,
+    service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -43,7 +41,7 @@ async function sendConfirmationEmail({ firstName, email }) {
 }
 
 export async function POST(request) {
-  const { firstName, secondName, email, country } = await request.json();
+  const { firstName, lastName, email, country } = await request.json();
 
   const normalizedCountry =
     country && country.trim().length > 0
@@ -62,7 +60,7 @@ export async function POST(request) {
 
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
-  const spreadsheetId = "1mbMFy16w_ogZtbOBe3Dj2Sh7_qzLcGC4sFqRL-nznsA";
+  const spreadsheetId = "12oNfQaws3nQbH7n7qTEtmS8IkKLM4YlvXcBCyoUMCN0";
 
   try {
     const existing = await sheets.spreadsheets.values.get({
@@ -90,7 +88,7 @@ export async function POST(request) {
           [
             new Date().toISOString(),
             firstName,
-            secondName,
+            lastName,
             email,
             normalizedCountry,
           ],
