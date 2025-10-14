@@ -4,18 +4,17 @@ import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import { CheckCircle } from "phosphor-react";
 
 export default function RegisterPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
     setStatus("⏳ Submitting...");
-
     const form = e.currentTarget;
-  const formData = new FormData(form);
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     try {
@@ -46,114 +45,103 @@ export default function RegisterPage() {
       <Navbar />
       <main className="pt-[72px] md:pt-[136px]">
         {/* Hero Section */}
-        <section className="bg-background pt-20 pb-10 md:pt-28 md:pb-16 px-4">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            {/* Left: Video */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
-              className="w-full"
-            >
-              <div className="relative w-full h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src="/hero.jpg"
-                  fill
-                  alt="Trezor Students in class"
-                  className="object-cover"
-                  priority
-                />
-                {/* Optional overlay for better text contrast */}
-                <div className="absolute inset-0 bg-black/20"></div>
-              </div>
-            </motion.div>
-
-            {/* Right: Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
-              className="text-center md:text-left"
-            >
-              <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-6">
-                Register for Trezor Academy Cohorts
-              </h1>
-
-              <p className="text-gray-700 mb-6 text-lg">
-                The{" "}
-                <span className="font-semibold">BTC Shule Trezor Academy</span>{" "}
-                is a hands-on training program on{" "}
-                <span className="font-medium">
-                  Bitcoin security, self-custody, open-source innovation, and
-                  financial sovereignty
-                </span>
-                .
-              </p>
-
-              <p className="text-gray-700 text-lg">
-                Since its launch, we’ve{" "}
-                <strong>trained and certified over 350 participants</strong>.
-                Each cohort averages 25 students — with{" "}
-                <strong>4 cohorts in 2024</strong> and{" "}
-                <strong>10 cohorts in 2025</strong>. You could be next!
-              </p>
-            </motion.div>
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="/hero.jpg"
+              alt="Bitcoin education classroom"
+              fill
+              className="object-cover opacity-80"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
           </div>
-
-          {/* Button below both columns */}
-          <div className="flex justify-center mt-10">
-            <button
-              onClick={() => setIsOpen(true)}
-              className="bg-secondary-light text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:bg-secondary-light/90 transition"
+          <div className="relative max-w-5xl mx-auto px-6 py-24 md:py-36  text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
             >
-              Fill Registration Form
-            </button>
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+                Register for{" "}
+                <span className="text-primary">Trezor Academy</span> Cohorts
+              </h1>
+              <p className="text-lg text-gray-200 mb-6">
+                Join our transformative program on{" "}
+                <strong>
+                  Bitcoin security, self-custody, and open-source innovation
+                </strong>
+                . Become part of a global movement for financial sovereignty.
+              </p>
+              <button
+                onClick={() => setIsOpen(true)}
+                className="mt-4 bg-secondary-light text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:bg-secondary-light/90 transition"
+              >
+                Fill Registration Form
+              </button>
+            </motion.div>
           </div>
         </section>
 
         {/* Program Highlights */}
-        <section className="bg-white pt-16 pb-24">
-          <div className="max-w-6xl mx-auto px-6 grid gap-12 md:grid-cols-2 lg:grid-cols-4 text-center">
-            {[
-              {
-                title: "🎓 Certification",
-                desc: "Earn a BTC Shule & Trezor endorsed certificate upon completion.",
-              },
-              {
-                title: "🔐 Hands-on Training",
-                desc: "Practice Bitcoin self-custody, wallet security & real-world skills.",
-              },
-              {
-                title: "🤝 Mentorship",
-                desc: "Learn from educators, security experts & open-source contributors.",
-              },
-              {
-                title: "🌍 Networking",
-                desc: "Join a global alumni network shaping decentralized innovation.",
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="p-6 bg-background rounded-2xl shadow hover:shadow-lg transition"
-              >
-                <h3 className="text-xl font-bold text-primary mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </motion.div>
-            ))}
+        <section className="bg-background py-20">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl md:text-4xl font-bold text-primary mb-10"
+            >
+              Why Join BTC Shule Trezor Academy?
+            </motion.h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  icon: "🎓",
+                  title: "Certification",
+                  desc: "Earn a BTC Shule & Trezor-endorsed certificate upon successful completion.",
+                },
+                {
+                  icon: "🔐",
+                  title: "Hands-on Training",
+                  desc: "Learn practical wallet management, self-custody, and real-world Bitcoin security.",
+                },
+                {
+                  icon: "🤝",
+                  title: "Expert Mentorship",
+                  desc: "Collaborate with experienced educators and industry professionals.",
+                },
+                {
+                  icon: "🌍",
+                  title: "Global Network",
+                  desc: "Join alumni from 15+ countries championing decentralized innovation.",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.2 }}
+                  className="p-6 bg-white rounded-2xl shadow hover:shadow-xl transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <div className="text-4xl mb-3">{item.icon}</div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Gallery Section */}
-        <section className="bg-secondary-light/5 py-16 md:py-24">
-          <div className="max-w-6xl mx-auto px-6 text-center">
+        {/* Gallery */}
+        <section className="bg-secondary-light/10 py-20">
+          <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold text-primary mb-10">
-              Moments from Past Classes
+              Highlights from Previous Cohorts
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[
@@ -176,14 +164,14 @@ export default function RegisterPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.15 }}
-                  className="overflow-hidden rounded-2xl shadow-lg"
+                  className="overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform"
                 >
                   <Image
                     src={src}
-                    alt={`Class session ${i + 1}`}
+                    alt={`Academy class ${i + 1}`}
                     width={500}
-                    height={300}
-                    className="object-cover w-full h-64 hover:scale-105 transition-transform duration-300"
+                    height={350}
+                    className="object-cover w-full h-64"
                   />
                 </motion.div>
               ))}
@@ -192,45 +180,50 @@ export default function RegisterPage() {
         </section>
 
         {/* FAQ */}
-        <section className="bg-secondary-light/10 py-16 md:py-24">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-primary text-center mb-10">
+        <section className="bg-white py-20">
+          <div className="max-w-5xl mx-auto px-6">
+            <h2 className="text-3xl font-bold text-primary text-center mb-12">
               Frequently Asked Questions
             </h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold text-lg text-gray-600">
-                  Who can apply?
-                </h3>
-                <p className="text-gray-600">
-                  University students and young professionals interested in
-                  Bitcoin, security, and open-source.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg text-gray-600">
-                  Do I need prior experience?
-                </h3>
-                <p className="text-gray-600">
-                  No — we welcome beginners! The program starts with basics and
-                  builds progressively.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg text-gray-600">
-                  How much does it cost?
-                </h3>
-                <p className="text-gray-600">
-                  The program is <strong>free</strong>, thanks to BTC Shule &
-                  Trezor’s support.
-                </p>
-              </div>
+            <div className="grid md:grid-cols-2 gap-10 text-gray-700">
+              {[
+                {
+                  q: "Who can apply?",
+                  a: "University students, professionals, or anyone passionate about Bitcoin and financial sovereignty.",
+                },
+                {
+                  q: "Do I need prior experience?",
+                  a: "No — we welcome beginners! You’ll start with Bitcoin basics and progress to advanced topics.",
+                },
+                {
+                  q: "Is the program free?",
+                  a: "Yes! Thanks to BTC Shule and Trezor’s support, participation is 100% free.",
+                },
+                {
+                  q: "How are classes conducted?",
+                  a: "Sessions are both in-person and virtual, with community projects and peer discussions.",
+                },
+              ].map((faq, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.1 }}
+                  className="p-6 bg-background rounded-xl shadow-sm hover:shadow-md transition"
+                >
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    {faq.q}
+                  </h3>
+                  <p>{faq.a}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
       </main>
 
-      {/* Popup Modal */}
+      {/* Modal */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -332,7 +325,6 @@ export default function RegisterPage() {
           </motion.div>
         )}
       </AnimatePresence>
-
       <Footer />
     </>
   );

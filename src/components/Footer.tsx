@@ -4,10 +4,11 @@ import {
   TelegramLogo,
   TwitterLogo,
   WhatsappLogo,
-  LinkedinLogo,
+  GlobeHemisphereWest,
   Envelope,
   Phone,
   MapPin,
+  GlobeHemisphereEast,
 } from "phosphor-react";
 import Link from "next/link";
 
@@ -119,11 +120,11 @@ export default function Footer() {
               <WhatsappLogo size={28} />
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://primal.net/p/nprofile1qqsyefs0ks7hr496ntxqyugkhwkrfnjukzzx7efp3sef54fdasmt5ugp3w6y6"
               target="_blank"
               className="hover:text-primary"
             >
-              <LinkedinLogo size={28} />
+              <GlobeHemisphereWest size={28} />
             </Link>
           </div>
         </div>

@@ -146,7 +146,7 @@ export default function Navbar() {
                     </Link>
 
                     <Link
-                      href="https://linkedin.com/in/yourprofile"
+                      href="https://primal.net/p/nprofile1qqsyefs0ks7hr496ntxqyugkhwkrfnjukzzx7efp3sef54fdasmt5ugp3w6y6"
                       target="_blank"
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
                     >

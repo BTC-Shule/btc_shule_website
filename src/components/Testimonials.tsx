@@ -102,12 +102,23 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="relative bg-foreground py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-primary">
-            What Our Community Says
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-primary">
+            Voices From The Bitcoin Community
           </h2>
-          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
-        </div>
+          <p className="mt-4 text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+            Here’s what global Bitcoiners and local innovators are saying about BTC
+            Shule’s movement to onboard communities and drive education in Africa.
+          </p>
+          <div className="mt-6 mx-auto w-24 h-1.5 bg-secondary-light rounded-full" />
+        </motion.div>
 
         {/* Tweets */}
         <div className="relative">

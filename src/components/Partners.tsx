@@ -1,4 +1,5 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ const partners = [
   {
     name: "Adopting Bitcoin CapeTown",
     logo: "/Adopting Bitcoin Capetown Logo.png",
-    url: " https://x.com/btcshule/status/1884833741303861551",
+    url: "https://x.com/btcshule/status/1884833741303861551",
   },
   {
     name: "Bitcoin Beach Brazil",
@@ -68,63 +69,95 @@ const partners = [
 
 export default function Partners() {
   return (
-    <section id="partners" className="relative bg-background py-24">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="partners" className="relative bg-gradient-to-b from-background to-gray-50 py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 space-y-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-4xl font-extrabold text-primary">Our Partners</h2>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            We collaborate with forward-thinking organizations to build Bitcoin
-            adoption across Burundi and beyond. Together, we create lasting
-            impact.
+          <h2 className="text-4xl md:text-5xl font-extrabold text-primary">
+            Our Global Partners
+          </h2>
+          <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
+            We proudly collaborate with leading organizations and Bitcoin communities worldwide — advancing education, financial inclusion, and innovation across borders.
           </p>
-          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
+          <motion.div
+            className="mt-6 mx-auto w-24 h-1 bg-secondary-light rounded-full"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8 }}
+          />
         </motion.div>
 
-        {/* Partners Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 lg:gap-12 items-start justify-items-center">
-          {partners.map((partner, i) => (
+        {/* Partner Logos */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.08,
+              },
+            },
+          }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10 justify-items-center"
+        >
+          {partners.map((partner) => (
             <motion.a
               key={partner.name}
               href={partner.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              viewport={{ once: true }}
-              className="w-full flex flex-col items-center justify-between rounded-2xl bg-white/70 shadow-md backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 p-4"
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.6 }}
+              className="group w-full flex flex-col items-center text-center rounded-2xl bg-white/70 backdrop-blur-md shadow-md hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500 border border-gray-100 p-6"
             >
-              <Image
-                src={partner.logo}
-                alt={partner.name}
-                width={160}
-                height={80}
-                className="max-h-16 object-contain"
-              />
-              <p className="mt-3 text-center text-md font-medium text-gray-600">
+              <div className="relative w-32 h-16 flex items-center justify-center">
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={160}
+                  height={80}
+                  className="object-contain max-h-16 group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <p className="mt-4 text-sm md:text-base font-medium text-gray-700 group-hover:text-primary transition-colors">
                 {partner.name}
               </p>
             </motion.a>
           ))}
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="text-center mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
           <Link
             href="/#contact"
-            className="inline-block bg-secondary-light text-white px-10 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-90 transition-all font-semibold"
+            className="inline-flex items-center gap-2 bg-primary text-white text-lg font-semibold px-10 py-4 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
             Become a Partner
           </Link>
-        </div>
+          <p className="text-gray-500 mt-3 text-sm">
+            Join the movement to expand Bitcoin education across the globe.
+          </p>
+        </motion.div>
       </div>
+
+      
     </section>
   );
 }

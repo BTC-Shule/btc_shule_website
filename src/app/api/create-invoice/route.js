@@ -3,7 +3,9 @@ export async function POST(req) {
     const { amount, currency = "USD" } = await req.json();
 
     if (!amount) {
-      return new Response(JSON.stringify({ error: "Amount required" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "Amount required" }), {
+        status: 400,
+      });
     }
 
     const res = await fetch(
@@ -30,9 +32,13 @@ export async function POST(req) {
     }
 
     const data = JSON.parse(text);
-    return new Response(JSON.stringify(data), { status: 200 });
+
+    const checkoutLink = `${process.env.BTCPAY_HOST}/invoice?id=${data.id}`;
+    return new Response(JSON.stringify({...data, checkoutLink}), { status: 200 });
   } catch (err) {
     console.error("Server error:", err);
-    return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
+    });
   }
 }

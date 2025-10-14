@@ -1,11 +1,9 @@
 "use client";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
-  Copy,
-  CheckCircle,
   Heart,
   ShieldCheck,
   GlobeHemisphereEast,
@@ -13,41 +11,48 @@ import {
   BookOpen,
   UsersThree,
 } from "phosphor-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
+
+type AddressMap = Record<string, string> | null;
 
 export default function DonatePage() {
-  const [copied, setCopied] = useState(false);
-  const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState("USD");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const btcAddress = "bc1qexampleaddress1234567890xyz";
+  const [amount, setAmount] = useState<string>("");
+  const [currency, setCurrency] = useState<string>("USD");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [selectedTab, setSelectedTab] = useState<string>("btcpay");
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [addresses, setAddresses] = useState<AddressMap>(null);
 
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(btcAddress);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/donationAddresses");
+        if (!res.ok) throw new Error("Failed to fetch addresses");
+        const json = (await res.json()) as Record<string, string>;
+        setAddresses(json);
+      } catch (err) {
+        console.error(err);
+        setAddresses(null);
+      }
+    })();
+  }, []);
 
   const handleBTCPayDonate = async () => {
     if (!amount) return;
     setLoading(true);
     setError("");
-
     try {
       const res = await fetch("/api/create-invoice", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, currency }),
       });
-
       const data = await res.json();
-
       if (res.ok && data.checkoutLink) {
         window.location.href = data.checkoutLink;
-      } else {
-        throw new Error(data.error || "Invoice creation failed");
-      }
+      } else throw new Error(data.error || "Invoice creation failed");
     } catch (err) {
       console.error(err);
       setError("Unable to connect to BTCPay. Please try again.");
@@ -59,236 +64,314 @@ export default function DonatePage() {
   return (
     <>
       <Navbar />
-      <main className="pt-[72px] md:pt-[136px]">
-        {/* Hero */}
-        <section className="bg-background py-16 md:py-24 text-center text-gray-700">
-          <motion.h1
+      <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-background to-gray-50">
+        {/* Hero Section */}
+        <section className="relative text-center py-20 md:py-28 overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/btc-pattern.svg')] opacity-5 bg-repeat" />
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-extrabold mb-6"
+            className="relative z-10 max-w-5xl mx-auto px-6"
           >
-            Fuel Bitcoin Education with Your Support
-          </motion.h1>
-          <p className="max-w-3xl mx-auto text-lg leading-relaxed">
-            BTC Shule is a{" "}
-            <strong>
-              grassroots Bitcoin education initiative in East Africa
-            </strong>
-            . Every satoshi helps us build{" "}
-            <span className="font-semibold">Circular Economies</span>, scale{" "}
-            <span className="font-semibold">Trezor Academy</span>, and expand{" "}
-            <span className="font-semibold">translation efforts</span> to reach
-            more communities worldwide.
-          </p>
+            <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-gray-800">
+              Fuel <span className="text-primary">Bitcoin Education</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+              BTC Shule is a{" "}
+              <strong>grassroots Bitcoin education movement</strong> in East
+              Africa. Every satoshi you send helps us expand{" "}
+              <span className="font-semibold">Circular Economies</span>, scale{" "}
+              <span className="font-semibold">Trezor Academy</span>, and bring
+              Bitcoin knowledge to every community.
+            </p>
+          </motion.div>
         </section>
 
-        {/* Donation Card */}
-        <section className="bg-background py-16 md:py-24">
-          <div className="max-w-5xl mx-auto px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white shadow-2xl rounded-2xl p-8 inline-block w-full max-w-lg"
-            >
-              <Image
-                src="/btc-qr.png"
-                alt="Bitcoin Donation QR Code"
-                className="mx-auto rounded-lg shadow-md"
-                width={200}
-                height={200}
-              />
-              <p className="mt-6 text-gray-800 font-mono break-all">
-                {btcAddress}
-              </p>
-
-              <div className="flex flex-col md:flex-row gap-4 justify-center mt-6">
+        {/* Donation Interface */}
+        <section className="py-16 md:py-24">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="flex justify-center gap-4 mb-10">
+              {["btcpay", "static"].map((tab) => (
                 <button
-                  onClick={handleCopy}
-                  className="flex items-center justify-center gap-2 bg-primary text-white px-5 py-2 rounded-lg shadow hover:bg-primary/90 transition"
+                  key={tab}
+                  onClick={() => setSelectedTab(tab)}
+                  className={`px-6 py-2 text-sm font-medium rounded-full transition-all ${
+                    selectedTab === tab
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-white border border-gray-300 text-gray-600 hover:bg-gray-100"
+                  }`}
                 >
-                  {copied ? (
-                    <>
-                      <CheckCircle size={20} /> Copied!
-                    </>
-                  ) : (
-                    <>
-                      <Copy size={20} /> Copy Address
-                    </>
-                  )}
+                  {tab === "btcpay" ? "BTCPay Server" : "Static QR Codes"}
                 </button>
-              </div>
+              ))}
+            </div>
 
-              <hr className="my-8 border-gray-200" />
-
-              <h3 className="text-xl font-semibold mb-4 text-gray-700">
-                Donate via BTCPay (Bitcoin or Lightning ⚡)
-              </h3>
-
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 ">
-                <input
-                  type="number"
-                  placeholder="Enter amount"
-                  min="1"
-                  step="any"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-4 py-2 text-lg  w-48 text-center focus:outline-none focus:ring-2 focus:ring-primary"
-                />
-                <select
-                  value={currency}
-                  onChange={(e) => setCurrency(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            <AnimatePresence mode="wait">
+              {selectedTab === "btcpay" && (
+                <motion.div
+                  key="btcpay"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto text-center"
                 >
-                  <option value="USD">USD</option>
-                  <option value="BTC">BTC</option>
-                </select>
-              </div>
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-700">
+                    Donate via BTCPay (Bitcoin / Lightning ⚡)
+                  </h3>
+                  <p className="text-gray-600 mb-6 text-sm">
+                    Secure, self-hosted, and open-source Bitcoin payment
+                    gateway.
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 text-gray-600">
+                    <input
+                      type="number"
+                      placeholder="Enter amount"
+                      min="1"
+                      step="any"
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      className="border border-gray-300 rounded-lg px-4 py-2 text-lg w-48 text-center focus:ring-2 focus:ring-primary focus:outline-none"
+                    />
+                    <select
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value)}
+                      className="border border-gray-300 rounded-lg px-3 py-2 text-lg focus:ring-2 focus:ring-primary focus:outline-none"
+                    >
+                      <option value="USD">USD</option>
+                      <option value="BTC">BTC</option>
+                      <option value="SATS">SATS</option>
+                    </select>
+                  </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-                disabled={loading || !amount}
-                onClick={handleBTCPayDonate}
-                className={`${
-                  loading
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-primary hover:bg-primary/90"
-                } text-gray-600 px-8 py-3 rounded-xl font-semibold shadow-lg transition flex items-center justify-center gap-2 mx-auto`}
-              >
-                {loading ? (
-                  <>
-                    <Lightning size={20} className="animate-pulse" />
-                    Generating Invoice...
-                  </>
-                ) : (
-                  <>
-                    <Lightning size={20} />
-                    Donate with BTCPay
-                  </>
-                )}
-              </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    disabled={loading || !amount}
+                    onClick={handleBTCPayDonate}
+                    className={`${
+                      loading
+                        ? "bg-gray-500 cursor-not-allowed"
+                        : "bg-primary hover:bg-primary/90"
+                    } text-white px-8 py-3 rounded-full font-semibold shadow-lg flex items-center justify-center gap-2 mx-auto`}
+                  >
+                    {loading ? (
+                      <>
+                        <Lightning size={20} className="animate-pulse" />
+                        Generating Invoice...
+                      </>
+                    ) : (
+                      <>
+                        <Lightning size={20} />
+                        Donate with BTCPay
+                      </>
+                    )}
+                  </motion.button>
+                  {error && <p className="text-red-500 mt-4">{error}</p>}
+                </motion.div>
+              )}
 
-              {error && <p className="text-red-500 mt-4">{error}</p>}
-            </motion.div>
+              {selectedTab === "static" && (
+                <motion.div
+                  key="static"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="max-w-4xl mx-auto"
+                >
+                  {addresses === null ? (
+                    <p className="text-center text-gray-500">
+                      Loading donation addresses...
+                    </p>
+                  ) : (
+                    <div className="grid sm:grid-cols-3 gap-10 text-center mt-10">
+                      {Object.entries(addresses).map(([key, address]) => {
+                        const clean = address.replace(
+                          /^(bitcoin:|lightning:|liquid:)/,
+                          ""
+                        );
+                        const label =
+                          key === "onchain"
+                            ? "Bitcoin On-chain"
+                            : key === "lightning"
+                            ? "Lightning"
+                            : "Liquid Network";
+                        return (
+                          <motion.div
+                            key={key}
+                            whileHover={{ scale: 1.03 }}
+                            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col items-center"
+                          >
+                            <div className="relative w-44 h-44 mb-3">
+                              <QRCode
+                                value={clean}
+                                size={176}
+                                bgColor="#ffffff"
+                                fgColor="#1a1a1a"
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  borderRadius: "12px",
+                                }}
+                              />
+                              <div className="absolute top-1/2 left-1/2 w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white flex items-center justify-center shadow-sm">
+                                <Image
+                                  src={`/${key}.png`}
+                                  alt={`${key} logo`}
+                                  width={24}
+                                  height={24}
+                                  className="object-contain"
+                                />
+                              </div>
+                            </div>
+                            <h4 className="font-semibold text-gray-700">
+                              {label}
+                            </h4>
+                            <p className="text-xs text-gray-500 mt-1 break-all max-w-[200px]">
+                              {clean}
+                            </p>
+                            <button
+                              onClick={async () => {
+                                try {
+                                  await navigator.clipboard.writeText(clean);
+                                  setCopiedKey(key);
+                                  setTimeout(() => setCopiedKey(null), 2000);
+                                } catch (err) {
+                                  console.error("Copy failed", err);
+                                }
+                              }}
+                              className="mt-2 text-xs bg-primary text-white px-3 py-1 rounded-md hover:bg-primary/90"
+                            >
+                              {copiedKey === key ? "Copied!" : "Copy Address"}
+                            </button>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
-        {/* Why Your Support Matters */}
-        <section className="py-16 md:py-24 bg-foreground">
+        {/* Why Support Matters */}
+        <section className="py-20 bg-foreground text-white text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
+            Why Your Support Matters
+          </h2>
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+            {[
+              {
+                icon: <UsersThree size={40} className="mx-auto mb-3" />,
+                title: "Circular Economies",
+                desc: "Your donation funds real Bitcoin use in schools, markets, and local communities.",
+              },
+              {
+                icon: <BookOpen size={40} className="mx-auto mb-3" />,
+                title: "Trezor Academy",
+                desc: "We train a new generation of Bitcoin educators through hands-on programs.",
+              },
+              {
+                icon: (
+                  <GlobeHemisphereEast size={40} className="mx-auto mb-3" />
+                ),
+                title: "Translations",
+                desc: "Expanding Bitcoin knowledge to local languages with Exonumia and Plan B Network.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                viewport={{ once: true }}
+                className="bg-gray-900 rounded-2xl p-6 hover:bg-gray-800 transition"
+              >
+                {item.icon}
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-400">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Commitment Section */}
+        <section className="py-20 bg-background">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-primary mb-12">
-              Why Your Support Matters
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12">
+              Our Commitment
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 text-left">
               {[
                 {
-                  icon: (
-                    <UsersThree
-                      size={36}
-                      className="text-secondary-light mb-4"
-                    />
-                  ),
-                  title: "Circular Economies",
-                  desc: "Your support funds Bitcoin adoption in local markets, schools, and communities.",
+                  icon: <Heart size={32} className="text-primary mb-3" />,
+                  title: "Community First",
+                  text: "Your sats empower local educators and community leaders to teach Bitcoin on the ground.",
                 },
                 {
-                  icon: (
-                    <BookOpen size={36} className="text-secondary-light mb-4" />
+                  icon: <ShieldCheck size={32} className="text-primary mb-3" />,
+                  title: "Radical Transparency",
+                  text: (
+                    <>
+                      100% of donations fund Bitcoin education.{" "}
+                      <a
+                        href="/funding-report"
+                        className="text-primary underline"
+                      >
+                        View Reports
+                      </a>
+                    </>
                   ),
-                  title: "Trezor Academy",
-                  desc: "We train the next generation of Bitcoiners through certified hands-on programs.",
                 },
                 {
                   icon: (
                     <GlobeHemisphereEast
-                      size={36}
-                      className="text-secondary-light mb-4"
+                      size={32}
+                      className="text-primary mb-3"
                     />
                   ),
-                  title: "Translations",
-                  desc: "We translate Bitcoin resources into Kirundi and other local languages with Exonumia & Plan B Network.",
+                  title: "Global Impact",
+                  text: "Your contribution accelerates Bitcoin adoption across Africa — inspiring the world.",
                 },
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
+                  whileHover={{ y: -5 }}
+                  className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition"
                 >
                   {item.icon}
-                  <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                  <h3 className="font-bold text-lg text-gray-800">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <p className="text-gray-600 mt-2">{item.text}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Transparency & Values */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-primary text-center mb-12">
-              Our Commitment
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8 text-left">
-              <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                <Heart size={32} className="text-primary mb-4" />
-                <h3 className="font-bold text-gray-800 text-lg">
-                  Community First
-                </h3>
-                <p className="text-gray-600 mt-2">
-                  Donations empower grassroots education in schools, churches,
-                  and Bitcoin hubs.
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                <ShieldCheck size={32} className="text-primary mb-4" />
-                <h3 className="font-bold text-gray-800 text-lg">
-                  Radical Transparency
-                </h3>
-                <p className="text-gray-600 mt-2">
-                  100% of funds go directly into Bitcoin education.{" "}
-                  <a href="/funding-report" className="text-primary underline">
-                    View Reports
-                  </a>
-                </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                <GlobeHemisphereEast size={32} className="text-primary mb-4" />
-                <h3 className="font-bold text-gray-800 text-lg">
-                  Global Impact
-                </h3>
-                <p className="text-gray-600 mt-2">
-                  Supporting BTC Shule means accelerating adoption across Africa
-                  — and inspiring communities worldwide.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Final Call to Action */}
-        <section className="py-16 md:py-24 bg-foreground text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-6 text-gray-800">
-            Be Part of the Movement
-          </h2>
-          <p className="max-w-2xl mx-auto mb-8 text-lg text-gray-600">
-            Your sats are not just donations — they’re an investment in the
-            future of freedom, education, and financial sovereignty.
-          </p>
-          <button
-            onClick={handleCopy}
-            className="bg-white text-primary px-8 py-4 rounded-xl font-semibold shadow-lg hover:bg-gray-100 transition"
+        {/* Final CTA */}
+        <section className="py-20 bg-gradient-to-r from-primary/10 to-secondary/10 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-800"
           >
-            {copied ? "Copied!" : "Copy Donation Address"}
-          </button>
+            Join the Global Movement 🌍
+          </motion.h2>
+          <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-8">
+            Every sat you send helps build financial sovereignty and open-source
+            education for future generations.
+          </p>
+          <motion.a
+            href="#"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary/90"
+          >
+            Donate Now
+          </motion.a>
         </section>
       </main>
       <Footer />

@@ -1,7 +1,8 @@
 "use client";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Clock } from "phosphor-react";
+import { MapPin, Clock, CalendarBlank } from "phosphor-react";
 
 type Event = {
   title: string;
@@ -43,7 +44,7 @@ const events: Event[] = [
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr; // fallback
+  if (isNaN(d.getTime())) return dateStr;
   return {
     day: d.getDate(),
     month: d.toLocaleString("default", { month: "short" }),
@@ -55,47 +56,50 @@ export default function Events() {
   const [showPast, setShowPast] = useState(false);
 
   const filteredEvents = showPast
-    ? events // show all
+    ? events
     : events.filter((e) => e.type === "upcoming");
 
   return (
-    <section id="events" className="relative bg-background py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section
+      id="events"
+      className="relative bg-secondary-light py-24 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 space-y-16 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 1 }}
+          viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-4xl font-extrabold text-primary">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-white bg-clip-text">
             Events & Meetups
           </h2>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
             Connect with the BTC Shule community through local workshops,
             merchant trainings, and global hackathons. Join an upcoming event or
-            explore what we’ve done so far.
+            relive our past experiences shaping Bitcoin adoption in Africa.
           </p>
-          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
+          <div className="mt-6 mx-auto w-24 h-1 bg-gradient-to-r from-primary to-orange-400 rounded-full"></div>
         </motion.div>
 
         {/* Toggle Button */}
         <div className="flex justify-center">
           <button
             onClick={() => setShowPast(!showPast)}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
+            className={`px-8 py-3 rounded-full font-semibold text-sm md:text-base transition-all duration-300 shadow-md ${
               showPast
-                ? "bg-primary text-background shadow-lg"
-                : "bg-secondary-light/10 text-gray-400 hover:text-primary"
+                ? "bg-primary text-white hover:scale-105"
+                : "bg-secondary text-white hover:bg-primary/10"
             }`}
           >
             {showPast ? "Hide Past Events" : "Show Past Events"}
           </button>
         </div>
 
-        {/* Events List */}
-        <div className="space-y-6">
+        {/* Events Grid */}
+        <div className="grid gap-10 lg:gap-12">
           {filteredEvents.map((event, i) => {
             const dateObj = formatDate(event.date);
             return (
@@ -103,70 +107,63 @@ export default function Events() {
                 key={i}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
-                className="flex flex-col md:flex-row items-stretch bg-secondary-light/10 border border-gray-300 rounded-2xl shadow-lg hover:shadow-xl transition p-4 md:py-8"
+                viewport={{ once: true }}
+                className="relative flex flex-col md:flex-row bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500"
               >
-                {/* Column 1: Date */}
-                <div className="md:w-1/6 flex items-center md:justify-center px-4 mb-4 md:mb-0">
-                  <div className="text-center bg-primary text-background rounded-xl px-8 py-3 shadow-md">
-                    <div className="text-2xl font-bold">
+                {/* Date Badge */}
+                <div className="md:w-1/5 flex justify-center items-center text-white p-6 md:p-0 md:flex-col md:gap-1">
+                  <CalendarBlank size={40} weight="duotone" className="mb-2" />
+                  <div className="text-center">
+                    <div className="text-3xl font-bold">
                       {typeof dateObj === "object" ? dateObj.day : event.date}
                     </div>
-                    <div className="uppercase text-sm tracking-wide">
+                    <div className="uppercase text-sm tracking-widest">
                       {typeof dateObj === "object" ? dateObj.month : ""}
                     </div>
-                    <div className="text-xs text-gray-200">
+                    <div className="text-xs opacity-90">
                       {typeof dateObj === "object" ? dateObj.year : ""}
                     </div>
                   </div>
                 </div>
 
-                {/* Column 2: Details */}
-                <div className="md:w-4/6 flex flex-col justify-between px-4">
+                {/* Details */}
+                <div className="flex flex-col justify-between md:w-3/5 p-8">
                   <div>
-                    <h3 className="text-lg font-bold text-primary">
+                    <h3 className="text-2xl font-semibold text-primary dark:text-white mb-2">
                       {event.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mt-1">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                       {event.description}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-4 mt-3 text-gray-500 text-sm">
+                  <div className="flex flex-wrap items-center gap-4 mt-4 text-gray-500 dark:text-gray-400 text-sm">
                     {event.time && (
-                      <div className="flex items-center gap-1">
-                        <Clock
-                          size={18}
-                          weight="duotone"
-                          className="text-secondary-light"
-                        />
+                      <div className="flex items-center gap-2">
+                        <Clock size={18} weight="duotone" />
                         <span>{event.time}</span>
                       </div>
                     )}
-                    <div className="flex items-center gap-1">
-                      <MapPin
-                        size={18}
-                        weight="duotone"
-                        className="text-secondary-light"
-                      />
+                    <div className="flex items-center gap-2">
+                      <MapPin size={18} weight="duotone" />
                       <span>{event.location}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Column 3: Action */}
-                <div className="md:w-1/6 flex items-center justify-end mt-4 md:mt-0">
+                {/* CTA */}
+                <div className="md:w-1/5 flex items-center justify-center p-6 md:p-0">
                   {event.type === "upcoming" ? (
                     <a
                       href="#rsvp"
-                      className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-primary text-background font-semibold shadow-md hover:scale-105 transition"
+                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                     >
                       RSVP
                     </a>
                   ) : (
                     <a
                       href="#recap"
-                      className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-secondary-light text-background font-semibold shadow-md hover:scale-105 transition"
+                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 hover:scale-105 transition-all duration-300"
                     >
                       Recap
                     </a>
@@ -177,6 +174,7 @@ export default function Events() {
           })}
         </div>
       </div>
+
     </section>
   );
 }

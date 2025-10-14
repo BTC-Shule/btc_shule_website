@@ -12,6 +12,8 @@ type Blog = {
   date: string;
   author: string;
   image: string;
+  featured?: boolean;
+  category?: string;
 };
 
 const blogs: Blog[] = [
@@ -19,17 +21,19 @@ const blogs: Blog[] = [
     id: "circular-economy",
     title: "Exploring Kenya’s Bitcoin Circular Economies",
     excerpt:
-      "From Nairobi to Kiambu, discover how Bitcoin is transforming communities.",
+      "From Nairobi to Kiambu, discover how Bitcoin is transforming communities and empowering individuals toward financial freedom.",
     date: "August 2025",
     author: "Belyi Nobel Kubwayo",
     image: "/blogheader.jpg",
+    featured: true,
+    category: "Community",
   },
 ];
 
 export default function Blog() {
   return (
-    <section id="blog" className="relative bg-background py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="blog" className="relative bg-gradient-to-b from-background to-gray-50 py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -38,82 +42,94 @@ export default function Blog() {
           transition={{ duration: 1 }}
           className="text-center"
         >
-          <h2 className="text-4xl font-extrabold text-primary">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-primary tracking-tight">
             Insights & Articles
           </h2>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-            Stay up-to-date with the latest stories, guides, and insights from
-            the BTC Shule community.
+          <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            Stay ahead with the latest Bitcoin stories, guides, and research from the BTC Shule global community.
           </p>
-          <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
+          <div className="mt-6 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
         </motion.div>
 
         {/* Blog Grid */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
           {blogs.map((blog, i) => (
-            <motion.div
+            <motion.article
               key={blog.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: i * 0.2 }}
-              className="h-full"
+              transition={{ duration: 0.8, ease: "easeOut", delay: i * 0.15 }}
+              className="group relative bg-white border border-gray-200 rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 flex flex-col overflow-hidden"
             >
-              <Link href={`/blog/${blog.id}`} className="group block h-full">
-                <div className="bg-secondary-light/10 border border-gray-300 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                  {/* Image */}
-                  <div className="h-48 overflow-hidden">
-                    <Image
-                      width={400}
-                      height={300}
-                      src={blog.image}
-                      alt={blog.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition"
+
+              {/* Image */}
+              <div className="relative h-56 overflow-hidden">
+                <Image
+                  width={600}
+                  height={400}
+                  src={blog.image}
+                  alt={blog.title}
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 ease-out"
+                  priority={blog.featured}
+                />
+                {blog.category && (
+                  <span className="absolute bottom-4 left-4 bg-secondary-light text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                    {blog.category}
+                  </span>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-1">
+                <h3 className="text-xl sm:text-2xl font-semibold text-primary group-hover:text-secondary-light transition-colors leading-snug">
+                  {blog.title}
+                </h3>
+                <p className="text-gray-600 text-sm mt-3 flex-grow leading-relaxed line-clamp-3">
+                  {blog.excerpt}
+                </p>
+
+                {/* Meta */}
+                <div className="mt-5 flex items-center justify-between text-sm text-gray-500 pt-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar
+                      size={18}
+                      weight="duotone"
+                      className="text-secondary-light"
                     />
+                    <span>{blog.date}</span>
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-xl font-bold text-primary group-hover:text-secondary-light transition">
-                      {blog.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm mt-2 line-clamp-3 flex-grow">
-                      {blog.excerpt}
-                    </p>
-
-                    {/* Meta */}
-                    <div className="flex items-center justify-between text-xs text-gray-400 mt-4">
-                      <div className="flex items-center gap-2">
-                        <Calendar
-                          size={16}
-                          weight="duotone"
-                          className="text-secondary-light"
-                        />
-                        {blog.date}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <User
-                          size={16}
-                          weight="duotone"
-                          className="text-secondary-light"
-                        />
-                        {blog.author}
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <User
+                      size={18}
+                      weight="duotone"
+                      className="text-secondary-light"
+                    />
+                    <span>{blog.author}</span>
                   </div>
                 </div>
-              </Link>
-            </motion.div>
+
+                {/* Read More */}
+                <div className="mt-6">
+                  <Link
+                    href={`/blog/${blog.id}`}
+                    className="inline-flex items-center justify-center px-6 py-2 text-sm font-semibold text-primary border border-primary rounded-full hover:bg-primary hover:text-white transition-all duration-300"
+                  >
+                    Read More →
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
 
         {/* View All */}
-        <div className="text-center mt-10">
+        <div className="text-center mt-12">
           <Link
             href="/blog"
-            className="inline-block bg-secondary-light text-white px-10 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-90 transition-all font-semibold"
+            className="inline-block bg-primary text-white px-10 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
-            View All Blogs
+            View All Articles
           </Link>
         </div>
       </div>

@@ -129,10 +129,14 @@ export default function Statistics() {
         viewport={{ once: true }}
         className="text-center md-8 md:mb-16"
       >
-        <h2 className="text-4xl font-extrabold text-primary p-4">
-          Our Key Impact Metrics
+        <h2 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
+          Our Impact in Numbers
         </h2>
-        <div className="mt-4 mx-auto w-24 h-1 bg-secondary-light rounded-full"></div>
+        <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-lg leading-relaxed">
+          Driving real change in Burundi through education, empowerment, and
+          circular Bitcoin adoption.
+        </p>
+        <div className="mt-6 mx-auto w-32 h-1.5 bg-gradient-to-r from-primary via-secondary-light to-primary rounded-full"></div>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -145,30 +149,33 @@ export default function Statistics() {
 
         {/* Featured Innovation Box */}
         <Link
-          href="https://github.com/Advaxe/MySatoshis"
-          target="_blank"
-          rel="noopener noreferrer"
+        href="https://github.com/Advaxe/MySatoshis"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+          className="mt-20 max-w-3xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg p-10 text-center hover:scale-[1.02] hover:bg-white/20 transition-all duration-700"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-            className="mt-12 max-w-2xl mx-auto bg-white/90 rounded-2xl shadow-lg p-6 text-center"
-          >
-            <div className="flex justify-center mb-4">
-              <Sparkle size={36} className="text-primary" />
-            </div>
-            <h4 className="text-xl font-bold text-gray-800 mb-2">
-              Featured Innovation
-            </h4>
-            <p className="text-gray-600">
-              <span className="font-semibold">My Satoshi Tool</span> – a local
-              innovation that helps Burundians calculate and understand Bitcoin
-              sats-to-fiat conversions, empowering practical adoption.
-            </p>
-          </motion.div>
-        </Link>
+          <div className="flex justify-center mb-4">
+            <Sparkle size={42} className="text-primary" />
+          </div>
+          <h4 className="text-2xl font-bold text-white mb-3">
+            Featured Innovation
+          </h4>
+          <p className="text-gray-300 leading-relaxed">
+            <span className="font-semibold text-primary">
+              My Satoshi Tool
+            </span>{" "}
+            – a locally built open-source tool empowering Burundians to easily
+            calculate and understand Bitcoin conversions, fueling real-world
+            adoption.
+          </p>
+        </motion.div>
+      </Link>
       </div>
     </section>
   );

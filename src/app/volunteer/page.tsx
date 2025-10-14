@@ -1,65 +1,79 @@
 "use client";
+
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function VolunteerPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-[72px] md:pt-[136px]">
+      <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-white via-background to-gray-50">
         {/* Hero Section */}
-        <section className="bg-background py-20 md:py-32 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-5xl font-extrabold text-primary mb-6"
-          >
-            Volunteer with BTC Shule
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="max-w-2xl mx-auto text-lg text-gray-700 px-4"
-          >
-            Join a global community empowering people with Bitcoin education.
-            Whether you contribute time, skills, or ideas, you’ll help shape a
-            brighter financial future.
-          </motion.p>
+        <section className="relative overflow-hidden text-center py-28 md:py-40">
+          <Image
+            src="/images/volunteer-hero.jpg"
+            alt="Volunteers working together"
+            fill
+            className="object-cover object-center opacity-30"
+            priority
+          />
+          <div className="relative z-10 max-w-4xl mx-auto px-6">
+            <motion.h1
+              initial={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-5xl md:text-6xl font-extrabold text-primary drop-shadow-md"
+            >
+              Volunteer with <span className="text-secondary-light">BTC Shule</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg md:text-xl text-gray-700 mt-6 max-w-2xl mx-auto"
+            >
+              Join our international movement bringing Bitcoin education to communities worldwide. 
+              Share your time, skills, and ideas to empower a brighter financial future.
+            </motion.p>
+          </div>
         </section>
 
         {/* Why Volunteer */}
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-20 md:py-28 bg-white">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-primary mb-6">
+            <h2 className="text-4xl font-bold text-primary mb-12">
               Why Volunteer with Us?
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-10">
               {[
                 {
                   title: "Global Impact",
-                  desc: "Help bring financial education to underserved communities around the world.",
+                  desc: "Help expand financial education access to underserved communities across continents.",
+                  icon: "🌍",
                 },
                 {
                   title: "Skill Growth",
-                  desc: "Gain experience in community building, content creation, translation, and event organizing.",
+                  desc: "Develop expertise in leadership, content creation, education, and community building.",
+                  icon: "🚀",
                 },
                 {
                   title: "Meaningful Connections",
-                  desc: "Work with passionate Bitcoiners, educators, and advocates globally.",
+                  desc: "Collaborate with global Bitcoiners, educators, and innovators shaping the future.",
+                  icon: "🤝",
                 },
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
+                  className="p-8 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2"
                 >
-                  <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="text-2xl font-semibold text-secondary-light mb-3">
                     {item.title}
                   </h3>
                   <p className="text-gray-600">{item.desc}</p>
@@ -70,38 +84,34 @@ export default function VolunteerPage() {
         </section>
 
         {/* Featured Initiatives */}
-        <section className="py-16 md:py-24 bg-foreground">
+        <section className="py-20 md:py-28 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-primary mb-6">
-              Featured Volunteer Initiatives
-            </h2>
-            <p className="text-gray-700 max-w-3xl mx-auto mb-10">
-              Our volunteers are driving projects that make Bitcoin education
-              more accessible across Africa and beyond.
+            <h2 className="text-4xl font-bold mb-6">Featured Volunteer Initiatives</h2>
+            <p className="text-gray-300 max-w-3xl mx-auto mb-12">
+              Our volunteers are pioneering projects that make Bitcoin education accessible
+              across Africa and the globe.
             </p>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-10">
               {[
                 {
                   title: "Kirundi Translations",
-                  desc: "We are translating Bitcoin educational resources into Kirundi, including materials from Exonumia and Plan B Network.",
+                  desc: "Translating key Bitcoin educational resources into Kirundi for local communities, partnering with Exonumia and Plan B Network.",
                 },
                 {
                   title: "Local Bitcoin Meetups",
-                  desc: "Support our grassroots Bitcoin meetups and help create learning hubs for your local community.",
+                  desc: "Organizing grassroots meetups that inspire conversations, learning, and empowerment in local languages.",
                 },
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition text-left"
+                  transition={{ duration: 0.6, delay: i * 0.3 }}
+                  className="p-8 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl hover:bg-white/20 transition text-left"
                 >
-                  <h3 className="text-xl font-semibold text-secondary-light mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600">{item.desc}</p>
+                  <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
+                  <p className="text-gray-300">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -109,35 +119,39 @@ export default function VolunteerPage() {
         </section>
 
         {/* Ways to Contribute */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-primary text-center mb-10">
+        <section className="py-20 md:py-28 bg-white">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h2 className="text-4xl font-bold text-primary mb-10">
               Ways You Can Contribute
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-10">
               {[
                 {
                   title: "Community Events",
-                  desc: "Help organize or assist at Bitcoin education meetups in your region.",
+                  desc: "Host or assist Bitcoin education meetups, workshops, and local awareness events.",
+                  icon: "🎤",
                 },
                 {
                   title: "Content & Translation",
-                  desc: "Translate resources, write articles, or create visual content in local languages.",
+                  desc: "Translate materials, write articles, or design visuals that connect with your culture.",
+                  icon: "📝",
                 },
                 {
                   title: "Digital Advocacy",
-                  desc: "Spread awareness online, create campaigns, and engage with our global audience.",
+                  desc: "Create digital campaigns, social media content, and engage online communities.",
+                  icon: "💻",
                 },
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="p-6 bg-white rounded-2xl shadow hover:shadow-lg transition"
+                  className="p-8 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition"
                 >
-                  <h3 className="text-xl font-semibold text-secondary-light mb-2">
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="text-2xl font-semibold text-secondary-light mb-3">
                     {item.title}
                   </h3>
                   <p className="text-gray-600">{item.desc}</p>
@@ -148,29 +162,27 @@ export default function VolunteerPage() {
         </section>
 
         {/* Volunteer Form */}
-        <section className="py-16 md:py-24 bg-foreground">
-          <div className="max-w-lg mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold text-primary mb-6">
-              Ready to Join Us?
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Fill out the form below and let us know how you’d like to help.
+        <section className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+          <div className="max-w-lg mx-auto px-6 text-center text-white">
+            <h2 className="text-4xl font-bold mb-6">Ready to Join Us?</h2>
+            <p className="text-gray-300 mb-10">
+              Fill out the form and tell us how you’d like to contribute. Every skill matters.
             </p>
-            <form className="space-y-6 text-secondary-light text-left max-w-lg m-auto">
+            <form className="space-y-6 bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-white/20">
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               />
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               />
               <select
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               >
                 <option value="">Select Area of Interest</option>
@@ -179,17 +191,19 @@ export default function VolunteerPage() {
                 <option value="advocacy">Digital Advocacy</option>
               </select>
               <textarea
-                placeholder="Tell us more about your skills or ideas..."
+                placeholder="Tell us about your skills or motivation..."
                 rows={4}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               ></textarea>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 className="w-full bg-secondary-light text-white font-semibold py-3 rounded-lg hover:bg-secondary-light/90 transition"
               >
                 Submit Application
-              </button>
+              </motion.button>
             </form>
           </div>
         </section>
