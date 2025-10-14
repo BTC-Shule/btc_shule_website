@@ -171,7 +171,7 @@ export default function Contact() {
                 <LinkedinLogo size={28} weight="duotone" />
               </a>
               <a
-                href="#"
+                href="https://t.me/+25762919316"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
               >
                 <TelegramLogo size={28} weight="duotone" />

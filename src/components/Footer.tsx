@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  FacebookLogo,
+  TelegramLogo,
   TwitterLogo,
-  InstagramLogo,
+  WhatsappLogo,
   LinkedinLogo,
   Envelope,
   Phone,
@@ -98,25 +98,25 @@ export default function Footer() {
           <h3 className="text-lg font-semibold text-white mb-3">Follow Us</h3>
           <div className="flex gap-4">
             <Link
-              href="https://twitter.com"
+              href="https://x.com/btcshule"
               target="_blank"
               className="hover:text-primary"
             >
               <TwitterLogo size={28} />
             </Link>
             <Link
-              href="https://facebook.com"
+              href="https://t.me/25762919316"
               target="_blank"
               className="hover:text-primary"
             >
-              <FacebookLogo size={28} />
+              <TelegramLogo size={28} />
             </Link>
             <Link
-              href="https://instagram.com"
+              href="https://wa.me/25762919316"
               target="_blank"
               className="hover:text-primary"
             >
-              <InstagramLogo size={28} />
+              <WhatsappLogo size={28} />
             </Link>
             <Link
               href="https://linkedin.com"

@@ -9,10 +9,10 @@ import {
   MapPin,
   Phone,
   EnvelopeSimple,
-  FacebookLogo,
+  TelegramLogo,
   TwitterLogo,
-  InstagramLogo,
-  LinkedinLogo,
+  WhatsappLogo,
+  GlobeHemisphereWest,
 } from "phosphor-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -123,21 +123,35 @@ export default function Navbar() {
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    {[
-                      FacebookLogo,
-                      TwitterLogo,
-                      InstagramLogo,
-                      LinkedinLogo,
-                    ].map((Icon, i) => (
-                      <Link
-                        key={i}
-                        href="#"
-                        target="_blank"
-                        className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
-                      >
-                        <Icon size={16} weight="fill" />
-                      </Link>
-                    ))}
+                    <Link
+                      href="https://x.com/btcshule"
+                      target="_blank"
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
+                    >
+                      <TwitterLogo size={16} weight="fill" />
+                    </Link>
+                    <Link
+                      href="https://t.me/25762919316"
+                      target="_blank"
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
+                    >
+                      <TelegramLogo size={16} weight="fill" />
+                    </Link>
+                    <Link
+                      href="https://wa.me/25762919316"
+                      target="_blank"
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
+                    >
+                      <WhatsappLogo size={16} weight="fill" />
+                    </Link>
+
+                    <Link
+                      href="https://linkedin.com/in/yourprofile"
+                      target="_blank"
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
+                    >
+                      <GlobeHemisphereWest size={16} weight="fill" />
+                    </Link>
                   </div>
                 </div>
               </div>
