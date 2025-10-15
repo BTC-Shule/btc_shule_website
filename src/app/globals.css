@@ -36,3 +36,18 @@ body {
 .perspective {
   perspective: 1000px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}

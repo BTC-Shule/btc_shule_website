@@ -21,7 +21,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl px-6 md:px-10 lg:px-16 py-24 md:py-40 text-white">
+      <div className="relative z-10 w-full max-w-7xl px-4 md:px-10 lg:px-16 py-20 md:py-40 text-white">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column */}
           <motion.div

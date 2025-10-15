@@ -47,7 +47,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative bg-gradient-to-b from-gray-50 via-background to-gray-100 py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -70,7 +70,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="space-y-8 bg-white/70 backdrop-blur-md border border-gray-200 rounded-3xl shadow-lg p-10"
+            className="space-y-8 bg-white/70 backdrop-blur-md border border-gray-200 rounded-3xl shadow-lg px-4 md:px-10 p-10"
           >
             {[
               {
@@ -166,7 +166,7 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200 p-10 space-y-6"
+              className="bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200 px-4 md:px-10 p-10 space-y-6"
             >
               {[
                 { label: "Name", name: "name", type: "text", placeholder: "Your Full Name" },
