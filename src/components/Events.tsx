@@ -73,10 +73,10 @@ export default function Events() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-white bg-clip-text">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white">
             Events & Meetups
           </h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="mt-4 text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Connect with the BTC Shule community through local workshops,
             merchant trainings, and global hackathons. Join an upcoming event or
             relive our past experiences shaping Bitcoin adoption in Africa.
@@ -109,26 +109,32 @@ export default function Events() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="relative flex flex-col md:flex-row bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500"
+                className="relative flex flex-col md:flex-row bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-500 overflow-hidden transition-all duration-500"
               >
-                {/* Date Badge */}
-                <div className="md:w-1/5 flex md:justify-center items-center text-white p-6 md:p-0 md:flex-col md:gap-1">
-                  <CalendarBlank size={40} weight="duotone" className="mb-2" />
-                  <div className="text-center">
+                <div className="md:w-1/5 flex md:flex-col md:justify-center items-center text-white p-6 md:p-0">
+                  <CalendarBlank size={40} weight="duotone" className="md:mb-2" />
+
+                  {/* Date + Month/Year container */}
+                  <div className="flex flex-row md:flex-col  justify-center gap-2 md:gap-1">
+                    {/* Date */}
                     <div className="text-3xl font-bold">
                       {typeof dateObj === "object" ? dateObj.day : event.date}
                     </div>
-                    <div className="uppercase text-sm tracking-widest">
-                      {typeof dateObj === "object" ? dateObj.month : ""}
-                    </div>
-                    <div className="text-xs opacity-90">
-                      {typeof dateObj === "object" ? dateObj.year : ""}
+
+                    {/* Month + Year stacked */}
+                    <div className="flex flex-col items-start md:items-center">
+                      <div className="uppercase text-sm tracking-widest">
+                        {typeof dateObj === "object" ? dateObj.month : ""}
+                      </div>
+                      <div className="text-xs opacity-90">
+                        {typeof dateObj === "object" ? dateObj.year : ""}
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Details */}
-                <div className="flex flex-col justify-between md:w-3/5 p-8">
+                <div className="flex flex-col justify-between md:w-3/5 p-4 md:p-8">
                   <div>
                     <h3 className="text-2xl font-semibold text-primary dark:text-white mb-2">
                       {event.title}
@@ -174,7 +180,6 @@ export default function Events() {
           })}
         </div>
       </div>
-
     </section>
   );
 }

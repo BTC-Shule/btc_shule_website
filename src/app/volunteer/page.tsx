@@ -84,7 +84,7 @@ export default function VolunteerPage() {
         </section>
 
         {/* Featured Initiatives */}
-        <section className="py-20 md:py-28 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+        <section className="py-20 md:py-28 bg-secondary-light text-white">
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-bold mb-6">Featured Volunteer Initiatives</h2>
             <p className="text-gray-300 max-w-3xl mx-auto mb-12">
@@ -168,7 +168,7 @@ export default function VolunteerPage() {
             <p className="text-gray-300 mb-10">
               Fill out the form and tell us how you’d like to contribute. Every skill matters.
             </p>
-            <form className="space-y-6 bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-white/20">
+            <form className="space-y-6 bg-white/10 backdrop-blur-lg px-4 md:px-8 p-8 rounded-2xl shadow-xl border border-white/20">
               <input
                 type="text"
                 placeholder="Your Name"
