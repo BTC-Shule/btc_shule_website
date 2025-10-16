@@ -127,9 +127,9 @@ export default function Statistics() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="text-center md-8 md:mb-16"
+        className="text-center md-8 md:mb-16 px-4"
       >
-        <h2 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight px-4">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
           Our Impact in Numbers
         </h2>
         <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-lg leading-relaxed">

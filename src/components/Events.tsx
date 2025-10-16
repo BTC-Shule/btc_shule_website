@@ -117,7 +117,7 @@ export default function Events() {
                   {/* Date + Month/Year container */}
                   <div className="flex flex-row md:flex-col  justify-center gap-2 md:gap-1">
                     {/* Date */}
-                    <div className="text-3xl font-bold">
+                    <div className="text-3xl font-bold text-center">
                       {typeof dateObj === "object" ? dateObj.day : event.date}
                     </div>
 
@@ -169,7 +169,7 @@ export default function Events() {
                   ) : (
                     <a
                       href="#recap"
-                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-full font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 hover:scale-105 transition-all duration-300"
+                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary-light text-gray-200 rounded-full font-semibold hover:bg-secondary-light/90 hover:scale-105 transition-all duration-300"
                     >
                       Recap
                     </a>
