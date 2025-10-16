@@ -256,7 +256,7 @@ export default function DonatePage() {
 
         {/* Why Support Matters */}
         <section className="py-20 bg-foreground text-white text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 px-4 text-gray-800">
             Why Your Support Matters
           </h2>
           <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
