@@ -129,7 +129,7 @@ export default function Statistics() {
         viewport={{ once: true }}
         className="text-center md-8 md:mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight px-4">
           Our Impact in Numbers
         </h2>
         <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-lg leading-relaxed">

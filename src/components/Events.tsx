@@ -112,7 +112,7 @@ export default function Events() {
                 className="relative flex flex-col md:flex-row bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-500"
               >
                 {/* Date Badge */}
-                <div className="md:w-1/5 flex justify-center items-center text-white p-6 md:p-0 md:flex-col md:gap-1">
+                <div className="md:w-1/5 flex md:justify-center items-center text-white p-6 md:p-0 md:flex-col md:gap-1">
                   <CalendarBlank size={40} weight="duotone" className="mb-2" />
                   <div className="text-center">
                     <div className="text-3xl font-bold">
