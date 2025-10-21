@@ -109,7 +109,8 @@ export default function Events() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="relative flex flex-col md:flex-row bg-white/10 backdrop-blur-md hover:bg-white/20 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-500 overflow-hidden transition-all duration-500"
+
+                className="relative flex flex-col md:flex-row bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl hover:bg-white/20 overflow-hidden transition-all duration-500"
               >
                 <div className="md:w-1/5 flex md:flex-col md:justify-center items-center text-white p-6 md:p-0">
                   <CalendarBlank size={40} weight="duotone" className="md:mb-2" />

@@ -162,27 +162,27 @@ export default function VolunteerPage() {
         </section>
 
         {/* Volunteer Form */}
-        <section className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-          <div className="max-w-lg mx-auto px-6 text-center text-white">
-            <h2 className="text-4xl font-bold mb-6">Ready to Join Us?</h2>
-            <p className="text-gray-300 mb-10">
+        <section className="py-24 bg-background">
+          <div className="max-w-lg mx-auto px-6 text-center">
+            <h2 className="text-4xl font-bold mb-6 text-primary">Ready to Join Us?</h2>
+            <p className="text-gray-600 mb-10">
               Fill out the form and tell us how you’d like to contribute. Every skill matters.
             </p>
             <form className="space-y-6 bg-white/10 backdrop-blur-lg px-4 md:px-8 p-8 rounded-2xl shadow-xl border border-white/20">
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               />
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               />
               <select
-                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-secondary-light outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               >
                 <option value="">Select Area of Interest</option>
@@ -193,7 +193,7 @@ export default function VolunteerPage() {
               <textarea
                 placeholder="Tell us about your skills or motivation..."
                 rows={4}
-                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
+                className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               ></textarea>
               <motion.button
