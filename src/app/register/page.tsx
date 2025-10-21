@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import { CheckCircle } from "phosphor-react";
 
 export default function RegisterPage() {
   const [isOpen, setIsOpen] = useState(false);

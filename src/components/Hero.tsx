@@ -11,12 +11,14 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/btchero.jpg"
+          src="/heroImage.jpg"
           alt="Bitcoin community in Burundi"
           fill
           priority
-          className="object-cover object-center opacity-90"
+          className="object-cover object-[center_top] md:object-center opacity-90"
+          sizes="100vw"
         />
+
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90"></div>
       </div>
 
@@ -78,7 +80,7 @@ export default function Hero() {
             </p>
             <div className="pt-6">
               <motion.a
-                href="#register"
+                href="register"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 text-primary font-semibold underline hover:text-primary/80 transition"
