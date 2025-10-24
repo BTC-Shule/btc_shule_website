@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
@@ -39,6 +41,34 @@ export default function DonatePage() {
     })();
   }, []);
 
+    useEffect(() => {
+    const initBlinkWidget = () => {
+      // Ensure BlinkPay script is ready
+      if (typeof (window as any).BlinkPayButton !== "undefined") {
+        (window as any).BlinkPayButton.init({
+          username: "btcshule",
+          containerId: "blink-pay-button-container",
+          themeMode: "dark",
+          onSuccess: (res: any) => console.log("Payment success:", res),
+          onError: (err: any) => console.error("Payment error:", err),
+        });
+      } else {
+        console.warn("BlinkPayButton not yet available, retrying...");
+        setTimeout(initBlinkWidget, 500); // Retry after 500ms
+      }
+    };
+
+    // Load BlinkPay script dynamically
+    const script = document.createElement("script");
+    script.src = "https://blinkpay.africa/widget.js";
+    script.async = true;
+    script.onload = initBlinkWidget;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   const handleBTCPayDonate = async () => {
     if (!amount) return;
     setLoading(true);
@@ -90,8 +120,9 @@ export default function DonatePage() {
         {/* Donation Interface */}
         <section className="py-16 md:py-24">
           <div className="max-w-5xl mx-auto px-6">
-            <div className="flex justify-center gap-4 mb-10">
-              {["btcpay", "static"].map((tab) => (
+            {/* Tabs */}
+            <div className="flex justify-center flex-wrap gap-4 mb-10">
+              {["btcpay", "blink", "static"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setSelectedTab(tab)}
@@ -101,12 +132,18 @@ export default function DonatePage() {
                       : "bg-white border border-gray-300 text-gray-600 hover:bg-gray-100"
                   }`}
                 >
-                  {tab === "btcpay" ? "BTCPay Server" : "Static QR Codes"}
+                  {tab === "btcpay"
+                    ? "BTCPay Server"
+                    : tab === "blink"
+                    ? "Blink Pay"
+                    : "Static QR Codes"}
                 </button>
               ))}
             </div>
 
+            {/* Tabs Content */}
             <AnimatePresence mode="wait">
+              {/* BTCPay Tab */}
               {selectedTab === "btcpay" && (
                 <motion.div
                   key="btcpay"
@@ -118,10 +155,6 @@ export default function DonatePage() {
                   <h3 className="text-2xl font-semibold mb-4 text-gray-700">
                     Donate via BTCPay (Bitcoin / Lightning ⚡)
                   </h3>
-                  <p className="text-gray-600 mb-6 text-sm">
-                    Secure, self-hosted, and open-source Bitcoin payment
-                    gateway.
-                  </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 text-gray-600">
                     <input
                       type="number"
@@ -170,6 +203,26 @@ export default function DonatePage() {
                 </motion.div>
               )}
 
+              {/* Blink Pay Tab */}
+              {selectedTab === "blink" && (
+                <motion.div
+                  key="blink"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto text-center"
+                >
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-700">
+                    Donate via Blink Pay ⚡
+                  </h3>
+                  <p className="text-gray-600 mb-6 text-sm">
+                    Use Blink Bitcoin wallet to donate instantly.
+                  </p>
+                  <div id="blink-pay-button-container" className="flex justify-center"></div>
+                </motion.div>
+              )}
+
+              {/* Static QR Codes Tab */}
               {selectedTab === "static" && (
                 <motion.div
                   key="static"
@@ -365,7 +418,7 @@ export default function DonatePage() {
             education for future generations.
           </p>
           <motion.a
-            href="#"
+            href="donate"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
             className="bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary/90"

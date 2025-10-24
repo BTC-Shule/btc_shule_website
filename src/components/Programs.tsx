@@ -15,7 +15,7 @@ const programs = [
     description:
       "Our flagship initiative in Winteko village builds a thriving Bitcoin circular economy — empowering merchants and residents to transact seamlessly using Bitcoin, fostering true local sovereignty.",
     icon: Storefront,
-    link: "https://geyser.fund/project/btcshule",
+    link: "programs/circular-economy",
   },
   {
     title: "Trezor Academy",
@@ -29,7 +29,7 @@ const programs = [
     description:
       "Our BitDevs chapter fuels technical growth by hosting developer meetups, open-source workshops, and discussions on Bitcoin, Lightning, and privacy technologies — shaping Burundi’s open-source frontier.",
     icon: Code,
-    link: "https://bitdevsgtga.org",
+    link: "programs/bitdevs-gitega",
   },
   {
     title: "Translation Work – Kirundi Resources",

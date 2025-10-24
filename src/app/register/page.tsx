@@ -149,13 +149,7 @@ export default function RegisterPage() {
                 "/1K4A7436.jpg",
                 "/GuMR6HXXsAAipLH.jpg",
                 "/GuMR6N2WkAAzRk4.jpg",
-                "/GysbpR0XgAcSD2k.jpg",
-                "/GuMR7ZgWsAAYLDR.jpg",
                 "/1K4A7490.jpg",
-                "/DSC_0092.JPG.jpg",
-                "/DSC_0096.JPG.jpg",
-                "/IMG_20250413_162621_274.jpg",
-                "/IMG_20250413_163110_917.jpg",
               ].map((src, i) => (
                 <motion.div
                   key={i}
