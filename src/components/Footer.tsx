@@ -8,7 +8,6 @@ import {
   Envelope,
   Phone,
   MapPin,
-  GlobeHemisphereEast,
 } from "phosphor-react";
 import Link from "next/link";
 
