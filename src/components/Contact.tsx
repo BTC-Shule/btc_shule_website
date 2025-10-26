@@ -78,12 +78,12 @@ export default function Contact() {
                 title: "Address",
                 content: (
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Winteko,+Burundi"
+                    href="https://www.google.com/maps/search/?api=1&query=Gitega,+Burundi"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 hover:text-primary transition-colors"
                   >
-                    Winteko, Burundi — Available Globally Online
+                    Gitega, Burundi — Available globally online
                   </a>
                 ),
               },

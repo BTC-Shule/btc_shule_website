@@ -87,7 +87,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Winteko, Burundi</span>
+                <span>Gitega, Burundi</span>
               </a>
             </li>
           </ul>
