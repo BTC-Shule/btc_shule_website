@@ -11,6 +11,7 @@ import Partners from "@/components/Partners";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Features from "@/components/Features";
+import DonateButton from "@/components/DonateButton";
 
 export default function Home() {
   return (
@@ -20,14 +21,17 @@ export default function Home() {
         <Hero />
         <AboutUs />
         <Statistics />
+        <DonateButton />
         <Programs />
         <GetInvolved />
         <Testimonials />
+        <DonateButton />
         <Features />
         <Events />
         <Blog />
         <Partners />
         <Contact />
+        <DonateButton />
         <Footer />
       </main>
     </>

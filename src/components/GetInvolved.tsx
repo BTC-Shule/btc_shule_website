@@ -17,8 +17,8 @@ const opportunities = [
     description:
       "Be part of our vibrant Bitcoin community by attending local meetups across Burundi. Share ideas, learn, and connect with peers.",
     icon: CalendarCheck,
-    link: "/#events",
-    cta: "See Events",
+    link: "/meetups",
+    cta: "See Meetups",
   },
   {
     title: "Volunteer with Us",

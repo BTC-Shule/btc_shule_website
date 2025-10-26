@@ -4,15 +4,59 @@ import { motion } from "framer-motion";
 import {
   WhatsappLogo,
   TelegramLogo,
+  EnvelopeSimple,
+  PhoneCall,
   UsersThree,
   GraduationCap,
+  ArrowRight,
 } from "phosphor-react";
+import Link from "next/link";
 
 const features = [
   {
     title: "Online Assistance",
-    description:
-      "Get instant support and answers to your questions via WhatsApp and Telegram. Our team is here to help you 24/7.",
+    description: (
+      <>
+        <p className="mb-3">
+          Live, human support for all your Bitcoin-related questions — available
+          in <strong>Kirundi</strong>, <strong>French</strong>, and{" "}
+          <strong>English</strong>.
+        </p>
+        <p>
+          Get instant help via your preferred platform below:
+        </p>
+        <div className="flex justify-center gap-4 mt-4 flex-wrap">
+          <a
+            href="https://wa.me/250700000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-green-600 hover:underline"
+          >
+            <WhatsappLogo size={24} weight="fill" /> WhatsApp
+          </a>
+          <a
+            href="https://t.me/btcshule"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sky-500 hover:underline"
+          >
+            <TelegramLogo size={24} weight="fill" /> Telegram
+          </a>
+          <a
+            href="mailto:info@btcshule.org"
+            className="flex items-center gap-2 text-gray-700 hover:underline"
+          >
+            <EnvelopeSimple size={24} weight="fill" /> Email
+          </a>
+          <a
+            href="tel:+25770000000"
+            className="flex items-center gap-2 text-orange-500 hover:underline"
+          >
+            <PhoneCall size={24} weight="fill" /> Call
+          </a>
+        </div>
+      </>
+    ),
     icons: [
       <WhatsappLogo
         key="whatsapp"
@@ -30,8 +74,22 @@ const features = [
   },
   {
     title: "BTC Shule Hub",
-    description:
-      "A dedicated physical and virtual space for Bitcoin meetups, workshops, and community-driven innovation.",
+    description: (
+      <>
+        <p className="mb-4">
+          A 100% physical community hub — a vibrant space for Bitcoin meetups,
+          workshops, and innovation. The Hub comfortably seats up to{" "}
+          <strong>80 people</strong>, fostering collaboration and real-world
+          learning experiences.
+        </p>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-primary font-medium hover:underline hover:text-orange-500 transition-colors"
+        >
+          Learn More <ArrowRight size={18} weight="bold" />
+        </Link>
+      </>
+    ),
     icons: [
       <UsersThree
         key="users"
@@ -44,7 +102,7 @@ const features = [
   {
     title: "Online Course (Coming Soon)",
     description:
-      "Structured Bitcoin education delivered through interactive lessons and real-world case studies — learn at your own pace, from anywhere.",
+      "Structured Bitcoin education through interactive lessons and real-world case studies — learn at your own pace, from anywhere.",
     icons: [
       <GraduationCap
         key="graduation"
@@ -73,7 +131,7 @@ export default function Features() {
           </h2>
           <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-lg">
             Empowering learners, innovators, and communities through accessible
-            Bitcoin education, support, and collaboration.
+            Bitcoin education, human support, and collaborative spaces.
           </p>
           <div className="mt-6 mx-auto w-24 h-1 bg-gradient-to-r from-primary to-orange-400 rounded-full"></div>
         </motion.div>
@@ -87,7 +145,7 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               viewport={{ once: true }}
-              className=" bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 flex flex-col items-center text-center group"
+              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 flex flex-col items-center text-center group"
             >
               {/* Icon */}
               <div className="flex items-center justify-center gap-3 mb-6 transform group-hover:scale-110 transition-transform duration-300">
@@ -100,9 +158,9 @@ export default function Features() {
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 leading-relaxed">
+              <div className="text-gray-600 leading-relaxed text-sm md:text-base">
                 {feature.description}
-              </p>
+              </div>
             </motion.div>
           ))}
         </div>
