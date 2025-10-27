@@ -83,7 +83,7 @@ export default function Footer() {
               <MapPin size={18} className="text-primary" />
 
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Winteko,+Burundi"
+                href="https://btcmap.org/community/btc-shule/merchants"
                 target="_blank"
                 rel="noopener noreferrer"
               >

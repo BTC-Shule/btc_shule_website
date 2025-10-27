@@ -78,7 +78,7 @@ export default function Contact() {
                 title: "Address",
                 content: (
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Gitega,+Burundi"
+                    href="https://btcmap.org/community/btc-shule/merchants"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 hover:text-primary transition-colors"

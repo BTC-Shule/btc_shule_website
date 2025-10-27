@@ -80,7 +80,7 @@ export default function Navbar() {
                 <div className="max-w-8xl mx-auto hidden md:flex justify-between items-center px-4 sm:px-6 lg:px-24 py-2">
                   <div className="flex items-center gap-6">
                     <a
-                      href="https://www.google.com/maps/search/?api=1&query=Winteko,+Burundi"
+                      href="https://btcmap.org/community/btc-shule/merchants"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"

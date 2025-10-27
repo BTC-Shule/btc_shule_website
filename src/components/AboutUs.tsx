@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Lightbulb,
   Target,
@@ -9,6 +10,7 @@ import {
   Rocket,
   ShieldCheck,
   Users,
+  ArrowRight,
 } from "phosphor-react";
 import { useEffect, useState } from "react";
 
@@ -153,6 +155,26 @@ export default function About() {
             )}
           </motion.div>
         </div>
+        {/* Learn More Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center pt-12"
+        >
+          <Link
+            href="/about-btcshule"
+            className="inline-flex items-center gap-2 text-lg font-semibold text-primary hover:text-secondary-light transition-all group"
+          >
+            Learn More
+            <ArrowRight
+              size={22}
+              weight="bold"
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
