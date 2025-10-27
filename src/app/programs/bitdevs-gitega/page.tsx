@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import DonateButton from "@/components/DonateButton";
 
 export default function BitDevsGitegaPage() {
   return (
@@ -97,6 +98,8 @@ export default function BitDevsGitegaPage() {
               ))}
             </div>
           </GradientSection>
+
+          <DonateButton />
 
           {/* Socratic Seminars */}
           <AnimatedSection>

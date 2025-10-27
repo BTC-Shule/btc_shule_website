@@ -27,7 +27,7 @@ const features = [
         </p>
         <div className="flex justify-center gap-4 mt-4 flex-wrap">
           <a
-            href="https://wa.me/250700000000"
+            href="https://wa.me/25771475533"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-green-600 hover:underline"
@@ -49,7 +49,7 @@ const features = [
             <EnvelopeSimple size={24} weight="fill" /> Email
           </a>
           <a
-            href="tel:+25770000000"
+            href="tel:+25771475533"
             className="flex items-center gap-2 text-orange-500 hover:underline"
           >
             <PhoneCall size={24} weight="fill" /> Call

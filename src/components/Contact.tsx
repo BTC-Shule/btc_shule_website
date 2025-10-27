@@ -92,12 +92,12 @@ export default function Contact() {
                 title: "Phone",
                 content: (
                   <a
-                    href="https://wa.me/25762919316"
+                    href="https://wa.me/25771475533"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-700 hover:text-primary transition-colors"
                   >
-                    +257 62919316
+                    +257 71 47 55 33
                   </a>
                 ),
               },

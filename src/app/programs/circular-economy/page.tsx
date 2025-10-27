@@ -202,8 +202,8 @@ export default function CircularEconomyPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
               "/1K4A7368.jpg",
-              "/1K4A7369.jpg",
-              "/1K4A7436.jpg",
+              "/GuMR6HXXsAAipLH.jpg",
+              "/GuMR6N2WkAAzRk4.jpg",
               "/DSC_0096.JPG.jpg",
               "/IMG_20250413_162621_274.jpg",
               "/IMG_20250413_163110_917.jpg",

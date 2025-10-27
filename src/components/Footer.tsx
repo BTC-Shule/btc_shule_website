@@ -72,11 +72,11 @@ export default function Footer() {
               <Phone size={18} className="text-primary" />
 
               <a
-                href="https://wa.me/25762919316"
+                href="https://wa.me/25771475533"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>+257 62919316</span>
+                <span>+257 71 47 55 33</span>
               </a>
             </li>
             <li className="flex items-center gap-2">
@@ -105,14 +105,14 @@ export default function Footer() {
               <TwitterLogo size={28} />
             </Link>
             <Link
-              href="https://t.me/25762919316"
+              href="https://t.me/25771475533"
               target="_blank"
               className="hover:text-primary"
             >
               <TelegramLogo size={28} />
             </Link>
             <Link
-              href="https://wa.me/25762919316"
+              href="https://wa.me/25771475533"
               target="_blank"
               className="hover:text-primary"
             >

@@ -95,7 +95,7 @@ export default function Navbar() {
 
                     <div>
                       <a
-                        href="https://wa.me/25762919316"
+                        href="https://wa.me/25771475533"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2"
@@ -105,7 +105,7 @@ export default function Navbar() {
                           weight="fill"
                           className="text-primary"
                         />
-                        <span>+257 62919316</span>
+                        <span>+257 71475533</span>
                       </a>
                     </div>
                     <div>
@@ -131,14 +131,14 @@ export default function Navbar() {
                       <TwitterLogo size={16} weight="fill" />
                     </Link>
                     <Link
-                      href="https://t.me/25762919316"
+                      href="https://t.me/25771475533"
                       target="_blank"
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
                     >
                       <TelegramLogo size={16} weight="fill" />
                     </Link>
                     <Link
-                      href="https://wa.me/25762919316"
+                      href="https://wa.me/25771475533"
                       target="_blank"
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-background text-primary hover:bg-primary hover:text-background transition-colors"
                     >

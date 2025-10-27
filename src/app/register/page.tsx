@@ -146,9 +146,6 @@ export default function RegisterPage() {
               {[
                 "/1K4A7368.jpg",
                 "/1K4A7369.jpg",
-                "/1K4A7436.jpg",
-                "/GuMR6HXXsAAipLH.jpg",
-                "/GuMR6N2WkAAzRk4.jpg",
                 "/1K4A7490.jpg",
               ].map((src, i) => (
                 <motion.div
