@@ -85,7 +85,7 @@ export default function TeamPage() {
         </section>
 
         {/* Team Grid */}
-        <section className="max-w-7xl mx-auto px-6 md:px-10 pb-28">
+        <section className="max-w-7xl mx-auto px-6 md:px-10 pb-40"> {/* Added extra bottom padding */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             {team.map((member, i) => (
               <motion.div
@@ -114,6 +114,9 @@ export default function TeamPage() {
           </div>
         </section>
       </main>
+
+      {/* Added margin-top before footer */}
+      <div className="mt-10"></div>
       <Footer />
     </>
   );
