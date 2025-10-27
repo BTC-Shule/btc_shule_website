@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  TelegramLogo,
   TwitterLogo,
-  WhatsappLogo,
   GlobeHemisphereWest,
   Envelope,
   Phone,
   MapPin,
+  Lightning,
+  Buildings,
 } from "phosphor-react";
 import Link from "next/link";
 
@@ -63,14 +63,12 @@ export default function Footer() {
           <ul className="space-y-3 text-md">
             <li className="flex items-center gap-2">
               <Envelope size={18} className="text-primary" />
-
               <a href="mailto:btcshule@gmail.com">
                 <span>btcshule@gmail.com</span>
               </a>
             </li>
             <li className="flex items-center gap-2">
               <Phone size={18} className="text-primary" />
-
               <a
                 href="https://wa.me/25771475533"
                 target="_blank"
@@ -81,7 +79,6 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <MapPin size={18} className="text-primary" />
-
               <a
                 href="https://btcmap.org/community/btc-shule/merchants"
                 target="_blank"
@@ -93,39 +90,56 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Social Media */}
+        {/* Social Media + Links */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Follow Us</h3>
-          <div className="flex gap-4">
-            <Link
-              href="https://x.com/btcshule"
-              target="_blank"
-              className="hover:text-primary"
-            >
-              <TwitterLogo size={28} />
-            </Link>
-            <Link
-              href="https://t.me/25771475533"
-              target="_blank"
-              className="hover:text-primary"
-            >
-              <TelegramLogo size={28} />
-            </Link>
-            <Link
-              href="https://wa.me/25771475533"
-              target="_blank"
-              className="hover:text-primary"
-            >
-              <WhatsappLogo size={28} />
-            </Link>
-            <Link
-              href="https://primal.net/p/nprofile1qqsyefs0ks7hr496ntxqyugkhwkrfnjukzzx7efp3sef54fdasmt5ugp3w6y6"
-              target="_blank"
-              className="hover:text-primary"
-            >
-              <GlobeHemisphereWest size={28} />
-            </Link>
-          </div>
+
+          <ul className="space-y-3 text-md">
+            <li className="flex items-center gap-2">
+              <TwitterLogo size={20} className="text-primary" />
+              <a
+                href="https://x.com/btcshule"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+              >
+                X
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <GlobeHemisphereWest size={20} className="text-primary" />
+              <a
+                href="https://primal.net/p/nprofile1qqsyefs0ks7hr496ntxqyugkhwkrfnjukzzx7efp3sef54fdasmt5ugp3w6y6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+              >
+                Primal
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Lightning size={20} className="text-primary" />
+              <a
+                href="https://geyser.fund/project/btcshule"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+              >
+                Geyser Project
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Buildings size={20} className="text-primary" />
+              <a
+                href="https://bitcoinconfederation.org/hub/btc-shule/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+              >
+                Confederation of Circular Economy
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
