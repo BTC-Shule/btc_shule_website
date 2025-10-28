@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -69,7 +69,7 @@ export default function StoryPage() {
               alternative currency.
             </p>
 
-            <div className="relative w-full h-[400px] md:h-[480px] rounded-2xl overflow-hidden shadow-2xl my-10">
+            {/* <div className="relative w-full h-[400px] md:h-[480px] rounded-2xl overflow-hidden shadow-2xl my-10">
               <Image
                 src="/btcshule-story.jpg"
                 alt="BTC Shule Burundi Circular Economy"
@@ -79,7 +79,7 @@ export default function StoryPage() {
               <div className="absolute bottom-6 left-6 bg-primary/90 text-background font-semibold px-5 py-3 rounded-lg shadow-lg">
                 Winteko, Burundi — The Heart of BTC Shule
               </div>
-            </div>
+            </div> */}
 
             <p>
               BTC Shule is pioneering a{" "}
