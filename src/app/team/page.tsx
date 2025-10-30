@@ -56,13 +56,6 @@ export default function TeamPage() {
         "Support training sessions, translations, and merchant logistics.",
       img: "/Anaxis.jpg",
     },
-    {
-      name: "Jodel",
-      role: "Volunteer",
-      responsibilities:
-        "Support training sessions, translations, and merchant logistics.",
-      img: "/Ananix.jpg",
-    },
   ];
 
   return (
