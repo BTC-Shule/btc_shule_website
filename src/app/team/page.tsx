@@ -12,49 +12,56 @@ export default function TeamPage() {
       role: "Founder & Director",
       responsibilities:
         "Strategic leadership, partnerships, and program design. Represents BTC Shule at international conferences (Africa Bitcoin Conference 2025, Adopting Bitcoin 2025).",
-      img: "/team/belyi.jpg",
+      img: "/Belyi.jpg",
     },
     {
       name: "Aimée Nahimana",
       role: "Head of Education",
       responsibilities:
         "Leads the Mi Primer Bitcoin, manages training content and evaluation.",
-      img: "/team/aimee.jpg",
+      img: "/Aime.jpg",
     },
     {
       name: "Evariste Ngendakumana",
       role: "Merchant Engagement Lead",
       responsibilities:
         "Onboards and trains merchants to accept Bitcoin; monitors shop adoption metrics.",
-      img: "/team/evariste.jpg",
+      img: "/Evariste.jpg",
     },
     {
       name: "Severin Basabingoma",
       role: "Community Outreach Coordinator",
       responsibilities:
         "Organizes village meetups, manages feedback from families and local leaders.",
-      img: "/team/severin.jpg",
+      img: "/Severin.jpg",
     },
     {
       name: "Guy Eudes Barakana",
       role: "Communications Officer",
       responsibilities:
         "Handles media, social-media content, and public relations. Leads TREZOR ACADEMY.",
-      img: "/team/guy.jpg",
+      img: "/Barakana.jpg",
     },
     {
       name: "Advaxe Ndayisenga",
       role: "IT Manager / Developer",
       responsibilities:
         "Maintains My Satoshi tool, supervises technical integrations (Blink APIs).",
-      img: "/team/advaxe.jpg",
+      img: "/Advaxe.jpg",
     },
     {
-      name: "Annaxis & Jodel",
-      role: "Volunteers",
+      name: "Annaxis",
+      role: "Volunteer",
       responsibilities:
         "Support training sessions, translations, and merchant logistics.",
-      img: "/team/volunteers.jpg",
+      img: "/Anaxis.jpg",
+    },
+    {
+      name: "Jodel",
+      role: "Volunteer",
+      responsibilities:
+        "Support training sessions, translations, and merchant logistics.",
+      img: "/Ananix.jpg",
     },
   ];
 

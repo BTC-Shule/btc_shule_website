@@ -4,8 +4,41 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function VolunteerPage() {
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("⏳ Submitting...");
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const res = await fetch("/api/volunteer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setStatus("✅ Application submitted successfully! We'll be in touch soon.");
+        form.reset();
+      } else if (result.status === "duplicate") {
+        setStatus("⚠️ You've already applied.");
+      } else {
+        setStatus("❌ Something went wrong. Try again later.");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("❌ Network error.");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -26,7 +59,8 @@ export default function VolunteerPage() {
               transition={{ duration: 1 }}
               className="text-5xl md:text-6xl font-extrabold text-primary drop-shadow-md"
             >
-              Volunteer with <span className="text-secondary-light">BTC Shule</span>
+              Volunteer with{" "}
+              <span className="text-secondary-light">BTC Shule</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -34,8 +68,9 @@ export default function VolunteerPage() {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-gray-700 mt-6 max-w-2xl mx-auto"
             >
-              Join our international movement bringing Bitcoin education to communities worldwide. 
-              Share your time, skills, and ideas to empower a brighter financial future.
+              Join our international movement bringing Bitcoin education to
+              communities worldwide. Share your time, skills, and ideas to
+              empower a brighter financial future.
             </motion.p>
           </div>
         </section>
@@ -86,10 +121,12 @@ export default function VolunteerPage() {
         {/* Featured Initiatives */}
         <section className="py-20 md:py-28 bg-secondary-light text-white">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-4xl font-bold mb-6">Featured Volunteer Initiatives</h2>
+            <h2 className="text-4xl font-bold mb-6">
+              Featured Volunteer Initiatives
+            </h2>
             <p className="text-gray-300 max-w-3xl mx-auto mb-12">
-              Our volunteers are pioneering projects that make Bitcoin education accessible
-              across Africa and the globe.
+              Our volunteers are pioneering projects that make Bitcoin education
+              accessible across Africa and the globe.
             </p>
             <div className="grid md:grid-cols-2 gap-10">
               {[
@@ -118,70 +155,38 @@ export default function VolunteerPage() {
           </div>
         </section>
 
-        {/* Ways to Contribute */}
-        <section className="py-20 md:py-28 bg-white">
-          <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-4xl font-bold text-primary mb-10">
-              Ways You Can Contribute
-            </h2>
-            <div className="grid md:grid-cols-3 gap-10">
-              {[
-                {
-                  title: "Community Events",
-                  desc: "Host or assist Bitcoin education meetups, workshops, and local awareness events.",
-                  icon: "🎤",
-                },
-                {
-                  title: "Content & Translation",
-                  desc: "Translate materials, write articles, or design visuals that connect with your culture.",
-                  icon: "📝",
-                },
-                {
-                  title: "Digital Advocacy",
-                  desc: "Create digital campaigns, social media content, and engage online communities.",
-                  icon: "💻",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.2 }}
-                  className="p-8 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-2 transition"
-                >
-                  <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="text-2xl font-semibold text-secondary-light mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Volunteer Form */}
         <section className="py-24 bg-background">
           <div className="max-w-lg mx-auto px-6 text-center">
-            <h2 className="text-4xl font-bold mb-6 text-primary">Ready to Join Us?</h2>
+            <h2 className="text-4xl font-bold mb-6 text-primary">
+              Ready to Join Us?
+            </h2>
             <p className="text-gray-600 mb-10">
-              Fill out the form and tell us how you’d like to contribute. Every skill matters.
+              Fill out the form and tell us how you’d like to contribute. Every
+              skill matters.
             </p>
-            <form className="space-y-6 bg-white/10 backdrop-blur-lg px-4 md:px-8 p-8 rounded-2xl shadow-xl border border-white/20">
+
+            {/* Form with data submission */}
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6 bg-white/10 backdrop-blur-lg px-4 md:px-8 p-8 rounded-2xl shadow-xl border border-white/20"
+            >
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
                 className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
                 className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               />
               <select
+                name="interest"
                 className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-secondary-light outline-none"
                 required
               >
@@ -191,6 +196,7 @@ export default function VolunteerPage() {
                 <option value="advocacy">Digital Advocacy</option>
               </select>
               <textarea
+                name="message"
                 placeholder="Tell us about your skills or motivation..."
                 rows={4}
                 className="w-full bg-transparent border border-gray-400 rounded-lg px-4 py-3 text-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-secondary-light outline-none"
@@ -205,6 +211,22 @@ export default function VolunteerPage() {
                 Submit Application
               </motion.button>
             </form>
+
+            {status && (
+              <p
+                className={`mt-4 text-sm ${
+                  status.startsWith("✅")
+                    ? "text-green-600"
+                    : status.startsWith("⚠️")
+                    ? "text-yellow-600"
+                    : status.startsWith("❌")
+                    ? "text-red-600"
+                    : "text-gray-600"
+                }`}
+              >
+                {status}
+              </p>
+            )}
           </div>
         </section>
       </main>
