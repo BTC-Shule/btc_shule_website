@@ -10,7 +10,7 @@ function getServiceAccountKey() {
   return JSON.parse(Buffer.from(raw, "base64").toString("utf8"));
 }
 
-async function sendVolunteerConfirmationEmail({ firstName, email }) {
+async function sendVolunteerConfirmationEmail({ name, email }) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -24,7 +24,7 @@ async function sendVolunteerConfirmationEmail({ firstName, email }) {
     to: email,
     subject: "Welcome to the Volunteer Program – BTC Shule",
     html: `
-      <p>Dear ${firstName},</p>
+      <p>Dear ${name},</p>
 
       <p>Thank you for expressing interest in joining our <b>BTC Shule Volunteer Program</b>.</p>
 
@@ -65,7 +65,7 @@ export async function POST(request) {
   const sheets = google.sheets({ version: "v4", auth: client });
 
   // 📝 Replace with your Google Sheet ID for volunteers
-  const spreadsheetId = "1p0EjOR2frsQ1jm6CkfPVTOIiQsH77IKf3CwjTuSqvw";
+  const spreadsheetId = "1p0EjOR2frsQ1jm6CkfPVTOIiQ-sH77IKf3CwjTuSqvw";
 
   try {
     const existing = await sheets.spreadsheets.values.get({
@@ -101,7 +101,7 @@ export async function POST(request) {
       },
     });
 
-    await sendVolunteerConfirmationEmail({ firstName, email });
+    await sendVolunteerConfirmationEmail({ name, email });
 
     return NextResponse.json({ status: "success" }, { status: 200 });
   } catch (err) {
