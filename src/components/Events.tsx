@@ -10,7 +10,6 @@ type Event = {
   time?: string;
   location: string;
   description: string;
-  type: "upcoming" | "past";
 };
 
 const events: Event[] = [
@@ -20,7 +19,6 @@ const events: Event[] = [
     location: "Online",
     description:
       "A hackathon focused on building open-source Bitcoin tools for African communities.",
-    type: "past",
   },
   {
     title: "Bitcoin Basics Workshop – Gitega",
@@ -29,16 +27,6 @@ const events: Event[] = [
     location: "Gitega, Burundi",
     description:
       "Hands-on introduction to Bitcoin wallets, payments, and financial sovereignty.",
-    type: "upcoming",
-  },
-  {
-    title: "Merchants & Bitcoin Training – Ngozi",
-    date: "December 5, 2025",
-    time: "1:00 PM – 5:00 PM",
-    location: "Ngozi, Burundi",
-    description:
-      "Helping local merchants understand how to accept Bitcoin and integrate it in their businesses.",
-    type: "upcoming",
   },
 ];
 
@@ -55,9 +43,13 @@ function formatDate(dateStr: string) {
 export default function Events() {
   const [showPast, setShowPast] = useState(false);
 
-  const filteredEvents = showPast
-    ? events
-    : events.filter((e) => e.type === "upcoming");
+  const now = new Date();
+
+  // Split automatically based on date
+  const pastEvents = events.filter((e) => new Date(e.date) < now);
+  const upcomingEvents = events.filter((e) => new Date(e.date) >= now);
+
+  const filteredEvents = showPast ? pastEvents : upcomingEvents;
 
   return (
     <section
@@ -100,85 +92,92 @@ export default function Events() {
 
         {/* Events Grid */}
         <div className="grid gap-10 lg:gap-12">
-          {filteredEvents.map((event, i) => {
-            const dateObj = formatDate(event.date);
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: i * 0.1 }}
-                viewport={{ once: true }}
+          {filteredEvents.length === 0 ? (
+            <p className="text-center text-gray-400">
+              No {showPast ? "past" : "upcoming"} events.
+            </p>
+          ) : (
+            filteredEvents.map((event, i) => {
+              const dateObj = formatDate(event.date);
+              const isUpcoming = new Date(event.date) >= now;
 
-                className="relative flex flex-col md:flex-row bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl hover:bg-white/20 overflow-hidden transition-all duration-500"
-              >
-                <div className="md:w-1/5 flex md:flex-col md:justify-center items-center text-white p-6 md:p-0">
-                  <CalendarBlank size={40} weight="duotone" className="md:mb-2" />
-
-                  {/* Date + Month/Year container */}
-                  <div className="flex flex-row md:flex-col  justify-center gap-2 md:gap-1">
-                    {/* Date */}
-                    <div className="text-3xl font-bold text-center">
-                      {typeof dateObj === "object" ? dateObj.day : event.date}
-                    </div>
-
-                    {/* Month + Year stacked */}
-                    <div className="flex flex-col items-start md:items-center">
-                      <div className="uppercase text-sm tracking-widest">
-                        {typeof dateObj === "object" ? dateObj.month : ""}
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative flex flex-col md:flex-row bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl hover:bg-white/20 overflow-hidden transition-all duration-500"
+                >
+                  {/* Date Section */}
+                  <div className="md:w-1/5 flex md:flex-col md:justify-center items-center text-white p-6 md:p-0">
+                    <CalendarBlank
+                      size={40}
+                      weight="duotone"
+                      className="md:mb-2"
+                    />
+                    <div className="flex flex-row md:flex-col justify-center gap-2 md:gap-1">
+                      <div className="text-3xl font-bold text-center">
+                        {typeof dateObj === "object" ? dateObj.day : event.date}
                       </div>
-                      <div className="text-xs opacity-90">
-                        {typeof dateObj === "object" ? dateObj.year : ""}
+                      <div className="flex flex-col items-start md:items-center">
+                        <div className="uppercase text-sm tracking-widest">
+                          {typeof dateObj === "object" ? dateObj.month : ""}
+                        </div>
+                        <div className="text-xs opacity-90">
+                          {typeof dateObj === "object" ? dateObj.year : ""}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Details */}
-                <div className="flex flex-col justify-between md:w-3/5 p-4 md:p-8">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-primary dark:text-white mb-2">
-                      {event.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                      {event.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-4 mt-4 text-gray-500 dark:text-gray-400 text-sm">
-                    {event.time && (
+                  {/* Details */}
+                  <div className="flex flex-col justify-between md:w-3/5 p-4 md:p-8">
+                    <div>
+                      <h3 className="text-2xl font-semibold text-primary dark:text-white mb-2">
+                        {event.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                        {event.description}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-4 mt-4 text-gray-500 dark:text-gray-400 text-sm">
+                      {event.time && (
+                        <div className="flex items-center gap-2">
+                          <Clock size={18} weight="duotone" />
+                          <span>{event.time}</span>
+                        </div>
+                      )}
                       <div className="flex items-center gap-2">
-                        <Clock size={18} weight="duotone" />
-                        <span>{event.time}</span>
+                        <MapPin size={18} weight="duotone" />
+                        <span>{event.location}</span>
                       </div>
-                    )}
-                    <div className="flex items-center gap-2">
-                      <MapPin size={18} weight="duotone" />
-                      <span>{event.location}</span>
                     </div>
                   </div>
-                </div>
 
-                {/* CTA */}
-                <div className="md:w-1/5 flex items-center justify-center p-6 md:p-0">
-                  {event.type === "upcoming" ? (
-                    <a
-                      href="#rsvp"
-                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                    >
-                      RSVP
-                    </a>
-                  ) : (
-                    <a
-                      href="#recap"
-                      className="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary-light text-gray-200 rounded-full font-semibold hover:bg-secondary-light/90 hover:scale-105 transition-all duration-300"
-                    >
-                      Recap
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
+                  {/* CTA */}
+                  <div className="md:w-1/5 flex items-center justify-center p-6 md:p-0">
+                    {isUpcoming ? (
+                      <a
+                        href="#rsvp"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                      >
+                        RSVP
+                      </a>
+                    ) : (
+                      <a
+                        href="#recap"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 bg-secondary-light text-gray-200 rounded-full font-semibold hover:bg-secondary-light/90 hover:scale-105 transition-all duration-300"
+                      >
+                        Recap
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })
+          )}
         </div>
       </div>
     </section>

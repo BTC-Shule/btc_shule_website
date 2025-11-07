@@ -83,7 +83,7 @@ const features = [
           learning experiences.
         </p>
         <Link
-          href="/"
+          href="/btc-hub"
           className="inline-flex items-center gap-2 text-primary font-medium hover:underline hover:text-orange-500 transition-colors"
         >
           Learn More <ArrowRight size={18} weight="bold" />

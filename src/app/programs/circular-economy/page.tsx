@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import DonateButton from "@/components/DonateButton";
 
 export default function CircularEconomyPage() {
   return (
@@ -433,6 +434,7 @@ export default function CircularEconomyPage() {
             <p className="text-gray-600">
               Help BTC Shule expand this model to new villages across Africa.
             </p>
+            <DonateButton />
             <a
               href="https://geyser.fund/project/btcshule"
               target="_blank"
