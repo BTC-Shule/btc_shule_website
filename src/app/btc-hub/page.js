@@ -166,7 +166,7 @@ export default function BtcHubPage() {
 
             <Link
               href="mailto:info@btcshule.org"
-              className="inline-flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-full font-medium hover:bg-secondary-light transition-colors"
+              className="inline-flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-full font-medium hover:bg-primary-dark transition-colors"
             >
               <EnvelopeSimple size={22} weight="bold" /> Contact BTC Shule Team
             </Link>
