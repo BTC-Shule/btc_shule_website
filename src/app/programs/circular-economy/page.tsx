@@ -202,10 +202,12 @@ export default function CircularEconomyPage() {
           {/* Photo Gallery */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              "/1K4A7368.jpg",
+              "/GuMR7ZgWsAAYLDR.jpg",
               "/GuMR6HXXsAAipLH.jpg",
               "/GuMR6N2WkAAzRk4.jpg",
               "/DSC_0096.JPG.jpg",
+              "/DSC_0092.JPG.jpg",
+              "/GysbpR0XgAcSD2k.jpg",
               "/IMG_20250413_162621_274.jpg",
               "/IMG_20250413_163110_917.jpg",
             ].map((src, i) => (
