@@ -242,6 +242,39 @@ export default function MeetupsPage() {
             </p>
           )}
         </section>
+
+        <section className="bg-secondary-light/10 py-20">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold text-primary mb-10">
+              Highlights from Previous Meetups
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {[
+                "/1K4A7369.jpg",
+                "/1K4A7368.jpg",
+                "/1K4A7436.jpg",
+                "/1K4A7490.jpg"
+              ].map((src, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.15 }}
+                  className="overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-transform"
+                >
+                  <Image
+                    src={src}
+                    alt={`Academy class ${i + 1}`}
+                    width={500}
+                    height={350}
+                    className="object-cover w-full h-64"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
