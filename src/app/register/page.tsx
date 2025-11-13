@@ -144,9 +144,14 @@ export default function RegisterPage() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {[
-                "/1K4A7368.jpg",
-                "/1K4A7369.jpg",
-                "/1K4A7490.jpg",
+                "/1K4A7238.jpg",
+                "/1K4A7254.jpg",
+                "/Ba TA.jpg",
+                "/DSC_9753.jpg",
+                "/IMG_5931 Muco ArtPhotography.JPG",
+                "/IMG_6657 Muco ArtPhotography.JPG",
+                "/IMG-20241208-WA0055.jpg",
+                "/trashed-1735720567-IMG-20241007-WA0045.jpg"
               ].map((src, i) => (
                 <motion.div
                   key={i}
