@@ -41,34 +41,66 @@ export default function DonatePage() {
     })();
   }, []);
 
-    useEffect(() => {
-    const initBlinkWidget = () => {
-      // Ensure BlinkPay script is ready
-      if (typeof (window as any).BlinkPayButton !== "undefined") {
-        (window as any).BlinkPayButton.init({
-          username: "btcshule",
-          containerId: "blink-pay-button-container",
-          themeMode: "dark",
-          onSuccess: (res: any) => console.log("Payment success:", res),
-          onError: (err: any) => console.error("Payment error:", err),
-        });
-      } else {
-        console.warn("BlinkPayButton not yet available, retrying...");
-        setTimeout(initBlinkWidget, 500); // Retry after 500ms
-      }
-    };
+  useEffect(() => {
+    if (document.getElementById("blink-script")) return;
 
-    // Load BlinkPay script dynamically
     const script = document.createElement("script");
-    script.src = "https://blinkpay.africa/widget.js";
+    script.id = "blink-script";
+    script.src =
+      "https://blinkbitcoin.github.io/donation-button.blink.sv/js/blink-pay-button.js";
     script.async = true;
-    script.onload = initBlinkWidget;
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      // don't remove script — keep it cached
     };
   }, []);
+
+  useEffect(() => {
+  if (selectedTab !== "blink") return;
+
+  // Wait for React + Framer Motion to fully mount the DOM
+  setTimeout(() => {
+    const initBlinkWidget = () => {
+      if (typeof (window as any).BlinkPayButton !== "undefined") {
+        const container = document.getElementById("blink-pay-button-container");
+        
+        if (!container) {
+          console.log("Container still not ready, retrying...");
+          return setTimeout(initBlinkWidget, 150);
+        }
+
+        if (!(window as any)._blinkInitialized) {
+          (window as any)._blinkInitialized = true;
+          container.innerHTML = "";
+
+          (window as any).BlinkPayButton.init({
+            username: "btcshule",
+            containerId: "blink-pay-button-container",
+            themeMode: "dark",
+            language: "en",
+            defaultAmount: 1000,
+            buttonWidth: 200,
+            supportedCurrencies: [
+              { code: "sats", name: "sats", isCrypto: true },
+              { code: "USD", name: "USD", isCrypto: false },
+            ],
+            debug: false,
+            onSuccess: (res: any) => console.log("Payment success:", res),
+            onError: (err: any) => console.error("Payment error:", err),
+          });
+        }
+      } else {
+        console.log("BlinkPayButton not ready, retrying...");
+        setTimeout(initBlinkWidget, 150);
+      }
+    };
+
+    initBlinkWidget();
+  }, 50); // <-- Important: allow DOM to finish mounting
+}, [selectedTab]);
+
+
   const handleBTCPayDonate = async () => {
     if (!amount) return;
     setLoading(true);
@@ -97,7 +129,7 @@ export default function DonatePage() {
       <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-background to-gray-50">
         {/* Hero Section */}
         <section className="relative text-center py-20 md:py-28 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/btc-pattern.svg')] opacity-5 bg-repeat" />
+          <div className="absolute inset-0" />
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -218,7 +250,10 @@ export default function DonatePage() {
                   <p className="text-gray-600 mb-6 text-sm">
                     Use Blink Bitcoin wallet to donate instantly.
                   </p>
-                  <div id="blink-pay-button-container" className="flex justify-center"></div>
+                  <div
+                    id="blink-pay-button-container"
+                    className="flex justify-center"
+                  ></div>
                 </motion.div>
               )}
 
