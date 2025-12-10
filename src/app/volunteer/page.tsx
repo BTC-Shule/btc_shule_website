@@ -3,7 +3,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function VolunteerPage() {
