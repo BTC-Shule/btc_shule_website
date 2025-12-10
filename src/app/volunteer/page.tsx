@@ -45,13 +45,6 @@ export default function VolunteerPage() {
       <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-white via-background to-gray-50">
         {/* Hero Section */}
         <section className="relative overflow-hidden text-center py-28 md:py-40">
-          <Image
-            src="/images/volunteer-hero.jpg"
-            alt="Volunteers working together"
-            fill
-            className="object-cover object-center opacity-30"
-            priority
-          />
           <div className="relative z-10 max-w-4xl mx-auto px-6">
             <motion.h1
               initial={{ opacity: 0, y: -40 }}
