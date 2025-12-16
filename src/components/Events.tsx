@@ -73,7 +73,7 @@ export default function Events() {
             merchant trainings, and global hackathons. Join an upcoming event or
             relive our past experiences shaping Bitcoin adoption in Africa.
           </p>
-          <div className="mt-6 mx-auto w-24 h-1 bg-gradient-to-r from-primary to-orange-400 rounded-full"></div>
+          <div className="mt-6 mx-auto w-24 h-1 bg-linear-to-r from-primary to-orange-400 rounded-full"></div>
         </motion.div>
 
         {/* Toggle Button */}

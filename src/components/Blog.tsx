@@ -32,7 +32,7 @@ const blogs: Blog[] = [
 
 export default function Blog() {
   return (
-    <section id="blog" className="relative bg-gradient-to-b from-background to-gray-50 py-24 overflow-hidden">
+    <section id="blog" className="relative bg-linear-to-b from-background to-gray-50 py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         {/* Header */}
         <motion.div
@@ -85,7 +85,7 @@ export default function Blog() {
                 <h3 className="text-xl sm:text-2xl font-semibold text-primary group-hover:text-secondary-light transition-colors leading-snug">
                   {blog.title}
                 </h3>
-                <p className="text-gray-600 text-sm mt-3 flex-grow leading-relaxed line-clamp-3">
+                <p className="text-gray-600 text-sm mt-3 grow leading-relaxed line-clamp-3">
                   {blog.excerpt}
                 </p>
 

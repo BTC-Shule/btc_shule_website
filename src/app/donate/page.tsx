@@ -97,7 +97,7 @@ export default function DonatePage() {
     };
 
     initBlinkWidget();
-  }, 50); // <-- Important: allow DOM to finish mounting
+  }, 50); 
 }, [selectedTab]);
 
 
@@ -126,7 +126,7 @@ export default function DonatePage() {
   return (
     <>
       <Navbar />
-      <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-background to-gray-50">
+      <main className="pt-[72px] md:pt-[136px] bg-linear-to-b from-background to-gray-50">
         {/* Hero Section */}
         <section className="relative text-center py-20 md:py-28 overflow-hidden">
           <div className="absolute inset-0" />
@@ -439,7 +439,7 @@ export default function DonatePage() {
         </section>
 
         {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-r from-primary/10 to-secondary/10 text-center">
+        <section className="py-20 bg-linear-to-r from-primary/10 to-secondary/10 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}

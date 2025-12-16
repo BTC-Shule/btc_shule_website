@@ -136,7 +136,7 @@ export default function Statistics() {
           Driving real change in Burundi through education, empowerment, and
           circular Bitcoin adoption.
         </p>
-        <div className="mt-6 mx-auto w-32 h-1.5 bg-gradient-to-r from-primary via-secondary-light to-primary rounded-full"></div>
+        <div className="mt-6 mx-auto w-32 h-1.5 bg-linear-to-r from-primary via-secondary-light to-primary rounded-full"></div>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

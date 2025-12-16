@@ -72,7 +72,7 @@ export default function TeamPage() {
           >
             Meet the <span className="text-secondary-light">BTC Shule Team</span>
           </motion.h1>
-          <div className="mt-6 mx-auto w-32 h-1.5 bg-gradient-to-r from-primary via-secondary-light to-primary rounded-full"></div>
+          <div className="mt-6 mx-auto w-32 h-1.5 bg-linear-to-r from-primary via-secondary-light to-primary rounded-full"></div>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function TeamPage() {
         </section>
 
         {/* Team Grid */}
-        <section className="max-w-7xl mx-auto px-6 md:px-10 pb-40"> {/* Added extra bottom padding */}
+        <section className="max-w-7xl mx-auto px-6 md:px-10 pb-40">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
             {team.map((member, i) => (
               <motion.div

@@ -69,7 +69,7 @@ const partners = [
 
 export default function Partners() {
   return (
-    <section id="partners" className="relative bg-gradient-to-b from-background to-gray-50 py-24 overflow-hidden">
+    <section id="partners" className="relative bg-linear-to-b from-background to-gray-50 py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 space-y-20">
         {/* Header */}
         <motion.div

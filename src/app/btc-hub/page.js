@@ -16,7 +16,7 @@ export default function BtcHubPage() {
   return (
     <>
      <Navbar />
-        <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-background to-gray-50">
+        <main className="pt-[72px] md:pt-[136px] bg-linear-to-b from-background to-gray-50">
       {/* Hero Section */}
       <section className="relative bg-foreground py-24">
         <div className="max-w-6xl mx-auto px-6 text-center">

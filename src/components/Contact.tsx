@@ -46,7 +46,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative bg-gradient-to-b from-gray-50 via-background to-gray-100 py-24 overflow-hidden">
+    <section id="contact" className="relative bg-linear-to-b from-gray-50 via-background to-gray-100 py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <motion.div

@@ -41,7 +41,7 @@ export default function VolunteerPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-white via-background to-gray-50">
+      <main className="pt-[72px] md:pt-[136px] bg-linear-to-b from-white via-background to-gray-50">
         {/* Hero Section */}
         <section className="relative overflow-hidden text-center py-28 md:py-40">
           <div className="relative z-10 max-w-4xl mx-auto px-6">
