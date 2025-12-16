@@ -131,7 +131,7 @@ export default function Testimonials() {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
                 transition={{ duration: 0.6 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-[30rem]"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 h-120"
               >
                 {getVisibleTweets().map((tweet) => (
                   <motion.div

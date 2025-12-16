@@ -22,7 +22,7 @@ export default function StoryPage() {
               The Story of{" "}
               <span className="text-secondary-light">BTC Shule</span>
             </h1>
-            <div className="mt-6 mx-auto w-32 h-1.5 bg-gradient-to-r from-primary via-secondary-light to-primary rounded-full"></div>
+            <div className="mt-6 mx-auto w-32 h-1.5 bg-linear-to-r from-primary via-secondary-light to-primary rounded-full"></div>
           </motion.div>
 
           {/* Story Content */}

@@ -19,7 +19,7 @@ export default function Hero() {
           sizes="100vw"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/90"></div>
       </div>
 
       {/* Content */}

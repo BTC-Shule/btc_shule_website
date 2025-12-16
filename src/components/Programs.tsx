@@ -42,7 +42,7 @@ const programs = [
 
 export default function Programs() {
   return (
-    <section id="programs" className="relative bg-gradient-to-b from-white via-secondary-light/10 to-white py-24 overflow-hidden">
+    <section id="programs" className="relative bg-linear-to-b from-white via-secondary-light/10 to-white py-24 overflow-hidden">
       {/* Subtle floating background effect */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -68,7 +68,7 @@ export default function Programs() {
             Bitcoin education and adoption to life across Burundi — from villages
             to universities, building lasting global impact.
           </p>
-          <div className="mt-6 mx-auto w-24 h-1.5 bg-gradient-to-r from-primary to-orange-400 rounded-full" />
+          <div className="mt-6 mx-auto w-24 h-1.5 bg-linear-to-r from-primary to-orange-400 rounded-full" />
         </motion.div>
 
         {/* Program Grid */}
@@ -86,7 +86,7 @@ export default function Programs() {
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="relative bg-white/80 backdrop-blur-md border border-gray-100 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 flex flex-col justify-between group"
               >
-                <div className="flex flex-col flex-grow">
+                <div className="flex flex-col grow">
                   <motion.div
                     className="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-primary mb-6 group-hover:bg-primary/20 transition-colors duration-300"
                     whileHover={{ rotate: 5 }}

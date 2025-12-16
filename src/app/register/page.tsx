@@ -53,7 +53,7 @@ export default function RegisterPage() {
               className="object-cover opacity-80"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent"></div>
           </div>
           <div className="relative max-w-5xl mx-auto px-6 py-24 md:py-36  text-white">
             <motion.div

@@ -210,7 +210,7 @@ function AnimatedSection({ children }: { children: React.ReactNode }) {
 
 function GradientSection({ children }: { children: React.ReactNode }) {
   return (
-    <section className="bg-gradient-to-br from-gray-50 to-white rounded-3xl shadow-inner p-10">
+    <section className="bg-linear-to-br from-gray-50 to-white rounded-3xl shadow-inner p-10">
       {children}
     </section>
   );

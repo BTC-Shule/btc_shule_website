@@ -25,7 +25,7 @@ export default function Blogs() {
   return (
     <>
       <Navbar />
-      <main className="pt-[72px] md:pt-[136px] bg-gradient-to-b from-background to-gray-50">
+      <main className="pt-[72px] md:pt-[136px] bg-linear-to-b from-background to-gray-50">
         {/* Hero Section */}
         <section className="relative py-20">
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -94,7 +94,7 @@ export default function Blogs() {
                     <h3 className="text-xl sm:text-2xl font-semibold text-primary group-hover:text-secondary-light transition-colors leading-snug">
                       {blog.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mt-3 flex-grow leading-relaxed line-clamp-3">
+                    <p className="text-gray-600 text-sm mt-3 grow leading-relaxed line-clamp-3">
                       {blog.excerpt}
                     </p>
 

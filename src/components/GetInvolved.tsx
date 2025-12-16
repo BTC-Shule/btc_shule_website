@@ -108,7 +108,7 @@ export default function GetInvolved() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-orange-400 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:opacity-90 transition-all"
+                    className="inline-flex items-center justify-center gap-2 bg-linear-to-r from-primary to-orange-400 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:opacity-90 transition-all"
                   >
                     {item.cta}
                     <ArrowRight size={18} weight="bold" />
@@ -116,7 +116,7 @@ export default function GetInvolved() {
                 ) : (
                   <Link
                     href={item.link}
-                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-orange-400 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:opacity-90 transition-all"
+                    className="inline-flex items-center justify-center gap-2 bg-linear-to-r from-primary to-orange-400 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:opacity-90 transition-all"
                   >
                     {item.cta}
                     <ArrowRight size={18} weight="bold" />

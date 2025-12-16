@@ -50,7 +50,7 @@ export default function About() {
             We are pioneering Bitcoin adoption in Burundi — building a sustainable circular economy,
             training tomorrow’s leaders, and fostering open-source innovation that transforms lives.
           </p>
-          <div className="mt-6 mx-auto w-32 h-1.5 bg-gradient-to-r from-primary via-secondary-light to-primary rounded-full"></div>
+          <div className="mt-6 mx-auto w-32 h-1.5 bg-linear-to-r from-primary via-secondary-light to-primary rounded-full"></div>
         </motion.div>
 
         {/* Vision & Mission */}
