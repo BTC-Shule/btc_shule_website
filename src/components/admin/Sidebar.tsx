@@ -1,0 +1,34 @@
+// components/admin/Sidebar.tsx
+"use client";
+
+import Link from "next/link";
+import { Newspaper, Calendar, Layout } from "phosphor-react";
+
+const nav = [
+  { label: "Dashboard", href: "/admin/dashboard", icon: Layout },
+  { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
+  { label: "Events", href: "#", icon: Calendar },
+];
+
+export default function Sidebar() {
+  return (
+    <aside className="w-64 bg-white border-r px-6 py-8">
+      <h2 className="text-2xl font-extrabold text-primary mb-10">
+        BTC Shule
+      </h2>
+
+      <nav className="space-y-4">
+        {nav.map(({ label, href, icon: Icon }) => (
+          <Link
+            key={label}
+            href={href}
+            className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-primary hover:text-white transition"
+          >
+            <Icon size={20} />
+            {label}
+          </Link>
+        ))}
+      </nav>
+    </aside>
+  );
+}
