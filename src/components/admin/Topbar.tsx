@@ -2,9 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import {
-  Plus,
-} from "phosphor-react";
+import { Plus } from "phosphor-react";
 
 const pageTitles: Record<string, string> = {
   "/admin/dashboard": "Dashboard",
@@ -16,28 +14,30 @@ export default function Topbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  function logout() {
-  localStorage.removeItem("btcshule_admin");
-  router.replace("/admin"); 
-}
+  // ✅ Secure logout using API
+  async function logout() {
+    try {
+      await fetch("/api/admin/logout", {
+        method: "POST",
+      });
+    } catch (err) {
+      console.error("Logout failed", err);
+    } finally {
+      router.replace("/admin");
+    }
+  }
 
   const title =
     pageTitles[pathname] ||
-    pathname.startsWith("/admin/blogs/")
-      ? "Edit Blog"
-      : "Admin";
+    (pathname.startsWith("/admin/blogs/") ? "Edit Blog" : "Admin");
 
   return (
     <header className="sticky top-0 z-30 bg-white border-b border-gray-200">
       <div className="flex items-center justify-between px-8 py-4">
         {/* Left */}
         <div>
-          <h1 className="text-2xl font-bold text-primary">
-            {title}
-          </h1>
-          <p className="text-sm text-gray-500">
-            BTC Shule Admin Panel
-          </p>
+          <h1 className="text-2xl font-bold text-primary">{title}</h1>
+          <p className="text-sm text-gray-500">BTC Shule Admin Panel</p>
         </div>
 
         {/* Right */}
@@ -53,11 +53,13 @@ export default function Topbar() {
             </Link>
           )}
 
-          {/* Admin Profile */}
-          <button className="flex items-center gap-2 px-3 py-2 border rounded-full" onClick={logout} title="Logout">
-            <span className="text-sm font-medium text-gray-500">
-              Sign Out
-            </span>
+          {/* Logout */}
+          <button
+            onClick={logout}
+            className="flex items-center gap-2 px-3 py-2 border rounded-full hover:bg-gray-100 transition"
+            title="Logout"
+          >
+            <span className="text-sm font-medium text-gray-600">Sign Out</span>
           </button>
         </div>
       </div>

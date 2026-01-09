@@ -19,6 +19,7 @@ export default function Sidebar() {
           <Link
             key={label}
             href={href}
+            aria-label={label}
             className="group flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-primary hover:text-background transition-all"
           >
             <Icon
