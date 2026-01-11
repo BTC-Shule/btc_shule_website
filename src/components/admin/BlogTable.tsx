@@ -58,20 +58,34 @@ export default function BlogTable() {
             <th className="p-4 text-right">Actions</th>
           </tr>
         </thead>
+
         <tbody>
           {blogs.map((b) => (
             <tr key={b.id} className="border-t hover:bg-gray-50">
-              <td className="p-4 font-medium text-primary">
-                {b.title}
-              </td>
+              <td className="p-4 font-medium text-primary">{b.title}</td>
+
               <td className="p-4 text-gray-600">{b.author}</td>
+
               <td className="p-4 text-right space-x-4">
+                {/* Preview */}
+                <a
+                  href={`/admin/blogs/preview?id=${b.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 font-medium hover:underline"
+                >
+                  Preview
+                </a>
+
+                {/* Edit */}
                 <Link
                   href={`/admin/blogs/${b.id}`}
                   className="text-primary font-semibold"
                 >
                   Edit
                 </Link>
+
+                {/* Delete */}
                 <button
                   onClick={() => remove(b.id)}
                   className="text-red-500 font-semibold"
