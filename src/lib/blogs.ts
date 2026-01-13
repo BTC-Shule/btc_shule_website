@@ -14,6 +14,7 @@ export type Blog = {
   contentHtml: string;
   createdAt: string;
   updatedAt: string;
+  featured?: boolean;
 };
 
 function readBlogs(): Blog[] {

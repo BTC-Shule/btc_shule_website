@@ -1,27 +1,13 @@
-"use client";
-
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User } from "phosphor-react";
+import { getBlogs } from "@/lib/blogs";
 
-const blogs = [
-  {
-    id: "circular-economy",
-    title: "Exploring Kenya’s Bitcoin Circular Economies",
-    excerpt:
-      "From Nairobi to Kiambu, discover how Bitcoin is transforming communities and empowering local economies to embrace a decentralized future.",
-    date: "August 2025",
-    author: "Belyi Nobel Kubwayo",
-    image: "/blogheader.jpg",
-    category: "Community",
-    featured: true,
-  },
-];
-
-export default function Blogs() {
+export default async function Blogs() {
+  const blogs = getBlogs();
   return (
     <>
       <Navbar />
@@ -77,7 +63,7 @@ export default function Blogs() {
                     <Image
                       width={600}
                       height={400}
-                      src={blog.image}
+                      src={blog.coverImage}
                       alt={blog.title}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 ease-out"
                       priority={blog.featured}
@@ -106,7 +92,7 @@ export default function Blogs() {
                           weight="duotone"
                           className="text-secondary-light"
                         />
-                        <span>{blog.date}</span>
+                        <span>{new Date(blog.updatedAt).toLocaleDateString()}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <User
