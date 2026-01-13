@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   Newspaper,
   Calendar,
@@ -9,10 +10,20 @@ import {
   PlusCircle,
 } from "phosphor-react";
 
-const stats = [
+export default function AdminDashboard() {
+  const [blogCount, setBlogCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/blogs/count")
+      .then((res) => res.json())
+      .then((data) => setBlogCount(data.count))
+      .catch(() => setBlogCount(0));
+  }, []);
+
+  const stats = [
   {
     title: "Blogs",
-    value: 1,
+    value: blogCount ?? "—",
     description: "Published articles",
     icon: Newspaper,
     href: "/admin/blogs",
@@ -43,8 +54,6 @@ const stats = [
     action: "View Analytics",
   },
 ];
-
-export default function AdminDashboard() {
   return (
     <div className="space-y-12">
       {/* Header */}
