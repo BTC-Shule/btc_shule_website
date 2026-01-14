@@ -42,6 +42,7 @@ export default async function BlogPreview({ searchParams }: Props) {
               src={blog.coverImage}
               alt={blog.title}
               fill
+              unoptimized
               className="object-cover"
               priority
             />

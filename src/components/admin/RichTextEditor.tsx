@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -5,6 +6,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import HardBreak from "@tiptap/extension-hard-break";
+import Link from "@tiptap/extension-link";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -28,6 +30,7 @@ export default function RichTextEditor({
         heading: { levels: [2, 3] },
         hardBreak: false,
       }),
+
       HardBreak.extend({
         addKeyboardShortcuts() {
           return {
@@ -35,17 +38,31 @@ export default function RichTextEditor({
           };
         },
       }),
+
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        HTMLAttributes: {
+          class: "text-primary underline",
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+      }),
+
       Image.configure({
         inline: false,
         HTMLAttributes: {
           class: "rounded-xl my-8 w-full object-cover",
         },
       }),
+
       Placeholder.configure({
         placeholder: "Start writing your blog…",
       }),
     ],
+
     content: value,
+
     onUpdate({ editor }) {
       if (mode === "visual") {
         onChange(editor.getHTML());
@@ -53,14 +70,14 @@ export default function RichTextEditor({
     },
   });
 
-  /* -------- Sync external value into editor -------- */
+  /* ---------- Sync external value ---------- */
 
   useEffect(() => {
     if (!editor) return;
 
     if (mode === "visual") {
       const current = editor.getHTML();
-      if (value !== current) {
+      if (current !== value) {
         editor.commands.setContent(value, { emitUpdate: false });
       }
     } else {
@@ -68,7 +85,7 @@ export default function RichTextEditor({
     }
   }, [value, editor, mode]);
 
-  /* -------- Switch modes safely -------- */
+  /* ---------- Mode switching ---------- */
 
   function switchToSource() {
     if (!editor) return;
@@ -82,6 +99,7 @@ export default function RichTextEditor({
     editor.commands.setContent(sourceValue || "<p></p>", {
       emitUpdate: false,
     });
+
     onChange(sourceValue);
     setMode("visual");
   }
@@ -101,7 +119,7 @@ export default function RichTextEditor({
       {mode === "visual" ? (
         <EditorContent
           editor={editor}
-          className="prose max-w-none p-6 text-gray-700 focus:outline-none"
+          className="prose max-w-none p-6 text-gray-700 focus:outline-none min-h-[120px]"
         />
       ) : (
         <textarea
@@ -123,25 +141,84 @@ function Toolbar({
   onSource,
   onVisual,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editor: any;
   uploadImage: (file: File) => Promise<string>;
   mode: "visual" | "source";
   onSource: () => void;
   onVisual: () => void;
 }) {
+  /* ---------- Helpers ---------- */
+
+  function isMarkActive(mark: string) {
+    return (
+      editor.isActive(mark) ||
+      !!editor.state.storedMarks?.some(
+        (m: any) => m.type.name === mark
+      )
+    );
+  }
+
+  function btn(active: boolean) {
+    return `
+      px-2 py-1 rounded-md text-sm font-semibold transition
+      ${active ? "text-primary" : "text-white hover:text-primary"}
+    `;
+  }
+
+  /* ---------- Image ---------- */
+
   function insertImage() {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
+
     input.onchange = async () => {
       const file = input.files?.[0];
       if (!file) return;
 
       const url = await uploadImage(file);
-      editor.chain().focus().setImage({ src: url }).createParagraphNear().run();
+      editor
+        .chain()
+        .focus()
+        .setImage({ src: url })
+        .createParagraphNear()
+        .run();
     };
+
     input.click();
+  }
+
+  /* ---------- Link (non-destructive toggle) ---------- */
+
+  function toggleLink() {
+    const isActive =
+      editor.isActive("link") ||
+      editor.state.storedMarks?.some(
+        (m: any) => m.type.name === "link"
+      );
+
+    // TURN LINK OFF (keep existing linked text)
+    if (isActive) {
+      editor
+        .chain()
+        .focus()
+        .insertContent("\u200B") // zero-width boundary
+        .unsetMark("link") // clears stored mark only
+        .run();
+      return;
+    }
+
+    // TURN LINK ON
+    const previousUrl = editor.getAttributes("link").href;
+    const url = window.prompt("Enter URL", previousUrl);
+
+    if (!url) return;
+
+    editor
+      .chain()
+      .focus()
+      .setLink({ href: url }) // stored mark
+      .run();
   }
 
   return (
@@ -150,39 +227,63 @@ function Toolbar({
         <>
           <button
             type="button"
+            className={btn(isMarkActive("bold"))}
             onClick={() => editor.chain().focus().toggleBold().run()}
           >
             Bold
           </button>
+
           <button
             type="button"
+            className={btn(isMarkActive("italic"))}
             onClick={() => editor.chain().focus().toggleItalic().run()}
           >
             Italic
           </button>
+
           <button
             type="button"
+            className={btn(editor.isActive("heading", { level: 2 }))}
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 2 }).run()
             }
           >
             H2
           </button>
+
           <button
             type="button"
+            className={btn(editor.isActive("heading", { level: 3 }))}
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 3 }).run()
             }
           >
             H3
           </button>
+
           <button
             type="button"
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            className={btn(editor.isActive("bulletList"))}
+            onClick={() =>
+              editor.chain().focus().toggleBulletList().run()
+            }
           >
             List
           </button>
-          <button type="button" onClick={insertImage}>
+
+          <button
+            type="button"
+            className={btn(isMarkActive("link"))}
+            onClick={toggleLink}
+          >
+            Link
+          </button>
+
+          <button
+            type="button"
+            className={btn(false)}
+            onClick={insertImage}
+          >
             Image
           </button>
         </>
@@ -202,4 +303,3 @@ function Toolbar({
     </div>
   );
 }
-  

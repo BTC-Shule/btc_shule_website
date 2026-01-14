@@ -143,6 +143,7 @@ export default function BlogForm({ id }: { id?: string }) {
               alt="Cover preview"
               width={600}
               height={400}
+              unoptimized
               className="mb-4 w-full max-w-sm rounded-xl border object-cover"
             />
           )}
