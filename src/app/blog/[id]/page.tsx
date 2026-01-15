@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getBlog } from "@/lib/blogs";
+import { getPublishedBlog } from "@/lib/blogs";
 import Navbar from "@/components/Navbar";
 import BlogClient from "./BlogClient";
 
@@ -12,8 +12,8 @@ type Props = {
 export default async function BlogPage({ params }: Props) {
   const { id } = await params;
 
-  const blog = getBlog(id);
-
+  const blog = getPublishedBlog(id);
+  
   if (!blog) return notFound();
 
   return (

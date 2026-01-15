@@ -50,48 +50,81 @@ export default function BlogTable() {
 
   return (
     <div className="bg-white rounded-3xl shadow overflow-hidden">
-      <table className="w-full">
-        <thead className="bg-gray-50 text-sm text-gray-500">
+      <table className="w-full border-collapse">
+        <thead className="bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
           <tr>
-            <th className="p-4 text-left">Title</th>
-            <th className="p-4 text-left">Author</th>
-            <th className="p-4 text-right">Actions</th>
+            <th className="px-6 py-4 text-left">Blog</th>
+            <th className="px-6 py-4 text-left">Status</th>
+            <th className="px-6 py-4 text-left">Featured</th>
+            <th className="px-6 py-4 text-right">Actions</th>
           </tr>
         </thead>
 
         <tbody>
           {blogs.map((b) => (
-            <tr key={b.id} className="border-t hover:bg-gray-50">
-              <td className="p-4 font-medium text-primary">{b.title}</td>
+            <tr key={b.id} className="border-t hover:bg-gray-50 transition">
+              {/* Blog Title + Author */}
+              <td className="px-6 py-4">
+                <div className="flex flex-col">
+                  <span className="font-semibold text-primary leading-snug">
+                    {b.title}
+                  </span>
+                  <span className="text-sm text-gray-500 mt-1">
+                    by {b.author}
+                  </span>
+                </div>
+              </td>
 
-              <td className="p-4 text-gray-600">{b.author}</td>
-
-              <td className="p-4 text-right space-x-4">
-                {/* Preview */}
-                <a
-                  href={`/admin/blogs/preview?id=${b.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 font-medium hover:underline"
+              {/* Status */}
+              <td className="px-6 py-4">
+                <span
+                  className={`inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full ${
+                    b.status === "published"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}
                 >
-                  Preview
-                </a>
+                  {b.status === "published" ? "Published" : "Draft"}
+                </span>
+              </td>
 
-                {/* Edit */}
-                <Link
-                  href={`/admin/blogs/${b.id}`}
-                  className="text-primary font-semibold"
-                >
-                  Edit
-                </Link>
+              {/* Featured */}
+              <td className="px-6 py-4">
+                {b.featured ? (
+                  <span className="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-700">
+                    Featured
+                  </span>
+                ) : (
+                  <span className="text-xs text-gray-400">—</span>
+                )}
+              </td>
 
-                {/* Delete */}
-                <button
-                  onClick={() => remove(b.id)}
-                  className="text-red-500 font-semibold"
-                >
-                  Delete
-                </button>
+              {/* Actions */}
+              <td className="px-6 py-4 text-right whitespace-nowrap">
+                <div className="inline-flex items-center gap-4">
+                  <a
+                    href={`/admin/blogs/preview?id=${b.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-primary text-sm font-medium"
+                  >
+                    Preview
+                  </a>
+
+                  <Link
+                    href={`/admin/blogs/${b.id}`}
+                    className="text-primary text-sm font-semibold"
+                  >
+                    Edit
+                  </Link>
+
+                  <button
+                    onClick={() => remove(b.id)}
+                    className="text-red-500 text-sm font-semibold"
+                  >
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

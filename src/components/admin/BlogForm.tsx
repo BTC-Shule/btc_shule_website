@@ -23,6 +23,7 @@ export default function BlogForm({ id }: { id?: string }) {
     seoTitle: "",
     seoDescription: "",
     status: "draft" as Status,
+    featured: false,
   });
 
   /* ---------------- Load blog when editing ---------------- */
@@ -43,6 +44,7 @@ export default function BlogForm({ id }: { id?: string }) {
           coverImage: blog.coverImage ?? "",
           contentHtml: blog.contentHtml ?? "",
           status: blog.status ?? "draft",
+          featured: blog.featured ?? false,
         }))
       );
   }, [id]);
@@ -93,12 +95,17 @@ export default function BlogForm({ id }: { id?: string }) {
 
     setSaving(true);
 
+    const payload = {
+      ...data,
+      featured: data.status === "published" ? data.featured : false,
+    };
+
     const res = await fetch(
       id ? `/api/admin/blogs/${id}` : "/api/admin/blogs",
       {
         method: id ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       }
     );
 
@@ -205,6 +212,25 @@ export default function BlogForm({ id }: { id?: string }) {
           Publish immediately
         </span>
       </section>
+
+      {/* ---------------- Featured ---------------- */}
+      {data.status === "published" && (
+        <section className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            checked={data.featured}
+            onChange={(e) =>
+              setData({
+                ...data,
+                featured: e.target.checked,
+              })
+            }
+          />
+          <span className="text-sm font-medium text-gray-700">
+            Feature this blog
+          </span>
+        </section>
+      )}
 
       {/* ---------------- SEO ---------------- */}
       <section className="grid sm:grid-cols-2 gap-6">

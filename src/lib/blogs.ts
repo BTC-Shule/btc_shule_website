@@ -4,6 +4,8 @@ import crypto from "crypto";
 
 const BLOGS_PATH = path.join(process.cwd(), "data/blogs.json");
 
+export type BlogStatus = "draft" | "published";
+
 export type Blog = {
   id: string;
   title: string;
@@ -14,8 +16,10 @@ export type Blog = {
   contentHtml: string;
   createdAt: string;
   updatedAt: string;
-  featured?: boolean;
+  status: BlogStatus;
+  featured: boolean;
 };
+
 
 function readBlogs(): Blog[] {
   if (!fs.existsSync(BLOGS_PATH)) return [];
@@ -56,6 +60,14 @@ export function updateBlog(id: string, data: Partial<Blog>) {
   const index = blogs.findIndex((b) => b.id === id);
   if (index === -1) return null;
 
+  // ✅ If this blog is being featured
+  if (data.featured === true) {
+    // Un-feature all other blogs
+    for (const blog of blogs) {
+      blog.featured = false;
+    }
+  }
+
   blogs[index] = {
     ...blogs[index],
     ...data,
@@ -65,6 +77,33 @@ export function updateBlog(id: string, data: Partial<Blog>) {
   writeBlogs(blogs);
   return blogs[index];
 }
+
+export function getPublishedBlogs() {
+  return readBlogs().filter((b) => b.status === "published");
+}
+
+export function getPublishedBlog(id: string) {
+  return readBlogs().find(
+    (b) => b.id === id && b.status === "published"
+  );
+}
+
+export function getFeaturedBlog() {
+  return readBlogs().find(
+    (b) => b.status === "published" && b.featured
+  );
+}
+
+export function getPublishedBlogsSorted() {
+  const blogs = readBlogs().filter((b) => b.status === "published");
+
+  return [
+    ...blogs.filter((b) => b.featured),
+    ...blogs.filter((b) => !b.featured),
+  ];
+}
+
+
 
 export function deleteBlog(id: string) {
   const blogs = readBlogs().filter((b) => b.id !== id);

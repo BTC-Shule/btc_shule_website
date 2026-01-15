@@ -8,23 +8,21 @@ import Placeholder from "@tiptap/extension-placeholder";
 import HardBreak from "@tiptap/extension-hard-break";
 import Link from "@tiptap/extension-link";
 import { Mark } from "@tiptap/core";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/* ---------------- Primary Color Mark ---------------- */
+/* ================= Primary Color Mark ================= */
 
 const PrimaryText = Mark.create({
   name: "primaryText",
-
   parseHTML() {
     return [{ tag: "span.text-primary" }];
   },
-
   renderHTML() {
     return ["span", { class: "text-primary" }, 0];
   },
 });
 
-/* ---------------- Types ---------------- */
+/* ================= Types ================= */
 
 type Props = {
   value: string;
@@ -41,6 +39,9 @@ export default function RichTextEditor({
 }: Props) {
   const [mode, setMode] = useState<"visual" | "source">("visual");
   const [sourceValue, setSourceValue] = useState(value);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [editorHeight, setEditorHeight] = useState<number | "auto">("auto");
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -106,10 +107,36 @@ export default function RichTextEditor({
     }
   }, [value, editor, mode]);
 
+  /* ---------- Elastic Scroll Logic ---------- */
+
+  useEffect(() => {
+    if (!scrollRef.current) return;
+
+    const el = scrollRef.current;
+
+    const updateHeight = () => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+
+      // Editor height shrinks as content scrolls upward
+      const nextHeight = Math.max(clientHeight, scrollHeight - scrollTop);
+
+      setEditorHeight(nextHeight);
+    };
+
+    updateHeight();
+    el.addEventListener("scroll", updateHeight);
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      el.removeEventListener("scroll", updateHeight);
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, [editor, mode]);
+
   if (!editor) return null;
 
   return (
-    <div className="border rounded-xl overflow-hidden">
+    <div className="border rounded-xl overflow-hidden bg-white">
       <Toolbar
         editor={editor}
         uploadImage={uploadImage}
@@ -128,10 +155,19 @@ export default function RichTextEditor({
       />
 
       {mode === "visual" ? (
-        <EditorContent
-          editor={editor}
-          className="prose max-w-none p-6 text-gray-700 focus:outline-none min-h-[120px]"
-        />
+        <div
+          ref={scrollRef}
+          className="overflow-y-auto transition-[height] duration-300 ease-out"
+          style={{
+            height: editorHeight === "auto" ? "auto" : `${editorHeight}px`,
+            maxHeight: "80vh",
+          }}
+        >
+          <EditorContent
+            editor={editor}
+            className="prose max-w-none p-6 text-gray-700 focus:outline-none"
+          />
+        </div>
       ) : (
         <textarea
           className="w-full min-h-[400px] font-mono text-sm text-gray-700 p-6 border-t"
@@ -200,7 +236,7 @@ function Toolbar({ editor, uploadImage, mode, onSource, onVisual }: any) {
   }
 
   return (
-    <div className="flex gap-2 border-b bg-gray-500 p-2">
+    <div className="flex gap-2 border-b bg-gray-500 p-2 sticky top-0 z-10">
       {mode === "visual" && (
         <>
           <button
@@ -273,9 +309,9 @@ function Toolbar({ editor, uploadImage, mode, onSource, onVisual }: any) {
 
       <div className="ml-auto">
         {mode === "visual" ? (
-          <button onClick={onSource}>{"</>"} Source</button>
+          <button type="button" onClick={onSource}>{"</>"} Source</button>
         ) : (
-          <button onClick={onVisual}>Visual</button>
+          <button type="button" onClick={onVisual}>Visual</button>
         )}
       </div>
     </div>
