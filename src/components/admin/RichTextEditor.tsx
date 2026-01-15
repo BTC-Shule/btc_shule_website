@@ -7,13 +7,32 @@ import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import HardBreak from "@tiptap/extension-hard-break";
 import Link from "@tiptap/extension-link";
+import { Mark } from "@tiptap/core";
 import { useEffect, useState } from "react";
+
+/* ---------------- Primary Color Mark ---------------- */
+
+const PrimaryText = Mark.create({
+  name: "primaryText",
+
+  parseHTML() {
+    return [{ tag: "span.text-primary" }];
+  },
+
+  renderHTML() {
+    return ["span", { class: "text-primary" }, 0];
+  },
+});
+
+/* ---------------- Types ---------------- */
 
 type Props = {
   value: string;
   onChange: (html: string) => void;
   uploadImage: (file: File) => Promise<string>;
 };
+
+/* ================= Editor ================= */
 
 export default function RichTextEditor({
   value,
@@ -48,6 +67,8 @@ export default function RichTextEditor({
           rel: "noopener noreferrer",
         },
       }),
+
+      PrimaryText,
 
       Image.configure({
         inline: false,
@@ -85,25 +106,6 @@ export default function RichTextEditor({
     }
   }, [value, editor, mode]);
 
-  /* ---------- Mode switching ---------- */
-
-  function switchToSource() {
-    if (!editor) return;
-    setSourceValue(editor.getHTML());
-    setMode("source");
-  }
-
-  function switchToVisual() {
-    if (!editor) return;
-
-    editor.commands.setContent(sourceValue || "<p></p>", {
-      emitUpdate: false,
-    });
-
-    onChange(sourceValue);
-    setMode("visual");
-  }
-
   if (!editor) return null;
 
   return (
@@ -112,8 +114,17 @@ export default function RichTextEditor({
         editor={editor}
         uploadImage={uploadImage}
         mode={mode}
-        onSource={switchToSource}
-        onVisual={switchToVisual}
+        onSource={() => {
+          setSourceValue(editor.getHTML());
+          setMode("source");
+        }}
+        onVisual={() => {
+          editor.commands.setContent(sourceValue || "<p></p>", {
+            emitUpdate: false,
+          });
+          onChange(sourceValue);
+          setMode("visual");
+        }}
       />
 
       {mode === "visual" ? (
@@ -123,7 +134,7 @@ export default function RichTextEditor({
         />
       ) : (
         <textarea
-          className="w-full min-h-[400px] font-mono text-sm text-gray-700 p-6 border-t focus:outline-none"
+          className="w-full min-h-[400px] font-mono text-sm text-gray-700 p-6 border-t"
           value={sourceValue}
           onChange={(e) => setSourceValue(e.target.value)}
         />
@@ -132,40 +143,17 @@ export default function RichTextEditor({
   );
 }
 
-/* ---------------- Toolbar ---------------- */
+/* ================= Toolbar ================= */
 
-function Toolbar({
-  editor,
-  uploadImage,
-  mode,
-  onSource,
-  onVisual,
-}: {
-  editor: any;
-  uploadImage: (file: File) => Promise<string>;
-  mode: "visual" | "source";
-  onSource: () => void;
-  onVisual: () => void;
-}) {
-  /* ---------- Helpers ---------- */
+function Toolbar({ editor, uploadImage, mode, onSource, onVisual }: any) {
+  const isMarkActive = (mark: string) =>
+    editor.isActive(mark) ||
+    editor.state.storedMarks?.some((m: any) => m.type.name === mark);
 
-  function isMarkActive(mark: string) {
-    return (
-      editor.isActive(mark) ||
-      !!editor.state.storedMarks?.some(
-        (m: any) => m.type.name === mark
-      )
-    );
-  }
-
-  function btn(active: boolean) {
-    return `
-      px-2 py-1 rounded-md text-sm font-semibold transition
-      ${active ? "text-primary" : "text-white hover:text-primary"}
-    `;
-  }
-
-  /* ---------- Image ---------- */
+  const btn = (active: boolean) =>
+    `px-2 py-1 rounded-md text-sm font-semibold transition ${
+      active ? "text-primary" : "text-white hover:text-primary"
+    }`;
 
   function insertImage() {
     const input = document.createElement("input");
@@ -177,52 +165,42 @@ function Toolbar({
       if (!file) return;
 
       const url = await uploadImage(file);
-      editor
-        .chain()
-        .focus()
-        .setImage({ src: url })
-        .createParagraphNear()
-        .run();
+      editor.chain().focus().setImage({ src: url }).createParagraphNear().run();
     };
 
     input.click();
   }
 
-  /* ---------- Link (non-destructive toggle) ---------- */
-
   function toggleLink() {
-    const isActive =
-      editor.isActive("link") ||
-      editor.state.storedMarks?.some(
-        (m: any) => m.type.name === "link"
-      );
+    const isActive = isMarkActive("link");
+    const href = editor.getAttributes("link")?.href || "";
 
-    // TURN LINK OFF (keep existing linked text)
-    if (isActive) {
+    if (isActive && href) {
+      const next = window.prompt("Edit link URL", href);
+      if (!next) return;
+
       editor
         .chain()
         .focus()
-        .insertContent("\u200B") // zero-width boundary
-        .unsetMark("link") // clears stored mark only
+        .extendMarkRange("link")
+        .setLink({ href: next })
         .run();
       return;
     }
 
-    // TURN LINK ON
-    const previousUrl = editor.getAttributes("link").href;
-    const url = window.prompt("Enter URL", previousUrl);
+    if (isActive) {
+      editor.chain().focus().insertContent("\u200B").unsetMark("link").run();
+      return;
+    }
 
+    const url = window.prompt("Enter URL");
     if (!url) return;
 
-    editor
-      .chain()
-      .focus()
-      .setLink({ href: url }) // stored mark
-      .run();
+    editor.chain().focus().setLink({ href: url }).run();
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-2 border-b bg-gray-500 p-2">
+    <div className="flex gap-2 border-b bg-gray-500 p-2">
       {mode === "visual" && (
         <>
           <button
@@ -264,11 +242,19 @@ function Toolbar({
           <button
             type="button"
             className={btn(editor.isActive("bulletList"))}
-            onClick={() =>
-              editor.chain().focus().toggleBulletList().run()
-            }
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
           >
             List
+          </button>
+
+          <button
+            type="button"
+            className={btn(isMarkActive("primaryText"))}
+            onClick={() =>
+              editor.chain().focus().toggleMark("primaryText").run()
+            }
+          >
+            Highlight
           </button>
 
           <button
@@ -279,25 +265,17 @@ function Toolbar({
             Link
           </button>
 
-          <button
-            type="button"
-            className={btn(false)}
-            onClick={insertImage}
-          >
+          <button type="button" className={btn(false)} onClick={insertImage}>
             Image
           </button>
         </>
       )}
 
-      <div className="ml-auto flex gap-2">
+      <div className="ml-auto">
         {mode === "visual" ? (
-          <button type="button" onClick={onSource}>
-            {"</>"} Source
-          </button>
+          <button onClick={onSource}>{"</>"} Source</button>
         ) : (
-          <button type="button" onClick={onVisual}>
-            Visual
-          </button>
+          <button onClick={onVisual}>Visual</button>
         )}
       </div>
     </div>

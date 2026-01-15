@@ -4,11 +4,15 @@ import Navbar from "@/components/Navbar";
 import BlogClient from "./BlogClient";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{
+    id: string;
+  }>;
 };
 
-export default function BlogPage({ params }: Props) {
-  const blog = getBlog(params.id);
+export default async function BlogPage({ params }: Props) {
+  const { id } = await params;
+
+  const blog = getBlog(id);
 
   if (!blog) return notFound();
 

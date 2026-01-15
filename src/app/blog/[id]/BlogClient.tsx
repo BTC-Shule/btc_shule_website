@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import type { Blog } from "@/lib/blogs";
 
 export default function BlogClient({ blog }: { blog: Blog }) {
-
   return (
     <>
       <Navbar />
@@ -26,12 +25,15 @@ export default function BlogClient({ blog }: { blog: Blog }) {
               </h1>
               <p className="mt-4 text-gray-400 italic">
                 By <span className="text-secondary-light">{blog.author}</span> ·{" "}
-                {blog.updatedAt}
+                {new Date(blog.updatedAt).toLocaleDateString("en-US", {
+                  month: "long",
+                  year: "numeric",
+                })}
               </p>
             </motion.div>
 
             {/* Cover Image */}
-            <div className="relative w-full h-72 md:h-96 overflow-hidden mb-12">
+            <div className="relative w-full h-72 md:h-96 overflow-hidden rounded-3xl mb-12">
               <Image
                 src={blog.coverImage}
                 alt={blog.title}
@@ -48,8 +50,7 @@ export default function BlogClient({ blog }: { blog: Blog }) {
               transition={{ duration: 1 }}
               className="prose prose-invert prose-lg text-gray-600 text-lg max-w-none"
               dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
-            >
-            </motion.div>
+            ></motion.div>
           </div>
         </article>
       </main>

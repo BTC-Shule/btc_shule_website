@@ -26,13 +26,16 @@ export default async function BlogPreview({ searchParams }: Props) {
             Preview Mode
           </p>
 
-          <h1 className="mt-4 text-4xl md:text-5xl font-extrabold text-primary">
-            {blog.title}
-          </h1>
-
-          <p className="mt-4 text-gray-500 italic">
-            By <span className="text-secondary-light">{blog.author}</span>
-          </p>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-primary">
+                {blog.title}
+              </h1>
+              <p className="mt-4 text-gray-400 italic">
+                By <span className="text-secondary-light">{blog.author}</span> ·{" "}
+                {new Date(blog.updatedAt).toLocaleDateString("en-US", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
         </header>
 
         {/* Cover Image */}
@@ -49,16 +52,9 @@ export default async function BlogPreview({ searchParams }: Props) {
           </div>
         )}
 
-        {/* Excerpt */}
-        {blog.excerpt && (
-          <p className="text-xl text-gray-600 leading-relaxed mb-12 italic">
-            {blog.excerpt}
-          </p>
-        )}
-
         {/* Content */}
         <div
-          className="prose prose-lg max-w-none text-gray-700"
+          className="prose prose-lg max-w-none text-gray-600 text-lg"
           dangerouslySetInnerHTML={{ __html: blog.contentHtml }}
         />
       </article>
