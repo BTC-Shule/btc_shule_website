@@ -6,7 +6,7 @@ import { Newspaper, Calendar, Layout } from "phosphor-react";
 const nav = [
   { label: "Dashboard", href: "/admin/dashboard", icon: Layout },
   { label: "Blogs", href: "/admin/blogs", icon: Newspaper },
-  { label: "Events", href: "#", icon: Calendar },
+  { label: "Events", href: "/admin/events", icon: Calendar }
 ];
 
 export default function Sidebar() {
