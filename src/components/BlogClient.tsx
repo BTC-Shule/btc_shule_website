@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Calendar, User } from "phosphor-react";
 
 export default function BlogClient({ blogs }: { blogs: Blog[] }) {
+  const publishedBlogs = blogs.filter((b) => b.status === "published");
   return (
     <section id="blog" className="relative bg-linear-to-b from-background to-gray-50 py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
@@ -29,7 +30,7 @@ export default function BlogClient({ blogs }: { blogs: Blog[] }) {
 
         {/* Blog Grid */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
-          {blogs.map((blog, i) => (
+          {publishedBlogs.map((blog, i) => (
             <motion.article
               key={blog.id}
               initial={{ opacity: 0, y: 40 }}

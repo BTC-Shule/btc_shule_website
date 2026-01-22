@@ -7,8 +7,10 @@ import { Calendar, User } from "phosphor-react";
 import { Blog } from "@/lib/blogs";
 
 export default function BlogGridClient({ blogs }: { blogs: Blog[] }) {
-  const featured = blogs.find((b) => b.featured);
-  const rest = blogs.filter((b) => !b.featured);
+  const publishedBlogs = blogs.filter((b) => b.status === "published");
+
+  const featured = publishedBlogs.find((b) => b.featured);
+  const rest = publishedBlogs.filter((b) => !b.featured);
 
   return (
     <>
