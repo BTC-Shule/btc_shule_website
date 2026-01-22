@@ -5,7 +5,7 @@ import Programs from "@/components/Programs";
 import Statistics from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import GetInvolved from "@/components/GetInvolved";
-import Events from "@/components/EventsClient";
+import Events from "@/components/Events";
 import Blog from "@/components/Blog";
 import Partners from "@/components/Partners";
 import Contact from "@/components/Contact";

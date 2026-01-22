@@ -8,5 +8,14 @@
     "time": "10.00 AM - 2.00 PM",
     "location": "Online",
     "description": "A hackathon focused on buildingopen-source Bitcoin tools for African communities"
-  }
+  },
+  {
+    "id": "210a7255-ad8c-4d84-b047-5a6196f3b5b2",
+  "title": "BTC Shule Meetup Nairobi",
+  "date": "2026-03-20",
+  "time": "3:00 PM – 6:00 PM",
+  "location": "Nairobi, Kenya",
+  "description": "Community meetup and Bitcoin workshop."
+}
+
 ]

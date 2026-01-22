@@ -24,7 +24,13 @@ export default function EventsClient({ events = [] }: { events?: Event[] }) {
   const pastEvents = events.filter((e) => new Date(e.date) < now);
   const upcomingEvents = events.filter((e) => new Date(e.date) >= now);
 
-  const filteredEvents = showPast ? pastEvents : upcomingEvents;
+  const filteredEvents = (showPast
+  ? [...upcomingEvents, ...pastEvents]
+  : upcomingEvents
+).sort(
+  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+);
+
 
   return (
     <section
