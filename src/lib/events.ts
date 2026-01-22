@@ -7,8 +7,9 @@ const EVENTS_PATH = path.join(process.cwd(), "data/events.json");
 export type Event = {
   id: string;
   title: string;
-  date: string;          // ISO or readable
-  time?: string;
+  date: string;          // yyyy-mm-dd
+  startTime?: string;    // HH:mm
+  endTime?: string;      // HH:mm
   location: string;
   description: string;
   createdAt: string;

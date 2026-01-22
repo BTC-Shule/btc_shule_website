@@ -2,157 +2,154 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {
-  Newspaper,
-  Calendar,
-  Users,
-  Eye,
-  PlusCircle,
-} from "phosphor-react";
+import { Newspaper, Calendar, Users, Eye, PlusCircle } from "phosphor-react";
 
 export default function AdminDashboard() {
   const [blogCount, setBlogCount] = useState<number | null>(null);
+  const [eventCount, setEventCount] = useState<number | null>(null);
 
   useEffect(() => {
     fetch("/api/admin/blogs/count")
       .then((res) => res.json())
-      .then((data) => setBlogCount(data.count))
+      .then((d) => setBlogCount(d.count))
       .catch(() => setBlogCount(0));
+
+    fetch("/api/admin/events/count")
+      .then((res) => res.json())
+      .then((d) => setEventCount(d.count))
+      .catch(() => setEventCount(0));
   }, []);
 
   const stats = [
-  {
-    title: "Blogs",
-    value: blogCount ?? "—",
-    description: "Published articles",
-    icon: Newspaper,
-    href: "/admin/blogs",
-    action: "Manage Blogs",
-  },
-  {
-    title: "Events",
-    value: 0,
-    description: "Upcoming & past events",
-    icon: Calendar,
-    href: "#",
-    action: "Manage Events",
-  },
-  {
-    title: "Admins",
-    value: 1,
-    description: "Authorized users",
-    icon: Users,
-    href: "#",
-    action: "Manage Admins",
-  },
-  {
-    title: "Page Views",
-    value: "—",
-    description: "Analytics (coming soon)",
-    icon: Eye,
-    href: "#",
-    action: "View Analytics",
-  },
-];
+    {
+      title: "Blogs",
+      value: blogCount ?? "—",
+      description: "Published articles",
+      icon: Newspaper,
+      href: "/admin/blogs",
+      accent: "from-secondary-light/20 to-secondary-light/5",
+    },
+    {
+      title: "Events",
+      value: eventCount ?? "—",
+      description: "Upcoming & past events",
+      icon: Calendar,
+      href: "/admin/events",
+      accent: "from-secondary-light/20 to-secondary-light/5",
+    },
+    {
+      title: "Admins",
+      value: 1,
+      description: "Authorized users",
+      icon: Users,
+      href: "#",
+      accent: "from-secondary-light/20 to-secondary-light/5",
+    },
+    {
+      title: "Analytics",
+      value: "—",
+      description: "Coming soon",
+      icon: Eye,
+      href: "#",
+      accent: "from-secondary-light/20 to-secondary-light/5",
+    },
+  ];
+
   return (
-    <div className="space-y-12">
+    <div className="space-y-16">
       {/* Header */}
-      <header>
-        <h1 className="text-4xl font-extrabold text-primary">
+      <header className="space-y-2">
+        <h1 className="text-4xl font-extrabold text-primary tracking-tight">
           Dashboard
         </h1>
-        <p className="mt-2 text-gray-600 max-w-2xl">
-          Welcome to the BTC Shule admin panel. Manage content, publish stories,
-          and oversee platform activity from one central place.
+        <p className="text-gray-600 max-w-2xl">
+          Overview of platform activity, content performance, and system health.
         </p>
       </header>
 
-      {/* Stats Grid */}
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Stats */}
+      <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((item) => {
           const Icon = item.icon;
           return (
-            <div
+            <Link
               key={item.title}
-              className="relative bg-white border border-gray-200 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 p-6"
+              href={item.href}
+              className="group relative rounded-3xl border bg-white p-6 shadow-sm hover:shadow-xl transition-all overflow-hidden"
             >
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-xl bg-secondary-light/10">
+              {/* Accent */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${item.accent} opacity-0 group-hover:opacity-100 transition`}
+              />
+
+              <div className="relative flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-secondary-light/10">
                   <Icon size={28} className="text-secondary-light" />
                 </div>
-                <span className="text-3xl font-bold text-primary">
+                <span className="text-4xl font-bold text-primary">
                   {item.value}
                 </span>
               </div>
 
-              <h3 className="mt-6 text-lg font-semibold text-primary">
-                {item.title}
-              </h3>
-              <p className="text-sm text-gray-500">
-                {item.description}
-              </p>
+              <div className="relative mt-6 space-y-1">
+                <h3 className="text-lg font-semibold text-primary">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-gray-500">{item.description}</p>
+              </div>
 
-              <Link
-                href={item.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary-light transition"
-              >
-                {item.action}
+              <div className="relative mt-6 flex items-center gap-2 text-sm font-semibold text-primary group-hover:text-secondary-light">
+                Manage
                 <PlusCircle size={16} />
-              </Link>
-            </div>
+              </div>
+            </Link>
           );
         })}
       </section>
 
       {/* Quick Actions */}
-      <section>
-        <h2 className="text-2xl font-bold text-primary mb-6">
-          Quick Actions
-        </h2>
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-primary">Quick Actions</h2>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           <QuickAction
-            title="Create New Blog"
-            description="Publish a new article to the BTC Shule blog"
+            title="Create Blog"
+            description="Publish a new article"
             href="/admin/blogs/new"
           />
           <QuickAction
             title="Create Event"
-            description="Add a new event (coming soon)"
-            href="#"
+            description="Schedule a new event"
+            href="/admin/events/new"
           />
           <QuickAction
             title="Upload Media"
-            description="Manage images and assets (coming soon)"
+            description="Manage images & assets"
             href="#"
           />
         </div>
       </section>
 
       {/* System Status */}
-      <section>
-        <h2 className="text-2xl font-bold text-primary mb-6">
-          System Status
-        </h2>
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-primary">System Status</h2>
 
-        <div className="bg-white rounded-3xl border border-gray-200 p-6 shadow-sm">
-          <ul className="space-y-4 text-sm text-gray-600">
-            <li className="flex items-center justify-between">
-              <span>Admin Authentication</span>
-              <span className="text-green-600 font-semibold">Active</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span>Blog Engine</span>
-              <span className="text-green-600 font-semibold">Operational</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span>Events Module</span>
-              <span className="text-yellow-500 font-semibold">Planned</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span>Analytics</span>
-              <span className="text-gray-400 font-semibold">Not Connected</span>
-            </li>
+        <div className="rounded-3xl border bg-white p-6 shadow-sm">
+          <ul className="divide-y text-sm">
+            {[
+              ["Authentication", "Active", "text-green-600"],
+              ["Blog Engine", "Operational", "text-green-600"],
+              ["Events Module", "Operational", "text-green-600"],
+              ["Analytics", "Not Connected", "text-gray-400"],
+            ].map(([label, status, color]) => (
+              <li
+                key={label}
+                className="flex items-center justify-between py-3"
+              >
+                <span className="text-gray-600">{label}</span>
+                <span className={`font-semibold ${color}`}>{status}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
@@ -172,14 +169,12 @@ function QuickAction({
   return (
     <Link
       href={href}
-      className="group bg-white rounded-3xl border border-gray-200 p-6 shadow-sm hover:shadow-xl transition-all duration-300"
+      className="group rounded-3xl border bg-white p-6 shadow-sm hover:shadow-xl transition-all"
     >
       <h3 className="text-lg font-semibold text-primary group-hover:text-secondary-light">
         {title}
       </h3>
-      <p className="mt-2 text-sm text-gray-500">
-        {description}
-      </p>
+      <p className="mt-2 text-sm text-gray-500">{description}</p>
     </Link>
   );
 }

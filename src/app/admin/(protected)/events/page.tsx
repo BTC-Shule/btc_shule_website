@@ -25,7 +25,7 @@ export default function EventsTable() {
         <h2 className="text-xl font-bold">Events</h2>
         <Link
           href="/admin/events/new"
-          className="bg-primary text-white px-4 py-2 rounded-xl"
+          className="bg-primary hover:bg-secondary-light text-white px-4 py-2 rounded-xl"
         >
           New Event
         </Link>
@@ -45,7 +45,7 @@ export default function EventsTable() {
               <td className="p-4 font-medium">{e.title}</td>
               <td className="p-4">{e.date}</td>
               <td className="p-4 text-right space-x-4">
-                <Link href={`/admin/events/${e.id}`} className="text-primary">
+                <Link href={`/admin/events/${e.id}`} className="text-primary hover:text-secondary-light">
                   Edit
                 </Link>
                 <button

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Clock, CalendarBlank } from "phosphor-react";
 import { Event } from "@/lib/events";
+import { formatTime } from "@/utils/formatTime";
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
@@ -24,13 +25,9 @@ export default function EventsClient({ events = [] }: { events?: Event[] }) {
   const pastEvents = events.filter((e) => new Date(e.date) < now);
   const upcomingEvents = events.filter((e) => new Date(e.date) >= now);
 
-  const filteredEvents = (showPast
-  ? [...upcomingEvents, ...pastEvents]
-  : upcomingEvents
-).sort(
-  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-);
-
+  const filteredEvents = (
+    showPast ? [...upcomingEvents, ...pastEvents] : upcomingEvents
+  ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
     <section
@@ -124,12 +121,16 @@ export default function EventsClient({ events = [] }: { events?: Event[] }) {
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-4 mt-4 text-gray-500 dark:text-gray-400 text-sm">
-                      {event.time && (
+                      {(event.startTime || event.endTime) && (
                         <div className="flex items-center gap-2">
                           <Clock size={18} weight="duotone" />
-                          <span>{event.time}</span>
+                          <span>
+                            {formatTime(event.startTime)}
+                            {event.endTime && ` – ${formatTime(event.endTime)}`}
+                          </span>
                         </div>
                       )}
+
                       <div className="flex items-center gap-2">
                         <MapPin size={18} weight="duotone" />
                         <span>{event.location}</span>
