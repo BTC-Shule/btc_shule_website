@@ -8,7 +8,7 @@ const pageTitles: Record<string, string> = {
   "/admin/dashboard": "Dashboard",
 
   // Blogs
-  "/admin/blogs": "Blogs",
+  "/admin/blogs": "All Blogs",
   "/admin/blogs/new": "Create Blog",
 
   // Events
